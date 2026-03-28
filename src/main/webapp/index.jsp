@@ -45,3 +45,22 @@
 </div>
 
 <%@ include file="/WEB-INF/views/includes/footer.jsp" %>
+
+<script>
+window.addEventListener("load", function () {
+    const hero = document.getElementById("heroSection");
+    if (hero) {
+        hero.classList.add("hero-visible");
+    }
+});
+
+document.querySelectorAll(".btn").forEach(function(button) {
+    button.addEventListener("click", function() {
+        this.classList.add("btn-clicked");
+
+        setTimeout(() => {
+            this.classList.remove("btn-clicked");
+        }, 150);
+    });
+});
+</script>

@@ -218,11 +218,150 @@ a {
 /* GENRIC FORMS (Aayush) */
 /* ============================= */
 
+.form-box {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 480px;
+    margin: 40px auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-box h2 {
+    margin-bottom: 22px;
+    color: #1b3a6b;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #444;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #1b3a6b;
+}
+
+.form-group textarea {
+    resize: vertical;
+    height: 100px;
+}
+
+.form-footer {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 13px;
+    color: #666;
+}
+
+.form-footer a {
+    color: #1b3a6b;
+    text-decoration: underline;
+}
 
 /* ============================= */
 /* CONTACT PAGE (Aayush) */
 /* ============================= */
 
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 30px;
+    margin-top: 25px;
+    align-items: start;
+}
+
+.contact-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 32px;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.07);
+}
+
+.contact-card h3 {
+    color: #1f437d;
+    font-size: 22px;
+    margin-bottom: 22px;
+    text-align: left;
+}
+
+.contact-details p {
+    font-size: 17px;
+    color: #444;
+    margin-bottom: 16px;
+    line-height: 1.7;
+}
+
+.contact-page-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.contact-form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form-group label {
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+    font-size: 15px;
+}
+
+.contact-page-form input,
+.contact-page-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px 15px;
+    border: 1px solid #d2d2d2;
+    border-radius: 8px;
+    font-size: 15px;
+    background: #fff;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-page-form input:focus,
+.contact-page-form textarea:focus {
+    border-color: #1f437d;
+    box-shadow: 0 0 0 3px rgba(31, 67, 125, 0.10);
+}
+
+.contact-page-form textarea {
+    resize: vertical;
+    min-height: 140px;
+}
+
+.contact-submit-btn {
+    width: 100%;
+    margin-top: 4px;
+    padding: 14px 18px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
 
 
 /* ============================= */
@@ -327,6 +466,20 @@ a {
 /* FOOTER (Aayush) */
 /* ============================= */
 
+footer {
+    background-color: #1b1b1b;
+    color: #999;
+    text-align: center;
+    padding: 22px;
+    font-size: 13px;
+    margin-top: 60px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
+}
+
+footer a {
+    color: #bbb;
+    text-decoration: underline;
+}
 
 
 /* ============================= */

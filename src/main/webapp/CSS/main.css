@@ -1,0 +1,420 @@
+/* ============================= */
+/* GLOBAL */
+/* ============================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* ============================= */
+/* NAV BAR (SANEEM) */
+/* ============================= */
+
+.navbar {
+    background-color: #1b3a6b;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.nav-logo {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li a {
+    color: #dce6f7;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.nav-links li a:hover {
+    color: white;
+}
+
+
+
+
+/* ============================= */
+/* INDEX PAGE (SANEEM) */
+/* ============================= */
+.hero {
+    background: linear-gradient(135deg, #173b73 0%, #1b3a6b 45%, #2a5aa0 100%);
+    color: white;
+    text-align: center;
+    padding: 95px 20px;
+    opacity: 0;
+    transform: translateY(45px);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.hero.hero-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hero-content {
+    max-width: 850px;
+    margin: auto;
+}
+
+.hero-tag {
+    margin-bottom: 10px;
+    opacity: 0.9;
+}
+
+.hero h1 {
+    font-size: 42px;
+    margin-bottom: 15px;
+}
+
+.hero-text {
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+.hero-btns {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+/* ============================= */
+/* BUTTONS (Abhisekh) */
+/* ============================= */
+
+
+
+/* ============================= */
+/* LAYOUT (Abhisekh) */
+/* ============================= */
+
+
+
+
+/* ============================= */
+/* CARDS (Bishesh) */
+/* ============================= */
+
+.cards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: white;
+    border-radius: 14px;
+    padding: 25px;
+    flex: 1;
+    min-width: 240px;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.07);
+    text-align: center;
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.10);
+}
+
+.card h3 {
+    margin-bottom: 10px;
+    font-size: 19px;
+    color: #1b3a6b;
+}
+
+.card p {
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 18px;
+    line-height: 1.65;
+}
+
+
+/* ============================= */
+/* ABOUT PAGE (Bishesh) */
+/* ============================= */
+
+.about-box {
+    background: white;
+    border-radius: 14px;
+    padding: 32px;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.07);
+    margin-bottom: 34px;
+}
+
+.about-box p {
+    font-size: 18px;
+    color: #444;
+    line-height: 1.85;
+    margin-bottom: 18px;
+}
+
+.about-box p:last-child {
+    margin-bottom: 0;
+}
+
+.feature-card {
+    text-align: center;
+}
+
+.feature-icon {
+    font-size: 34px;
+    margin-bottom: 10px;
+}
+
+.highlight-box {
+    margin-top: 34px;
+    background: linear-gradient(135deg, #eef4ff 0%, #f8fbff 100%);
+    border-left: 5px solid #1b3a6b;
+    border-radius: 14px;
+    padding: 24px 26px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+}
+
+.highlight-box h3 {
+    color: #1b3a6b;
+    margin-bottom: 12px;
+    font-size: 20px;
+}
+
+.highlight-box ul {
+    padding-left: 20px;
+}
+
+.highlight-box li {
+    margin-bottom: 8px;
+    color: #444;
+    font-size: 15px;
+}
+
+
+/* ============================= */
+/* GENRIC FORMS (Aayush) */
+/* ============================= */
+
+
+/* ============================= */
+/* CONTACT PAGE (Aayush) */
+/* ============================= */
+
+
+
+/* ============================= */
+/* ALERT MESSAGES (Saneem) */
+/* ============================= */
+
+.msg-error {
+    background-color: #fdecea;
+    color: #c0392b;
+    padding: 10px 14px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    font-size: 14px;
+}
+
+.msg-success {
+    background-color: #eafaf1;
+    color: #1e7e34;
+    padding: 10px 14px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    font-size: 14px;
+}
+
+.msg-info {
+    background-color: #eaf2fb;
+    color: #1b3a6b;
+    padding: 10px 14px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    font-size: 14px;
+}
+
+
+/* ============================= */
+/* BADGES (Abhisekh) */
+/* ============================= */
+
+
+
+/* ============================= */
+/* ITEMS GRID (Bishesh) */
+/* ============================= */
+
+.item-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.item-card {
+    background: white;
+    border-radius: 8px;
+    width: calc(33% - 14px);
+    min-width: 220px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.09);
+    overflow: hidden;
+}
+
+.item-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+}
+
+.item-card .item-info {
+    padding: 15px;
+}
+
+.item-card .item-info h4 {
+    font-size: 15px;
+    margin-bottom: 6px;
+    color: #1b3a6b;
+}
+
+.item-card .item-info p {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.item-card .item-actions {
+    margin-top: 12px;
+}
+
+
+
+/* ============================= */
+/* SEARCH (Abhisekh) */
+/* ============================= */
+
+
+
+
+/* ============================= */
+/* DASHBOARD (Aayush) */
+/* ============================= */
+
+
+
+/* ============================= */
+/* FOOTER (Aayush) */
+/* ============================= */
+
+
+
+/* ============================= */
+/* ERROR PAGES (Bishesh) */
+/* ============================= */
+
+.error-page {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.error-page h1 {
+    font-size: 80px;
+    color: #1b3a6b;
+    font-weight: bold;
+}
+
+.error-page h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.error-page p {
+    color: #777;
+    margin-bottom: 25px;
+}
+
+/* ============================= */
+/* RESPONSIVE (Saneem) */
+/* ============================= */
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 12px;
+        padding: 15px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .hero {
+        padding: 75px 20px;
+    }
+
+    .hero h1 {
+        font-size: 34px;
+    }
+
+    .hero p.hero-text {
+        font-size: 17px;
+    }
+
+    .hero-btns .btn {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .item-card {
+        width: 100%;
+    }
+
+    .cards {
+        flex-direction: column;
+    }
+
+    .stats-row {
+        flex-direction: column;
+    }
+
+    .form-box {
+        margin: 20px 15px;
+        padding: 20px;
+    }
+
+    .search-bar {
+        flex-direction: column;
+    }
+
+    .about-box {
+        padding: 24px;
+    }
+
+    .about-box p {
+        font-size: 16px;
+    }
+}

@@ -107,13 +107,69 @@ a {
 /* BUTTONS (Abhisekh) */
 /* ============================= */
 
+btn {
+    padding: 10px 24px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.btn-primary {
+    background-color: #e8a020;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #c9881a;
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.btn-blue {
+    background-color: #1b3a6b;
+    color: white;
+}
+
+.btn-blue:hover {
+    background-color: #152e55;
+}
+
+.btn-danger {
+    background-color: #c0392b;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #a93226;
+}
+
+.btn-sm {
+    padding: 6px 14px;
+    font-size: 13px;
+}
+
 
 
 /* ============================= */
 /* LAYOUT (Abhisekh) */
 /* ============================= */
 
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 35px 20px;
+}
 
+.page-section {
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
 
 
 /* ============================= */

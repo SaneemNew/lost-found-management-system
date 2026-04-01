@@ -157,7 +157,7 @@ a {
 
 
 /* ============================= */
-/* LAYOUT (Abhisekh) */
+/* CONTAINER (Abhisekh) */
 /* ============================= */
 
 .container {
@@ -169,6 +169,18 @@ a {
 .page-section {
     padding-top: 10px;
     padding-bottom: 20px;
+}
+
+/* ============================= */
+/* SECTION TITLE (Abhisekh) */
+/* ============================= */
+
+.section-title {
+    font-size: 23px;
+    margin-bottom: 24px;
+    color: #1b3a6b;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 8px;
 }
 
 

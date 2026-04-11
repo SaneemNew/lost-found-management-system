@@ -1,20 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/includes/header.jsp" %>
 
 <div class="form-box">
     <h2>Login</h2>
 
-    <%
-        String err = (String) request.getAttribute("error");
-    %>
-    <% if (err != null) { %>
-        <div class="msg-error"><%= err %></div>
-    <% } %>
+    <c:if test="${not empty error}">
+        <div class="msg-error">${error}</div>
+    </c:if>
 
     <form action="${pageContext.request.contextPath}/login" method="post">
         <div class="form-group">
             <label>Email</label>
-            <input type="email" name="email" placeholder="Enter your email" required>
+            <input type="email" name="email" placeholder="Enter your email" value="${savedEmail}" required>
         </div>
         <div class="form-group">
             <label>Password</label>

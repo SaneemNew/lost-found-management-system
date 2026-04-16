@@ -1,0 +1,45 @@
+package com.lostfound.controller;
+import java.io.IOException;
+import com.lostfound.dao.ClaimDAO;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.*;
+
+@WebServlet("/admin/claims")
+public class AdminClaimServlet extends HttpServlet {
+	
+	private static final long serialVersionUID = 1L;
+
+    private ClaimDAO claimDAO = new ClaimDAO();
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+
+        req.setAttribute("claims", claimDAO.getAllClaims());
+        req.getRequestDispatcher("/WEB-INF/views/admin/adminClaims.jsp").forward(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+
+        String action = req.getParameter("action");
+        int claimId = 0;
+        try {
+            claimId = Integer.parseInt(req.getParameter("claimId"));
+        } catch (NumberFormatException e) {
+            resp.sendRedirect(req.getContextPath() + "/admin/claims");
+            return;
+        }
+
+        if ("approve".equals(action)) {
+            claimDAO.updateStatus(claimId, "approved");
+        } else if ("reject".equals(action)) {
+            claimDAO.updateStatus(claimId, "rejected");
+        }
+
+        resp.sendRedirect(req.getContextPath() + "/admin/claims");
+    }
+}

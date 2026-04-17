@@ -596,6 +596,49 @@ table tr:hover td {
 /* DASHBOARD (Aayush) */
 /* ============================= */
 
+.dash-header {
+    margin-bottom: 25px;
+}
+
+.dash-header h2 {
+    font-size: 24px;
+    color: #1b3a6b;
+}
+
+.dash-header p {
+    color: #777;
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+.stats-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.stat-box {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    flex: 1;
+    min-width: 150px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.stat-box .stat-num {
+    font-size: 32px;
+    font-weight: bold;
+    color: #1b3a6b;
+}
+
+.stat-box .stat-label {
+    font-size: 13px;
+    color: #888;
+    margin-top: 4px;
+}
 
 
 /* ============================= */

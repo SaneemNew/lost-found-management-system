@@ -571,8 +571,26 @@ table tr:hover td {
 /* SEARCH (Abhisekh) */
 /* ============================= */
 
+.search-bar {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    background: white;
+    padding: 18px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    margin-bottom: 25px;
+}
 
-
+.search-bar input,
+.search-bar select {
+    padding: 9px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    flex: 1;
+    min-width: 150px;
+}
 
 /* ============================= */
 /* DASHBOARD (Aayush) */

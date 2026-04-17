@@ -433,6 +433,42 @@ a {
 
 
 /* ============================= */
+/* TABLE (Saneem) */
+/* ============================= */
+
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+table th {
+    background-color: #1b3a6b;
+    color: white;
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 14px;
+}
+
+table td {
+    padding: 11px 15px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+    color: #444;
+}
+
+table tr:last-child td {
+    border-bottom: none;
+}
+
+table tr:hover td {
+    background-color: #f9f9f9;
+}
+
+
+/* ============================= */
 /* ALERT MESSAGES (Saneem) */
 /* ============================= */
 

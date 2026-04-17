@@ -2,6 +2,7 @@ package com.lostfound.controller;
 
 import com.lostfound.model.User;
 import com.lostfound.service.UserService;
+import com.lostfound.util.SessionUtil;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -10,6 +11,8 @@ import javax.servlet.http.*;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
+	
+    private static final long serialVersionUID = 1L;
 
     private UserService userService = new UserService();
 
@@ -37,11 +40,11 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        String email    = req.getParameter("email");
+        String email = req.getParameter("email");
         String password = req.getParameter("password");
         String remember = req.getParameter("remember");
 
-        if (email == null || email.trim().isEmpty() || password == null) {
+        if (email == null || email.trim().isEmpty() || password == null || password.trim().isEmpty()) {
             req.setAttribute("error", "Please fill in all fields.");
             req.getRequestDispatcher("/WEB-INF/views/auth/login.jsp").forward(req, resp);
             return;
@@ -68,15 +71,13 @@ public class LoginServlet extends HttpServlet {
         }
 
         /*---------------------
-          setting up the session
-        ----------------------*/
-        HttpSession session = req.getSession();
-        session.setAttribute("userId",   user.getId());
-        session.setAttribute("userName", user.getFullName());
-        session.setAttribute("email",    user.getEmail());
-        session.setAttribute("role",     user.getRole());
+        setting up the session
+      	----------------------*/
+        
+        SessionUtil.createUserSession(req, user.getId(), user.getFullName(), user.getRole());
 
-        // remember me cookie...
+     // remember me cookie...
+        
         if ("on".equals(remember)) {
             Cookie emailCookie = new Cookie("rememberEmail", email.trim());
             emailCookie.setMaxAge(7 * 24 * 60 * 60);
@@ -96,3 +97,4 @@ public class LoginServlet extends HttpServlet {
         }
     }
 }
+        

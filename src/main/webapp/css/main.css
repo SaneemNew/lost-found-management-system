@@ -210,45 +210,57 @@ textarea {
 /* ============================= */
 
 .btn {
-    padding: 10px 24px;
+    padding: 11px 22px;
     font-size: 14px;
     border: none;
-    border-radius: 5px;
+    border-radius: var(--radius-sm);
     cursor: pointer;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    text-align: center;
 }
 
 .btn-primary {
-    background-color: #e8a020;
-    color: white;
+    background-color: var(--accent);
+    color: var(--white);
 }
 
 .btn-primary:hover {
-    background-color: #c9881a;
+    background-color: var(--accent-dark);
+    transform: translateY(-2px);
 }
 
 .btn-outline {
     background-color: transparent;
-    color: white;
-    border: 2px solid white;
+    color: var(--white);
+    border: 2px solid var(--white);
+}
+
+.btn-outline:hover {
+    background-color: rgba(255, 255, 255, 0.16);
+    transform: translateY(-2px);
 }
 
 .btn-blue {
-    background-color: #1b3a6b;
-    color: white;
+    background-color: var(--primary);
+    color: var(--white);
 }
 
 .btn-blue:hover {
-    background-color: #152e55;
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
 }
 
 .btn-danger {
     background-color: #c0392b;
-    color: white;
+    color: var(--white);
 }
 
 .btn-danger:hover {
     background-color: #a93226;
+    transform: translateY(-2px);
 }
 
 .btn-sm {
@@ -256,33 +268,19 @@ textarea {
     font-size: 13px;
 }
 
-
-
-/* ============================= */
-/* CONTAINER (Abhisekh) */
-/* ============================= */
-
-.container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 35px 20px;
+.hero-btns .btn {
+    min-width: 220px;
+    padding: 14px 26px;
+    font-size: 17px;
+    border-radius: var(--radius-md);
 }
 
-.page-section {
-    padding-top: 10px;
-    padding-bottom: 20px;
+.hero-btns .btn-primary {
+    box-shadow: 0 8px 20px rgba(232, 160, 32, 0.22);
 }
 
-/* ============================= */
-/* SECTION TITLE (Abhisekh) */
-/* ============================= */
-
-.section-title {
-    font-size: 23px;
-    margin-bottom: 24px;
-    color: #1b3a6b;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 8px;
+.hero-btns .btn-primary:hover {
+    box-shadow: 0 14px 28px rgba(232, 160, 32, 0.28);
 }
 
 
@@ -535,7 +533,7 @@ textarea {
 
 
 /* ============================= */
-/* ALERT MESSAGES (Saneem) */
+/* ALERT MESSAGES (Abhisekh) */
 /* ============================= */
 
 .msg-error,
@@ -611,10 +609,12 @@ table tr:hover td {
 /* ============================= */
 
 .badge {
-    padding: 3px 10px;
-    border-radius: 12px;
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
     font-size: 12px;
-    font-weight: bold;
+    font-weight: 700;
+    line-height: 1.2;
 }
 
 .badge-pending  { background: #fff3cd; color: #856404; }
@@ -623,7 +623,6 @@ table tr:hover td {
 .badge-open     { background: #cce5ff; color: #004085; }
 .badge-resolved { background: #d4edda; color: #155724; }
 .badge-claimed  { background: #fff3cd; color: #856404; }
-
 
 
 /* ============================= */
@@ -674,28 +673,19 @@ table tr:hover td {
 
 
 /* ============================= */
-/* SEARCH (Abhisekh) */
+/* SEARCH BAR (Abhisekh) */
 /* ============================= */
 
 .search-bar {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    background: white;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    background: var(--white);
     padding: 18px;
     border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    box-shadow: var(--shadow-sm);
     margin-bottom: 25px;
-}
-
-.search-bar input,
-.search-bar select {
-    padding: 9px 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-    flex: 1;
-    min-width: 150px;
+    align-items: center;
 }
 
 /* ============================= */

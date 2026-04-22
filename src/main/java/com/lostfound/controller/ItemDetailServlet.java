@@ -53,9 +53,6 @@ public class ItemDetailServlet extends HttpServlet {
             req.setAttribute("alreadyClaimed", claimDAO.alreadyClaimed(itemId, userId));
         }
 
-        // Load all claims related to this item
-        req.setAttribute("claims", claimDAO.getByItem(itemId));
-
         // Open the item detail page
         req.getRequestDispatcher("/WEB-INF/views/items/itemDetail.jsp").forward(req, resp);
     }

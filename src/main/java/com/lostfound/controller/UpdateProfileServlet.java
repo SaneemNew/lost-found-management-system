@@ -11,15 +11,16 @@ import javax.servlet.http.*;
 
 @WebServlet("/student/updateProfile")
 public class UpdateProfileServlet extends HttpServlet {
-	
-	private static final long serialVersionUID = 1L;
 
-    private UserDAO     userDAO     = new UserDAO();
+    private static final long serialVersionUID = 1L;
+
+    private UserDAO userDAO = new UserDAO();
     private UserService userService = new UserService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+
         int userId = (int) req.getSession().getAttribute("userId");
         req.setAttribute("user", userDAO.getUserById(userId));
         req.getRequestDispatcher("/WEB-INF/views/student/editProfile.jsp").forward(req, resp);
@@ -29,12 +30,12 @@ public class UpdateProfileServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        int    userId  = (int) req.getSession().getAttribute("userId");
-        String action  = req.getParameter("action");
+        int userId = (int) req.getSession().getAttribute("userId");
+        String action = req.getParameter("action");
 
         if ("password".equals(action)) {
-            String current    = req.getParameter("currentPassword");
-            String newPass    = req.getParameter("newPassword");
+            String current = req.getParameter("currentPassword");
+            String newPass = req.getParameter("newPassword");
             String confirmNew = req.getParameter("confirmNew");
 
             User user = userDAO.getUserById(userId);
@@ -46,12 +47,14 @@ public class UpdateProfileServlet extends HttpServlet {
                 req.getRequestDispatcher("/WEB-INF/views/student/editProfile.jsp").forward(req, resp);
                 return;
             }
-            if (newPass == null || newPass.length() < 6) {
+
+            if (newPass == null || newPass.trim().length() < 6) {
                 req.setAttribute("passError", "New password must be at least 6 characters.");
                 req.setAttribute("user", user);
                 req.getRequestDispatcher("/WEB-INF/views/student/editProfile.jsp").forward(req, resp);
                 return;
             }
+
             if (!newPass.equals(confirmNew)) {
                 req.setAttribute("passError", "Passwords do not match.");
                 req.setAttribute("user", user);
@@ -61,29 +64,47 @@ public class UpdateProfileServlet extends HttpServlet {
 
             userDAO.updatePassword(userId, userService.hashPassword(newPass));
             resp.sendRedirect(req.getContextPath() + "/student/updateProfile?passUpdated=1");
-
-        } else {
-            String fullName = req.getParameter("fullName");
-            String email    = req.getParameter("email");
-            String phone    = req.getParameter("phone");
-
-            if (fullName == null || fullName.trim().isEmpty() || email == null || email.trim().isEmpty()) {
-                req.setAttribute("error", "Name and email are required.");
-                req.setAttribute("user", userDAO.getUserById(userId));
-                req.getRequestDispatcher("/WEB-INF/views/student/editProfile.jsp").forward(req, resp);
-                return;
-            }
-
-            User user = new User();
-            user.setId(userId);
-            user.setFullName(fullName.trim());
-            user.setEmail(email.trim());
-            user.setPhone(phone != null ? phone.trim() : "");
-            userDAO.updateProfile(user);
-
-            // update session name
-            req.getSession().setAttribute("userName", fullName.trim());
-            resp.sendRedirect(req.getContextPath() + "/student/updateProfile?updated=1");
+            return;
         }
+
+        String fullName = req.getParameter("fullName");
+        String email = req.getParameter("email");
+        String phone = req.getParameter("phone");
+
+        if (fullName == null || fullName.trim().isEmpty()
+                || email == null || email.trim().isEmpty()) {
+
+            req.setAttribute("error", "Name and email are required.");
+            req.setAttribute("user", userDAO.getUserById(userId));
+            req.getRequestDispatcher("/WEB-INF/views/student/editProfile.jsp").forward(req, resp);
+            return;
+        }
+
+        fullName = fullName.trim();
+        email = email.trim().toLowerCase();
+        phone = (phone != null) ? phone.trim() : "";
+
+        if (userDAO.emailExistsForOtherUser(email, userId)) {
+            User currentUser = userDAO.getUserById(userId);
+            currentUser.setFullName(fullName);
+            currentUser.setEmail(email);
+            currentUser.setPhone(phone);
+
+            req.setAttribute("error", "This email is already being used by another account.");
+            req.setAttribute("user", currentUser);
+            req.getRequestDispatcher("/WEB-INF/views/student/editProfile.jsp").forward(req, resp);
+            return;
+        }
+
+        User user = new User();
+        user.setId(userId);
+        user.setFullName(fullName);
+        user.setEmail(email);
+        user.setPhone(phone);
+
+        userDAO.updateProfile(user);
+
+        req.getSession().setAttribute("userName", fullName);
+        resp.sendRedirect(req.getContextPath() + "/student/updateProfile?updated=1");
     }
 }

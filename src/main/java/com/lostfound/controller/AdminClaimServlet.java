@@ -1,6 +1,10 @@
 package com.lostfound.controller;
+
 import java.io.IOException;
+
 import com.lostfound.dao.ClaimDAO;
+import com.lostfound.dao.ItemDAO;
+import com.lostfound.model.Claim;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,10 +12,11 @@ import javax.servlet.http.*;
 
 @WebServlet("/admin/claims")
 public class AdminClaimServlet extends HttpServlet {
-	
-	private static final long serialVersionUID = 1L;
+
+    private static final long serialVersionUID = 1L;
 
     private ClaimDAO claimDAO = new ClaimDAO();
+    private ItemDAO itemDAO = new ItemDAO();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -26,7 +31,8 @@ public class AdminClaimServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String action = req.getParameter("action");
-        int claimId = 0;
+
+        int claimId;
         try {
             claimId = Integer.parseInt(req.getParameter("claimId"));
         } catch (NumberFormatException e) {
@@ -34,8 +40,20 @@ public class AdminClaimServlet extends HttpServlet {
             return;
         }
 
+        Claim claim = claimDAO.getById(claimId);
+        if (claim == null) {
+            resp.sendRedirect(req.getContextPath() + "/admin/claims");
+            return;
+        }
+
         if ("approve".equals(action)) {
-            claimDAO.updateStatus(claimId, "approved");
+            boolean claimUpdated = claimDAO.updateStatus(claimId, "approved");
+            boolean itemUpdated = itemDAO.updateStatus(claim.getItemId(), "claimed");
+
+            if (claimUpdated && itemUpdated) {
+                claimDAO.rejectOtherPendingClaims(claim.getItemId(), claimId);
+            }
+
         } else if ("reject".equals(action)) {
             claimDAO.updateStatus(claimId, "rejected");
         }

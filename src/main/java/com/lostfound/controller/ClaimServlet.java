@@ -12,6 +12,8 @@ import javax.servlet.http.*;
 
 @WebServlet("/student/claim")
 public class ClaimServlet extends HttpServlet {
+	
+	private static final long serialVersionUID = 1L;
 
     private ClaimDAO claimDAO = new ClaimDAO();
     private ItemDAO  itemDAO  = new ItemDAO();

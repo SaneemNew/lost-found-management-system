@@ -9,15 +9,24 @@ import javax.servlet.http.*;
 
 @WebServlet(urlPatterns = {"/student/bookmark", "/student/bookmarks"})
 public class BookmarkServlet extends HttpServlet {
-	
-	private static final long serialVersionUID = 1L;
+
+    private static final long serialVersionUID = 1L;
 
     private BookmarkDAO bookmarkDAO = new BookmarkDAO();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        int userId = (int) req.getSession().getAttribute("userId");
+
+        HttpSession session = req.getSession(false);
+
+        if (session == null || session.getAttribute("userId") == null) {
+            resp.sendRedirect(req.getContextPath() + "/login");
+            return;
+        }
+
+        Integer userId = (Integer) session.getAttribute("userId");
+
         req.setAttribute("items", bookmarkDAO.getBookmarkedItems(userId));
         req.getRequestDispatcher("/WEB-INF/views/student/bookmarks.jsp").forward(req, resp);
     }
@@ -26,10 +35,17 @@ public class BookmarkServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        int userId = (int) req.getSession().getAttribute("userId");
+        HttpSession session = req.getSession(false);
+
+        if (session == null || session.getAttribute("userId") == null) {
+            resp.sendRedirect(req.getContextPath() + "/login");
+            return;
+        }
+
+        Integer userId = (Integer) session.getAttribute("userId");
         String action = req.getParameter("action");
 
-        int itemId = 0;
+        int itemId;
         try {
             itemId = Integer.parseInt(req.getParameter("itemId"));
         } catch (NumberFormatException e) {
@@ -43,12 +59,11 @@ public class BookmarkServlet extends HttpServlet {
             bookmarkDAO.removeBookmark(userId, itemId);
         }
 
-        // go back to the item page after toggling
         String ref = req.getHeader("Referer");
-        if (ref != null) {
+        if (ref != null && !ref.isEmpty()) {
             resp.sendRedirect(ref);
         } else {
-            resp.sendRedirect(req.getContextPath() + "/item?id=" + itemId);
+            resp.sendRedirect(req.getContextPath() + "/student/bookmarks");
         }
     }
 }

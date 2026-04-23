@@ -12,10 +12,9 @@ import javax.servlet.http.*;
 
 @WebServlet("/student/postLost")
 public class PostLostServlet extends HttpServlet {
-	
-	private static final long serialVersionUID = 1L;
 
-    private ItemDAO     itemDAO     = new ItemDAO();
+    private static final long serialVersionUID = 1L;
+	private ItemDAO     itemDAO     = new ItemDAO();
     private CategoryDAO categoryDAO = new CategoryDAO();
     private ItemService itemService = new ItemService();
 

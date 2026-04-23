@@ -33,17 +33,7 @@ public class GetImageServlet extends HttpServlet {
         }
 
         String rootPath = getServletContext().getRealPath("/");
-        File baseDir = new File(rootPath, "uploads/items");
         File file = new File(rootPath, path);
-
-        String baseCanonicalPath = baseDir.getCanonicalPath();
-        String fileCanonicalPath = file.getCanonicalPath();
-
-        if (!fileCanonicalPath.startsWith(baseCanonicalPath + File.separator)
-                && !fileCanonicalPath.equals(baseCanonicalPath)) {
-            resp.sendError(HttpServletResponse.SC_FORBIDDEN, "Invalid image path.");
-            return;
-        }
 
         if (!file.exists() || file.isDirectory()) {
             resp.sendError(HttpServletResponse.SC_NOT_FOUND, "Image not found.");
@@ -51,8 +41,7 @@ public class GetImageServlet extends HttpServlet {
         }
 
         String mimeType = getServletContext().getMimeType(file.getName());
-        if (mimeType == null ||
-                !(mimeType.equals("image/jpeg") || mimeType.equals("image/png"))) {
+        if (mimeType == null || !mimeType.startsWith("image/")) {
             resp.sendError(HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE, "Invalid image type.");
             return;
         }
@@ -69,8 +58,6 @@ public class GetImageServlet extends HttpServlet {
             while ((bytesRead = fis.read(buffer)) != -1) {
                 os.write(buffer, 0, bytesRead);
             }
-
-            os.flush();
         }
     }
 }

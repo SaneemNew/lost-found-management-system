@@ -1,7 +1,6 @@
 /* =========================
    RESET / BASE
 ========================= */
-
 * {
     margin: 0;
     padding: 0;
@@ -64,12 +63,9 @@ textarea {
     font: inherit;
 }
 
-
-
-/* ============================= */
-/* Layout (SANEEM) */
-/* ============================= */
-
+/* =============================
+   LAYOUT (Saneem)
+============================= */
 .container {
     width: min(var(--container-width), 100%);
     margin: 0 auto;
@@ -89,11 +85,9 @@ textarea {
     padding-bottom: 8px;
 }
 
-
-/* ============================= */
-/* NAV BAR (SANEEM) */
-/* ============================= */
-
+/* =============================
+   NAV BAR (Saneem)
+============================= */
 .navbar {
     background-color: var(--primary);
     display: flex;
@@ -148,11 +142,9 @@ textarea {
     width: 100%;
 }
 
-
-
-/* ============================= */
-/* INDEX PAGE (SANEEM) */
-/* ============================= */
+/* =============================
+   INDEX PAGE / HERO (Saneem)
+============================= */
 .hero {
     background: linear-gradient(135deg, #173b73 0%, #1b3a6b 45%, #2a5aa0 100%);
     color: var(--white);
@@ -204,11 +196,9 @@ textarea {
     flex-wrap: wrap;
 }
 
-
-/* ============================= */
-/* BUTTONS (Abhisekh) */
-/* ============================= */
-
+/* =============================
+   BUTTONS (Abhisekh)
+============================= */
 .btn {
     padding: 11px 22px;
     font-size: 14px;
@@ -220,6 +210,7 @@ textarea {
     justify-content: center;
     transition: var(--transition);
     text-align: center;
+    line-height: 1.2;
 }
 
 .btn-primary {
@@ -283,7 +274,6 @@ textarea {
     box-shadow: 0 14px 28px rgba(232, 160, 32, 0.28);
 }
 
-
 /* =========================
    CARDS (Bishesh)
 ========================= */
@@ -320,11 +310,9 @@ textarea {
     line-height: 1.65;
 }
 
-
-/* ============================= */
-/* ABOUT PAGE (Bishesh) */
-/* ============================= */
-
+/* =============================
+   ABOUT PAGE (Bishesh)
+============================= */
 .about-page {
     padding-top: 45px;
     padding-bottom: 30px;
@@ -490,11 +478,9 @@ textarea {
     font-weight: bold;
 }
 
-
-/* ============================= */
-/* GENRIC FORMS (Aayush) */
-/* ============================= */
-
+/* =============================
+   GENERIC FORMS (Aayush)
+============================= */
 .form-box {
     background: var(--white);
     padding: 30px;
@@ -569,12 +555,9 @@ textarea {
     text-decoration: underline;
 }
 
-
-
-/* ============================= */
-/* CONTACT PAGE (Aayush) */
-/* ============================= */
-
+/* =============================
+   CONTACT PAGE (Aayush)
+============================= */
 .contact-grid {
     display: grid;
     grid-template-columns: 1fr 1.6fr;
@@ -624,11 +607,9 @@ textarea {
     cursor: pointer;
 }
 
-
-/* ============================= */
-/* ALERT MESSAGES (Abhisekh) */
-/* ============================= */
-
+/* =============================
+   ALERT MESSAGES (Abhisekh)
+============================= */
 .msg-error,
 .msg-success,
 .msg-info {
@@ -653,11 +634,9 @@ textarea {
     color: var(--primary);
 }
 
-
-/* ============================= */
-/* TABLE (Saneem) */
-/* ============================= */
-
+/* =============================
+   TABLES (Saneem)
+============================= */
 .table-wrapper {
     width: 100%;
     overflow-x: auto;
@@ -697,10 +676,9 @@ table tr:hover td {
     background-color: #f9f9f9;
 }
 
-/* ============================= */
-/* BADGES (Abhisekh) */
-/* ============================= */
-
+/* =============================
+   BADGES (Abhisekh)
+============================= */
 .badge {
     display: inline-block;
     padding: 4px 10px;
@@ -717,11 +695,9 @@ table tr:hover td {
 .badge-resolved { background: #d4edda; color: #155724; }
 .badge-claimed  { background: #fff3cd; color: #856404; }
 
-
-/* ============================= */
-/* ITEMS GRID (Bishesh) */
-/* ============================= */
-
+/* =============================
+   ITEMS GRID (Bishesh)
+============================= */
 .item-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -767,12 +743,9 @@ table tr:hover td {
     margin-top: 12px;
 }
 
-
-
-/* ============================= */
-/* SEARCH BAR (Abhisekh) */
-/* ============================= */
-
+/* =============================
+   SEARCH BAR (Abhisekh)
+============================= */
 .search-bar {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -785,10 +758,9 @@ table tr:hover td {
     align-items: center;
 }
 
-/* ============================= */
-/* DASHBOARD (Aayush) */
-/* ============================= */
-
+/* =============================
+   DASHBOARD (Aayush)
+============================= */
 .dash-header {
     margin-bottom: 25px;
 }
@@ -831,11 +803,9 @@ table tr:hover td {
     margin-top: 4px;
 }
 
-
-/* ============================= */
-/* FOOTER (Aayush) */
-/* ============================= */
-
+/* =============================
+   FOOTER (Aayush)
+============================= */
 footer {
     background-color: #1b1b1b;
     color: #999;
@@ -851,11 +821,9 @@ footer a {
     text-decoration: underline;
 }
 
-
-/* ============================= */
-/* ERROR PAGES (Bishesh) */
-/* ============================= */
-
+/* =============================
+   ERROR PAGES (Bishesh)
+============================= */
 .error-page {
     text-align: center;
     padding: 80px 20px;
@@ -878,11 +846,9 @@ footer a {
     margin-bottom: 25px;
 }
 
-
-/* ============================= */
-/* RESPONSIVE (Saneem) */
-/* ============================= */
-
+/* =============================
+   RESPONSIVE (Saneem)
+============================= */
 @media (max-width: 1100px) {
     .about-steps {
         grid-template-columns: repeat(2, 1fr);

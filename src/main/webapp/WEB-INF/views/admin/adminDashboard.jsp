@@ -66,31 +66,33 @@
                     <div class="msg-info">No categories yet.</div>
                 </c:when>
                 <c:otherwise>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach var="cat" items="${categories}">
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
                                 <tr>
-                                    <td>${cat.id}</td>
-                                    <td>${cat.name}</td>
-                                    <td>
-                                        <form method="post" action="${pageContext.request.contextPath}/admin/dashboard"
-                                              onsubmit="return confirm('Delete this category?');" style="display: inline;">
-                                            <input type="hidden" name="action" value="deleteCategory">
-                                            <input type="hidden" name="catId" value="${cat.id}">
-                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                        </form>
-                                    </td>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Action</th>
                                 </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <c:forEach var="cat" items="${categories}">
+                                    <tr>
+                                        <td>${cat.id}</td>
+                                        <td>${cat.name}</td>
+                                        <td>
+                                            <form method="post" action="${pageContext.request.contextPath}/admin/dashboard"
+                                                  onsubmit="return confirm('Delete this category?');" style="display: inline;">
+                                                <input type="hidden" name="action" value="deleteCategory">
+                                                <input type="hidden" name="catId" value="${cat.id}">
+                                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
                 </c:otherwise>
             </c:choose>
         </div>

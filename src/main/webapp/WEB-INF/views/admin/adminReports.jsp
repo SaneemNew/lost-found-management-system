@@ -75,22 +75,24 @@
             <div class="msg-info">Not enough data yet.</div>
         </c:when>
         <c:otherwise>
-            <table style="max-width: 400px;">
-                <thead>
-                    <tr>
-                        <th>Category</th>
-                        <th>Lost Reports</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="row" items="${topCategories}">
+            <div class="table-wrapper">
+                <table style="max-width: 400px;">
+                    <thead>
                         <tr>
-                            <td>${row[0]}</td>
-                            <td>${row[1]}</td>
+                            <th>Category</th>
+                            <th>Lost Reports</th>
                         </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="row" items="${topCategories}">
+                            <tr>
+                                <td>${row[0]}</td>
+                                <td>${row[1]}</td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
         </c:otherwise>
     </c:choose>
 

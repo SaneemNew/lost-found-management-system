@@ -18,52 +18,54 @@
             <div class="msg-info">No claims have been submitted yet.</div>
         </c:when>
         <c:otherwise>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Item</th>
-                        <th>Claimed By</th>
-                        <th>Description</th>
-                        <th>Status</th>
-                        <th>Date</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="c" items="${claims}">
+            <div class="table-wrapper">
+                <table>
+                    <thead>
                         <tr>
-                            <td>${c.id}</td>
-                            <td>${c.itemTitle}</td>
-                            <td>${c.claimantName}</td>
-                            <td style="max-width: 200px;">${c.description}</td>
-                            <td><span class="badge badge-${c.status}">${c.status}</span></td>
-                            <td>${c.createdAt}</td>
-                            <td style="white-space: nowrap;">
-                                <c:choose>
-                                    <c:when test="${c.status == 'pending'}">
-                                        <form method="post" action="${pageContext.request.contextPath}/admin/claims" style="display: inline;">
-                                            <input type="hidden" name="action" value="approve">
-                                            <input type="hidden" name="claimId" value="${c.id}">
-                                            <button type="submit" class="btn btn-sm" style="background:#1e7e34;color:white;">Approve</button>
-                                        </form>
-
-                                        <form method="post" action="${pageContext.request.contextPath}/admin/claims"
-                                              onsubmit="return confirm('Reject this claim?');" style="display: inline; margin-left: 4px;">
-                                            <input type="hidden" name="action" value="reject">
-                                            <input type="hidden" name="claimId" value="${c.id}">
-                                            <button type="submit" class="btn btn-danger btn-sm">Reject</button>
-                                        </form>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <span style="color: #aaa; font-size: 13px;">-</span>
-                                    </c:otherwise>
-                                </c:choose>
-                            </td>
+                            <th>ID</th>
+                            <th>Item</th>
+                            <th>Claimed By</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                            <th>Actions</th>
                         </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="c" items="${claims}">
+                            <tr>
+                                <td>${c.id}</td>
+                                <td>${c.itemTitle}</td>
+                                <td>${c.claimantName}</td>
+                                <td style="max-width: 200px;">${c.description}</td>
+                                <td><span class="badge badge-${c.status}">${c.status}</span></td>
+                                <td>${c.createdAt}</td>
+                                <td style="white-space: nowrap;">
+                                    <c:choose>
+                                        <c:when test="${c.status == 'pending'}">
+                                            <form method="post" action="${pageContext.request.contextPath}/admin/claims" style="display: inline;">
+                                                <input type="hidden" name="action" value="approve">
+                                                <input type="hidden" name="claimId" value="${c.id}">
+                                                <button type="submit" class="btn btn-sm" style="background:#1e7e34;color:white;">Approve</button>
+                                            </form>
+
+                                            <form method="post" action="${pageContext.request.contextPath}/admin/claims"
+                                                  onsubmit="return confirm('Reject this claim?');" style="display: inline; margin-left: 4px;">
+                                                <input type="hidden" name="action" value="reject">
+                                                <input type="hidden" name="claimId" value="${c.id}">
+                                                <button type="submit" class="btn btn-danger btn-sm">Reject</button>
+                                            </form>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <span style="color: #aaa; font-size: 13px;">-</span>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
         </c:otherwise>
     </c:choose>
 

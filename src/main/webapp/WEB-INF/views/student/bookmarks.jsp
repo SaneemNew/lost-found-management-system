@@ -13,16 +13,21 @@
         <c:when test="${empty items}">
             <div class="msg-info">
                 You haven't bookmarked any items yet.
-                <a href="${pageContext.request.contextPath}/search" style="color: #1b3a6b;">Browse found items</a>
+                <a href="${pageContext.request.contextPath}/search" style="color: #1b3a6b;">
+                    Browse found items
+                </a>
             </div>
         </c:when>
+
         <c:otherwise>
             <div class="item-grid">
                 <c:forEach var="item" items="${items}">
                     <div class="item-card">
+
                         <c:choose>
                             <c:when test="${not empty item.imagePath}">
-                                <img src="${pageContext.request.contextPath}/${item.imagePath}" alt="Item image">
+                                <img src="${pageContext.request.contextPath}/getimage?path=${item.imagePath}"
+                                     alt="Item image">
                             </c:when>
                             <c:otherwise>
                                 <div style="height: 160px; background: #eee; display: flex; align-items: center; justify-content: center; color: #999;">
@@ -44,12 +49,21 @@
                             </c:choose>
 
                             <p>${item.location}</p>
-                            <p><span class="badge badge-${item.status}">${item.status}</span></p>
+                            <p>
+                                <span class="badge badge-${item.status}">
+                                    ${item.status}
+                                </span>
+                            </p>
 
                             <div class="item-actions" style="display: flex; gap: 8px; margin-top: 10px;">
-                                <a href="${pageContext.request.contextPath}/item?id=${item.id}" class="btn btn-blue btn-sm">View</a>
+                                <a href="${pageContext.request.contextPath}/item?id=${item.id}"
+                                   class="btn btn-blue btn-sm">
+                                    View Details
+                                </a>
 
-                                <form method="post" action="${pageContext.request.contextPath}/student/bookmark" style="display: inline;">
+                                <form method="post"
+                                      action="${pageContext.request.contextPath}/student/bookmark"
+                                      style="display: inline;">
                                     <input type="hidden" name="itemId" value="${item.id}">
                                     <input type="hidden" name="action" value="remove">
                                     <button type="submit" class="btn btn-danger btn-sm">Remove</button>

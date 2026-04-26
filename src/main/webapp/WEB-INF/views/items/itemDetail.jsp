@@ -16,6 +16,10 @@
     <c:if test="${param.err == 'own'}">
         <div class="msg-error">You cannot claim your own post.</div>
     </c:if>
+    
+    <c:if test="${param.err == 'claimfail'}">
+    	<div class="msg-error">Claim could not be submitted. Please try again.</div>
+	</c:if>
 
     <div style="display: flex; gap: 30px; flex-wrap: wrap; align-items: flex-start;">
 
@@ -89,7 +93,7 @@
                         <c:choose>
                             <c:when test="${alreadyClaimed}">
                                 <span class="btn" style="background: #eee; color: #888; cursor: default;">
-                                    Already Claimed
+                                    Claim Already Submitted
                                 </span>
                             </c:when>
                             <c:otherwise>

@@ -40,7 +40,7 @@ public class AdminItemServlet extends HttpServlet {
             itemDAO.deleteItem(itemId);
         } else if ("changeStatus".equals(action)) {
             String newStatus = req.getParameter("newStatus");
-            if (newStatus != null) {
+            if ("open".equals(newStatus) || "claimed".equals(newStatus) || "resolved".equals(newStatus)) {
                 itemDAO.updateStatus(itemId, newStatus);
             }
         }

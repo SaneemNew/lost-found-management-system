@@ -4,6 +4,7 @@ import com.lostfound.dao.CategoryDAO;
 import com.lostfound.dao.ItemDAO;
 import com.lostfound.model.Item;
 import com.lostfound.service.ItemService;
+import com.lostfound.util.SessionUtil;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -14,13 +15,15 @@ import javax.servlet.http.*;
 public class PostLostServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-	private ItemDAO     itemDAO     = new ItemDAO();
+
+    private ItemDAO itemDAO = new ItemDAO();
     private CategoryDAO categoryDAO = new CategoryDAO();
     private ItemService itemService = new ItemService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+
         req.setAttribute("categories", categoryDAO.getAll());
         req.getRequestDispatcher("/WEB-INF/views/student/postLost.jsp").forward(req, resp);
     }
@@ -29,11 +32,17 @@ public class PostLostServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        String title       = req.getParameter("title");
+        Integer userId = SessionUtil.getUserId(req);
+        if (userId == null) {
+            resp.sendRedirect(req.getContextPath() + "/login");
+            return;
+        }
+
+        String title = req.getParameter("title");
         String description = req.getParameter("description");
-        String location    = req.getParameter("location");
-        String date        = req.getParameter("dateReported");
-        String catParam    = req.getParameter("categoryId");
+        String location = req.getParameter("location");
+        String date = req.getParameter("dateReported");
+        String catParam = req.getParameter("categoryId");
 
         String error = itemService.validateItem(title, location, date);
         if (error != null) {
@@ -44,9 +53,11 @@ public class PostLostServlet extends HttpServlet {
         }
 
         int catId = 0;
-        try { catId = Integer.parseInt(catParam); } catch (Exception e) {}
-
-        int userId = (int) req.getSession().getAttribute("userId");
+        try {
+            catId = Integer.parseInt(catParam);
+        } catch (Exception e) {
+            catId = 0;
+        }
 
         Item item = new Item();
         item.setUserId(userId);
@@ -58,7 +69,15 @@ public class PostLostServlet extends HttpServlet {
         item.setDateReported(date);
         item.setImagePath(null);
 
-        itemDAO.saveItem(item);
+        boolean saved = itemDAO.saveItem(item);
+
+        if (!saved) {
+            req.setAttribute("error", "Failed to save item. Please try again.");
+            req.setAttribute("categories", categoryDAO.getAll());
+            req.getRequestDispatcher("/WEB-INF/views/student/postLost.jsp").forward(req, resp);
+            return;
+        }
+
         resp.sendRedirect(req.getContextPath() + "/student/myPosts");
     }
 }

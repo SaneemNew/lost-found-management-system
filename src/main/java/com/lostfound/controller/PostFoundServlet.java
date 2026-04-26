@@ -4,6 +4,7 @@ import com.lostfound.dao.CategoryDAO;
 import com.lostfound.dao.ItemDAO;
 import com.lostfound.model.Item;
 import com.lostfound.service.ItemService;
+import com.lostfound.util.SessionUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,6 +42,12 @@ public class PostFoundServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
+        Integer userId = SessionUtil.getUserId(req);
+        if (userId == null) {
+            resp.sendRedirect(req.getContextPath() + "/login");
+            return;
+        }
+
         String title = req.getParameter("title");
         String description = req.getParameter("description");
         String location = req.getParameter("location");
@@ -60,9 +67,7 @@ public class PostFoundServlet extends HttpServlet {
             catId = 0;
         }
 
-        int userId = (int) req.getSession().getAttribute("userId");
         String imagePath = null;
-
         Part filePart = req.getPart("image");
 
         if (filePart != null && filePart.getSize() > 0) {
@@ -143,7 +148,6 @@ public class PostFoundServlet extends HttpServlet {
 
         req.setAttribute("error", error);
         req.setAttribute("categories", categoryDAO.getAll());
-
         req.setAttribute("title", title);
         req.setAttribute("description", description);
         req.setAttribute("location", location);

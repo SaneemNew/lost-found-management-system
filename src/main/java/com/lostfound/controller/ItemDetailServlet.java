@@ -4,6 +4,7 @@ import com.lostfound.dao.BookmarkDAO;
 import com.lostfound.dao.ClaimDAO;
 import com.lostfound.dao.ItemDAO;
 import com.lostfound.model.Item;
+import com.lostfound.util.SessionUtil;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -13,9 +14,10 @@ import javax.servlet.http.*;
 @WebServlet("/item")
 public class ItemDetailServlet extends HttpServlet {
 
-	private static final long serialVersionUID = 1L;
-    private ItemDAO     itemDAO     = new ItemDAO();
-    private ClaimDAO    claimDAO    = new ClaimDAO();
+    private static final long serialVersionUID = 1L;
+
+    private ItemDAO itemDAO = new ItemDAO();
+    private ClaimDAO claimDAO = new ClaimDAO();
     private BookmarkDAO bookmarkDAO = new BookmarkDAO();
 
     @Override
@@ -38,16 +40,13 @@ public class ItemDetailServlet extends HttpServlet {
 
         req.setAttribute("item", item);
 
-        // check bookmark + claim status if logged in
-        HttpSession session = req.getSession(false);
-        if (session != null && session.getAttribute("userId") != null) {
-            int userId = (int) session.getAttribute("userId");
-            req.setAttribute("isBookmarked",  bookmarkDAO.isBookmarked(userId, itemId));
+        Integer userId = SessionUtil.getUserId(req);
+        if (userId != null) {
+            req.setAttribute("isBookmarked", bookmarkDAO.isBookmarked(userId, itemId));
             req.setAttribute("alreadyClaimed", claimDAO.alreadyClaimed(itemId, userId));
         }
 
         req.setAttribute("claims", claimDAO.getByItem(itemId));
-
         req.getRequestDispatcher("/WEB-INF/views/items/itemDetail.jsp").forward(req, resp);
     }
 }

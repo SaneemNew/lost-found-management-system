@@ -1,6 +1,7 @@
 package com.lostfound.controller;
 
 import com.lostfound.dao.ItemDAO;
+import com.lostfound.util.SessionUtil;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -9,15 +10,21 @@ import javax.servlet.http.*;
 
 @WebServlet("/student/myPosts")
 public class MyPostsServlet extends HttpServlet {
-	
-	private static final long serialVersionUID = 1L;
-	
+
+    private static final long serialVersionUID = 1L;
+
     private ItemDAO itemDAO = new ItemDAO();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        int userId = (int) req.getSession().getAttribute("userId");
+
+        Integer userId = SessionUtil.getUserId(req);
+        if (userId == null) {
+            resp.sendRedirect(req.getContextPath() + "/login");
+            return;
+        }
+
         req.setAttribute("items", itemDAO.getByUser(userId));
         req.getRequestDispatcher("/WEB-INF/views/student/myPosts.jsp").forward(req, resp);
     }
@@ -26,7 +33,12 @@ public class MyPostsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        int userId = (int) req.getSession().getAttribute("userId");
+        Integer userId = SessionUtil.getUserId(req);
+        if (userId == null) {
+            resp.sendRedirect(req.getContextPath() + "/login");
+            return;
+        }
+
         String action = req.getParameter("action");
 
         if ("delete".equals(action)) {
@@ -38,7 +50,6 @@ public class MyPostsServlet extends HttpServlet {
                 return;
             }
 
-            // only delete if the item belongs to this user
             itemDAO.deleteItemByUser(itemId, userId);
         }
 

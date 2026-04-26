@@ -14,14 +14,17 @@
             <div class="stat-num">${lostCount}</div>
             <div class="stat-label">Lost Items Posted</div>
         </div>
+
         <div class="stat-box">
             <div class="stat-num">${foundCount}</div>
             <div class="stat-label">Found Items Posted</div>
         </div>
+
         <div class="stat-box">
             <div class="stat-num">${claimCount}</div>
             <div class="stat-label">Pending Claims</div>
         </div>
+
         <div class="stat-box">
             <div class="stat-num">${bookmarkCount}</div>
             <div class="stat-label">Bookmarks</div>
@@ -29,17 +32,42 @@
     </div>
 
     <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 35px;">
-        <a href="${pageContext.request.contextPath}/student/postLost" class="btn btn-primary">Report Lost Item</a>
-        <a href="${pageContext.request.contextPath}/student/postFound" class="btn btn-blue">Report Found Item</a>
-        <a href="${pageContext.request.contextPath}/search" class="btn btn-outline" style="color: #1b3a6b; border-color: #1b3a6b;">Browse Found Items</a>
-        <a href="${pageContext.request.contextPath}/student/myPosts" class="btn btn-outline" style="color: #1b3a6b; border-color: #1b3a6b;">My Posts</a>
+        <a href="${pageContext.request.contextPath}/student/postLost"
+           class="btn btn-primary">
+            Report Lost Item
+        </a>
+
+        <a href="${pageContext.request.contextPath}/student/postFound"
+           class="btn btn-blue">
+            Report Found Item
+        </a>
+
+        <a href="${pageContext.request.contextPath}/search"
+           class="btn btn-outline"
+           style="color: #1b3a6b; border-color: #1b3a6b;">
+            Browse Found Items
+        </a>
+
+        <a href="${pageContext.request.contextPath}/student/myPosts"
+           class="btn btn-outline"
+           style="color: #1b3a6b; border-color: #1b3a6b;">
+            My Posts
+        </a>
+
+        <a href="${pageContext.request.contextPath}/student/updateProfile"
+           class="btn btn-outline"
+           style="color: #1b3a6b; border-color: #1b3a6b;">
+            Edit Profile
+        </a>
     </div>
 
     <h2 class="section-title">Recently Found Items</h2>
 
     <c:choose>
         <c:when test="${empty recentItems}">
-            <p style="color: #777; font-size: 14px;">No found items posted yet.</p>
+            <p style="color: #777; font-size: 14px;">
+                No found items posted yet.
+            </p>
         </c:when>
 
         <c:otherwise>
@@ -53,6 +81,7 @@
                                      alt="Item image"
                                      style="width: 100%; height: 220px; object-fit: contain; background: #f4f4f4; display: block;">
                             </c:when>
+
                             <c:otherwise>
                                 <div style="height: 220px; background: #eee; display: flex; align-items: center; justify-content: center; color: #999;">
                                     No image

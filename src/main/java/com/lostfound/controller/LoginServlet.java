@@ -2,6 +2,7 @@ package com.lostfound.controller;
 
 import com.lostfound.model.User;
 import com.lostfound.service.UserService;
+import com.lostfound.util.CookieUtil;
 import com.lostfound.util.SessionUtil;
 
 import java.io.IOException;
@@ -11,7 +12,7 @@ import javax.servlet.http.*;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-	
+
     private static final long serialVersionUID = 1L;
 
     private UserService userService = new UserService();
@@ -20,16 +21,9 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        // look for saved email in cookies...
-        String savedEmail = "";
-        Cookie[] cookies = req.getCookies();
-        if (cookies != null) {
-            for (Cookie c : cookies) {
-                if ("rememberEmail".equals(c.getName())) {
-                    savedEmail = c.getValue();
-                    break;
-                }
-            }
+        String savedEmail = CookieUtil.getCookieValue(req, "rememberEmail");
+        if (savedEmail == null) {
+            savedEmail = "";
         }
 
         req.setAttribute("savedEmail", savedEmail);
@@ -70,24 +64,12 @@ public class LoginServlet extends HttpServlet {
             return;
         }
 
-        /*---------------------
-        setting up the session
-      	----------------------*/
-        
-        SessionUtil.createUserSession(req, user.getId(), user.getFullName(), user.getRole());
+        SessionUtil.createUserSession(req, user.getId(), user.getFullName(), user.getEmail(), user.getRole());
 
-     // remember me cookie...
-        
         if ("on".equals(remember)) {
-            Cookie emailCookie = new Cookie("rememberEmail", email.trim());
-            emailCookie.setMaxAge(7 * 24 * 60 * 60);
-            emailCookie.setPath("/");
-            resp.addCookie(emailCookie);
+            CookieUtil.addCookie(resp, "rememberEmail", email.trim(), 7 * 24 * 60 * 60);
         } else {
-            Cookie clear = new Cookie("rememberEmail", "");
-            clear.setMaxAge(0);
-            clear.setPath("/");
-            resp.addCookie(clear);
+            CookieUtil.deleteCookie(resp, "rememberEmail");
         }
 
         if ("admin".equals(user.getRole())) {

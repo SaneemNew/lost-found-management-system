@@ -5,11 +5,20 @@ import javax.servlet.http.HttpSession;
 
 public class SessionUtil {
 
-    public static void createUserSession(HttpServletRequest request, int userId, String userName, String role) {
+    public static void createUserSession(HttpServletRequest request, int userId, String userName, String email, String role) {
         HttpSession session = request.getSession();
         session.setAttribute("userId", userId);
         session.setAttribute("userName", userName);
+        session.setAttribute("email", email);
         session.setAttribute("role", role);
+    }
+
+    public static void updateUserSession(HttpServletRequest request, String userName, String email) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.setAttribute("userName", userName);
+            session.setAttribute("email", email);
+        }
     }
 
     public static Integer getUserId(HttpServletRequest request) {
@@ -26,6 +35,14 @@ public class SessionUtil {
             return null;
         }
         return (String) session.getAttribute("userName");
+    }
+
+    public static String getEmail(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            return null;
+        }
+        return (String) session.getAttribute("email");
     }
 
     public static String getRole(HttpServletRequest request) {

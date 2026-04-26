@@ -45,6 +45,11 @@ public class AdminClaimServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/admin/claims");
             return;
         }
+        
+        if (!"pending".equals(claim.getStatus())) {
+            resp.sendRedirect(req.getContextPath() + "/admin/claims");
+            return;
+        }
 
         if ("approve".equals(action)) {
             boolean claimUpdated = claimDAO.updateStatus(claimId, "approved");

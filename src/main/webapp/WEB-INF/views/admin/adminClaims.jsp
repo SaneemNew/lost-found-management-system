@@ -35,11 +35,15 @@
                         <c:forEach var="c" items="${claims}">
                             <tr>
                                 <td>${c.id}</td>
-                                <td>${c.itemTitle}</td>
-                                <td>${c.claimantName}</td>
-                                <td style="max-width: 200px;">${c.description}</td>
-                                <td><span class="badge badge-${c.status}">${c.status}</span></td>
-                                <td>${c.createdAt}</td>
+                                <td><c:out value="${c.itemTitle}" /></td>
+                                <td><c:out value="${c.claimantName}" /></td>
+                                <td style="max-width: 200px;"><c:out value="${c.description}" /></td>
+                                <td>
+                                    <span class="badge badge-${c.status}">
+                                        <c:out value="${c.status}" />
+                                    </span>
+                                </td>
+                                <td><c:out value="${c.createdAt}" /></td>
                                 <td style="white-space: nowrap;">
                                     <c:choose>
                                         <c:when test="${c.status == 'pending'}">

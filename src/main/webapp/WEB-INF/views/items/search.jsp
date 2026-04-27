@@ -12,13 +12,13 @@
             <input type="text"
                    name="keyword"
                    placeholder="Search by keyword..."
-                   value="${keyword}">
+                   value="<c:out value='${keyword}' />">
 
             <select name="categoryId">
                 <option value="0">All Categories</option>
                 <c:forEach var="c" items="${categories}">
                     <option value="${c.id}" <c:if test="${c.id == catId}">selected</c:if>>
-                        ${c.name}
+                        <c:out value="${c.name}" />
                     </option>
                 </c:forEach>
             </select>
@@ -26,7 +26,7 @@
             <input type="text"
                    name="location"
                    placeholder="Filter by location..."
-                   value="${location}">
+                   value="<c:out value='${location}' />">
 
             <button type="submit" class="btn btn-blue">Search</button>
         </div>
@@ -61,14 +61,14 @@
 
                         <div style="padding: 16px 18px 18px;">
                             <h4 style="font-size: 20px; color: #1b3a6b; margin-bottom: 10px; line-height: 1.3;">
-                                ${item.title}
+                                <c:out value="${item.title}" />
                             </h4>
 
                             <p style="font-size: 14px; color: #666; margin-bottom: 6px;">
                                 <strong>Category:</strong>
                                 <c:choose>
                                     <c:when test="${not empty item.categoryName}">
-                                        ${item.categoryName}
+                                        <c:out value="${item.categoryName}" />
                                     </c:when>
                                     <c:otherwise>
                                         Uncategorised
@@ -77,7 +77,7 @@
                             </p>
 
                             <p style="font-size: 14px; color: #666; margin-bottom: 14px;">
-                                <strong>Location:</strong> ${item.location}
+                                <strong>Location:</strong> <c:out value="${item.location}" />
                             </p>
 
                             <div style="margin-top: 8px;">

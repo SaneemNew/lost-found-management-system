@@ -37,21 +37,21 @@
                         </c:choose>
 
                         <div class="item-info">
-                            <h4>${item.title}</h4>
+                            <h4><c:out value="${item.title}" /></h4>
 
                             <c:choose>
                                 <c:when test="${not empty item.categoryName}">
-                                    <p>${item.categoryName}</p>
+                                    <p><c:out value="${item.categoryName}" /></p>
                                 </c:when>
                                 <c:otherwise>
                                     <p>Uncategorised</p>
                                 </c:otherwise>
                             </c:choose>
 
-                            <p>${item.location}</p>
+                            <p><c:out value="${item.location}" /></p>
                             <p>
                                 <span class="badge badge-${item.status}">
-                                    ${item.status}
+                                    <c:out value="${item.status}" />
                                 </span>
                             </p>
 

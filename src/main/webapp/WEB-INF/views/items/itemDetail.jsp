@@ -18,8 +18,8 @@
     </c:if>
     
     <c:if test="${param.err == 'claimfail'}">
-    	<div class="msg-error">Claim could not be submitted. Please try again.</div>
-	</c:if>
+        <div class="msg-error">Claim could not be submitted. Please try again.</div>
+    </c:if>
 
     <div style="display: flex; gap: 30px; flex-wrap: wrap; align-items: flex-start;">
 
@@ -45,14 +45,16 @@
 
                 <!-- Title and status badges -->
                 <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px; flex-wrap: wrap;">
-                    <h2 style="color: #1b3a6b; font-size: 22px;">${item.title}</h2>
+                    <h2 style="color: #1b3a6b; font-size: 22px;">
+                        <c:out value="${item.title}" />
+                    </h2>
 
                     <span class="badge badge-${item.status}">
-                        ${item.status}
+                        <c:out value="${item.status}" />
                     </span>
 
                     <span class="badge" style="background: #e8f0ff; color: #1b3a6b;">
-                        ${item.type == 'found' ? 'Found' : 'Lost'}
+                        <c:out value="${item.type == 'found' ? 'Found' : 'Lost'}" />
                     </span>
                 </div>
 
@@ -60,26 +62,47 @@
                 <table style="box-shadow: none; margin-bottom: 15px;">
                     <tr>
                         <td style="font-weight: bold; width: 130px;">Category</td>
-                        <td>${not empty item.categoryName ? item.categoryName : '-'}</td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${not empty item.categoryName}">
+                                    <c:out value="${item.categoryName}" />
+                                </c:when>
+                                <c:otherwise>-</c:otherwise>
+                            </c:choose>
+                        </td>
                     </tr>
                     <tr>
                         <td style="font-weight: bold;">Location</td>
-                        <td>${item.location}</td>
+                        <td><c:out value="${item.location}" /></td>
                     </tr>
                     <tr>
                         <td style="font-weight: bold;">Date</td>
-                        <td>${not empty item.dateReported ? item.dateReported : '-'}</td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${not empty item.dateReported}">
+                                    <c:out value="${item.dateReported}" />
+                                </c:when>
+                                <c:otherwise>-</c:otherwise>
+                            </c:choose>
+                        </td>
                     </tr>
                     <tr>
                         <td style="font-weight: bold;">Posted by</td>
-                        <td>${not empty item.postedBy ? item.postedBy : '-'}</td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${not empty item.postedBy}">
+                                    <c:out value="${item.postedBy}" />
+                                </c:when>
+                                <c:otherwise>-</c:otherwise>
+                            </c:choose>
+                        </td>
                     </tr>
                 </table>
 
                 <!-- Show description only if one exists -->
                 <c:if test="${not empty item.description}">
                     <p style="font-size: 14px; color: #555; line-height: 1.6; margin-bottom: 18px;">
-                        ${item.description}
+                        <c:out value="${item.description}" />
                     </p>
                 </c:if>
 
@@ -118,7 +141,7 @@
                             <button type="submit"
                                     class="btn btn-outline"
                                     style="color: #1b3a6b; border-color: #1b3a6b;">
-                                ${isBookmarked ? 'Remove Bookmark' : 'Bookmark'}
+                                <c:out value="${isBookmarked ? 'Remove Bookmark' : 'Bookmark'}" />
                             </button>
                         </form>
                     </c:if>

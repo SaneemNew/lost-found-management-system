@@ -14,10 +14,9 @@
         <br>
         <p style="color: #666; font-size: 14px; margin-bottom: 25px;">
             If you have any questions, visit the
-            <a href="${pageContext.request.contextPath}/contact.jsp" style="color: #1b3a6b;">contact page</a>.
+            <a href="${pageContext.request.contextPath}/contact" style="color: #1b3a6b;">contact page</a>.
         </p>
 
-        <a href="${pageContext.request.contextPath}/login" class="btn btn-blue">Back to Login</a>
     </div>
 </div>
 

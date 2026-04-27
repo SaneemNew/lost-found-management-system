@@ -17,7 +17,7 @@
         <h2 style="font-size: 18px; margin-bottom: 18px;">Profile Info</h2>
 
         <c:if test="${not empty error}">
-            <div class="msg-error">${error}</div>
+            <div class="msg-error"><c:out value="${error}" /></div>
         </c:if>
 
         <form action="${pageContext.request.contextPath}/student/updateProfile" method="post">
@@ -25,22 +25,22 @@
 
             <div class="form-group">
                 <label>Full Name</label>
-                <input type="text" name="fullName" value="${user.fullName}" required>
+                <input type="text" name="fullName" value="<c:out value='${user.fullName}' />" required>
             </div>
 
             <div class="form-group">
                 <label>Email</label>
-                <input type="email" name="email" value="${user.email}" required>
+                <input type="email" name="email" value="<c:out value='${user.email}' />" required>
             </div>
 
             <div class="form-group">
                 <label>Phone</label>
-                <input type="text" name="phone" value="${user.phone}">
+                <input type="text" name="phone" value="<c:out value='${user.phone}' />">
             </div>
 
             <div class="form-group">
                 <label>Student ID</label>
-                <input type="text" value="${user.studentId}" disabled style="background: #f0f0f0;">
+                <input type="text" value="<c:out value='${user.studentId}' />" disabled style="background: #f0f0f0;">
             </div>
 
             <button type="submit" class="btn btn-blue">Save Changes</button>
@@ -51,7 +51,7 @@
         <h2 style="font-size: 18px; margin-bottom: 18px;">Change Password</h2>
 
         <c:if test="${not empty passError}">
-            <div class="msg-error">${passError}</div>
+            <div class="msg-error"><c:out value="${passError}" /></div>
         </c:if>
 
         <form action="${pageContext.request.contextPath}/student/updateProfile" method="post">

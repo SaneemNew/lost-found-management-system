@@ -79,7 +79,7 @@
                                 <c:forEach var="cat" items="${categories}">
                                     <tr>
                                         <td>${cat.id}</td>
-                                        <td>${cat.name}</td>
+                                        <td><c:out value="${cat.name}" /></td>
                                         <td>
                                             <form method="post" action="${pageContext.request.contextPath}/admin/dashboard"
                                                   onsubmit="return confirm('Delete this category?');" style="display: inline;">

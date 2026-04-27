@@ -39,7 +39,7 @@
                                 <td>${item.id}</td>
                                 <td>
                                     <a href="${pageContext.request.contextPath}/item?id=${item.id}" style="color:#1b3a6b;">
-                                        ${item.title}
+                                        <c:out value="${item.title}" />
                                     </a>
                                 </td>
 
@@ -52,28 +52,38 @@
 
                                 <td>
                                     <c:choose>
-                                        <c:when test="${not empty item.categoryName}">${item.categoryName}</c:when>
+                                        <c:when test="${not empty item.categoryName}">
+                                            <c:out value="${item.categoryName}" />
+                                        </c:when>
                                         <c:otherwise>-</c:otherwise>
                                     </c:choose>
                                 </td>
 
-                                <td>${item.location}</td>
+                                <td><c:out value="${item.location}" /></td>
 
                                 <td>
                                     <c:choose>
-                                        <c:when test="${not empty item.postedBy}">${item.postedBy}</c:when>
+                                        <c:when test="${not empty item.postedBy}">
+                                            <c:out value="${item.postedBy}" />
+                                        </c:when>
                                         <c:otherwise>-</c:otherwise>
                                     </c:choose>
                                 </td>
 
                                 <td>
-                                    <span class="badge badge-${item.status}">${item.status}</span>
+                                    <span class="badge badge-${item.status}">
+                                        <c:out value="${item.status}" />
+                                    </span>
                                 </td>
 
                                 <td>
                                     <c:choose>
-                                        <c:when test="${not empty item.dateReported}">${item.dateReported}</c:when>
-                                        <c:otherwise>${item.createdAt}</c:otherwise>
+                                        <c:when test="${not empty item.dateReported}">
+                                            <c:out value="${item.dateReported}" />
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:out value="${item.createdAt}" />
+                                        </c:otherwise>
                                     </c:choose>
                                 </td>
 

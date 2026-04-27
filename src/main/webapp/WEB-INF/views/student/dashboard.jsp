@@ -5,7 +5,7 @@
 <div class="container">
 
     <div class="dash-header">
-        <h2>Welcome, ${sessionScope.userName}</h2>
+        <h2>Welcome, <c:out value="${sessionScope.userName}" /></h2>
         <p>Here is an overview of your activity.</p>
     </div>
 
@@ -91,14 +91,14 @@
 
                         <div style="padding: 16px 18px 18px;">
                             <h4 style="font-size: 20px; color: #1b3a6b; margin-bottom: 10px; line-height: 1.3;">
-                                ${item.title}
+                                <c:out value="${item.title}" />
                             </h4>
 
                             <p style="font-size: 14px; color: #666; margin-bottom: 6px;">
                                 <strong>Category:</strong>
                                 <c:choose>
                                     <c:when test="${not empty item.categoryName}">
-                                        ${item.categoryName}
+                                        <c:out value="${item.categoryName}" />
                                     </c:when>
                                     <c:otherwise>
                                         Uncategorised
@@ -107,7 +107,7 @@
                             </p>
 
                             <p style="font-size: 14px; color: #666; margin-bottom: 14px;">
-                                <strong>Location:</strong> ${item.location}
+                                <strong>Location:</strong> <c:out value="${item.location}" />
                             </p>
 
                             <div style="margin-top: 8px;">

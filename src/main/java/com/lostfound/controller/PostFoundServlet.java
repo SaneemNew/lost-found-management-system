@@ -14,10 +14,11 @@ import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
-@WebServlet("/student/postFound")
 @MultipartConfig(maxFileSize = 5242880, maxRequestSize = 10485760)
 public class PostFoundServlet extends HttpServlet {
 
@@ -43,6 +44,7 @@ public class PostFoundServlet extends HttpServlet {
             throws ServletException, IOException {
 
         Integer userId = SessionUtil.getUserId(req);
+
         if (userId == null) {
             resp.sendRedirect(req.getContextPath() + "/login");
             return;
@@ -55,16 +57,23 @@ public class PostFoundServlet extends HttpServlet {
         String catParam = req.getParameter("categoryId");
 
         String error = itemService.validateItem(title, location, date);
+
         if (error != null) {
             reloadForm(req, resp, error, title, description, location, date, catParam);
             return;
         }
 
         int catId = 0;
+
         try {
             catId = Integer.parseInt(catParam);
         } catch (Exception e) {
             catId = 0;
+        }
+
+        if (catId <= 0) {
+            reloadForm(req, resp, "Please select a valid category.", title, description, location, date, catParam);
+            return;
         }
 
         String imagePath = null;
@@ -80,6 +89,7 @@ public class PostFoundServlet extends HttpServlet {
             }
 
             int dotIndex = originalFileName.lastIndexOf(".");
+
             if (dotIndex == -1) {
                 reloadForm(req, resp, "File must be an image with a valid extension.", title, description, location, date, catParam);
                 return;
@@ -97,7 +107,10 @@ public class PostFoundServlet extends HttpServlet {
                 return;
             }
 
-            String rootPath = getServletContext().getRealPath("/uploads/items");
+            String rootPath = System.getProperty("user.home")
+                    + File.separator + "campusfind_uploads"
+                    + File.separator + "items";
+
             File uploadDir = new File(rootPath);
 
             if (!uploadDir.exists() && !uploadDir.mkdirs()) {
@@ -140,6 +153,7 @@ public class PostFoundServlet extends HttpServlet {
             throws ServletException, IOException {
 
         int selectedCategoryId = 0;
+
         try {
             selectedCategoryId = Integer.parseInt(catParam);
         } catch (Exception e) {

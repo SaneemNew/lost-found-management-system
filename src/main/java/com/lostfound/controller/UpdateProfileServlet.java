@@ -2,7 +2,7 @@ package com.lostfound.controller;
 
 import com.lostfound.dao.UserDAO;
 import com.lostfound.model.User;
-import com.lostfound.service.UserService;
+import com.lostfound.util.PasswordUtil;
 import com.lostfound.util.SessionUtil;
 
 import java.io.IOException;
@@ -18,13 +18,13 @@ public class UpdateProfileServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     private UserDAO userDAO = new UserDAO();
-    private UserService userService = new UserService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
         Integer userId = SessionUtil.getUserId(req);
+
         if (userId == null) {
             resp.sendRedirect(req.getContextPath() + "/login");
             return;
@@ -39,6 +39,7 @@ public class UpdateProfileServlet extends HttpServlet {
             throws ServletException, IOException {
 
         Integer userId = SessionUtil.getUserId(req);
+
         if (userId == null) {
             resp.sendRedirect(req.getContextPath() + "/login");
             return;
@@ -68,9 +69,7 @@ public class UpdateProfileServlet extends HttpServlet {
             return;
         }
 
-        String hashedCurrent = userService.hashPassword(current);
-
-        if (hashedCurrent == null || !hashedCurrent.equals(user.getPassword())) {
+        if (!PasswordUtil.checkPassword(current, user.getPassword())) {
             req.setAttribute("passError", "Current password is incorrect.");
             req.setAttribute("user", user);
             req.getRequestDispatcher("/WEB-INF/views/student/editProfile.jsp").forward(req, resp);
@@ -91,7 +90,7 @@ public class UpdateProfileServlet extends HttpServlet {
             return;
         }
 
-        String hashedNewPassword = userService.hashPassword(newPass);
+        String hashedNewPassword = PasswordUtil.hashPassword(newPass);
 
         if (hashedNewPassword == null) {
             req.setAttribute("passError", "Password could not be processed. Please try again.");

@@ -1,0 +1,25 @@
+/* =============================
+   ERROR / ACCESS DENIED PAGES
+============================= */
+
+.error-page {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.error-page h1 {
+    font-size: clamp(3.5rem, 10vw, 5rem);
+    color: #1b3a6b;
+    font-weight: 700;
+}
+
+.error-page h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #333333;
+}
+
+.error-page p {
+    color: #777777;
+    margin-bottom: 25px;
+}

@@ -1,11 +1,17 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isErrorPage="true"%>
 <%@ include file="/WEB-INF/views/includes/header.jsp" %>
 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/error.css">
+
 <div class="error-page">
     <h1>500</h1>
     <h2>Something Went Wrong</h2>
     <p>There was a problem on our end. Please try again later.</p>
-    <a href="${pageContext.request.contextPath}/" class="btn btn-blue">Go Back Home</a>
+
+    <a href="${pageContext.request.contextPath}/"
+       class="btn btn-blue">
+        Go Back Home
+    </a>
 </div>
 
 <%@ include file="/WEB-INF/views/includes/footer.jsp" %>

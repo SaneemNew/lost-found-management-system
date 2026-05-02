@@ -1,0 +1,135 @@
+/* =============================
+   AUTH PAGES
+============================= */
+
+.auth-page {
+    min-height: calc(100vh - 160px);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 70px 20px;
+}
+
+.auth-card {
+    background: #ffffff;
+    width: 100%;
+    max-width: 560px;
+    padding: 38px 42px;
+    border-radius: 10px;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.07);
+}
+
+.auth-card h2 {
+    color: #1b3a6b;
+    text-align: center;
+    margin-bottom: 24px;
+    font-size: 24px;
+}
+
+.auth-card .form-group {
+    margin-bottom: 18px;
+}
+
+.auth-card .btn {
+    width: 100%;
+}
+
+/* Remember me row for login page */
+.remember-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 6px 0 22px;
+}
+
+.remember-row input {
+    width: auto;
+}
+
+.remember-row label {
+    margin: 0;
+    font-weight: normal;
+}
+
+/* Pending page */
+.pending-card {
+    text-align: center;
+    max-width: 620px;
+}
+
+.pending-icon {
+    font-size: 40px;
+    margin-bottom: 12px;
+}
+
+.pending-message {
+    text-align: left;
+    line-height: 1.7;
+    margin-bottom: 22px;
+}
+
+.pending-text {
+    color: #666666;
+    font-size: 14px;
+    margin-bottom: 26px;
+}
+
+.pending-text a {
+    color: #1b3a6b;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.pending-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.pending-actions .btn {
+    width: auto;
+    min-width: 150px;
+}
+
+.auth-outline-btn {
+    color: #1b3a6b;
+    border-color: #1b3a6b;
+}
+
+.auth-outline-btn:hover {
+    background: rgba(27, 58, 107, 0.08);
+}
+
+/* Form footer */
+.form-footer {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 14px;
+    color: #666666;
+}
+
+.form-footer a {
+    color: #1b3a6b;
+    text-decoration: underline;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .auth-page {
+        padding: 40px 16px;
+        align-items: flex-start;
+    }
+
+    .auth-card {
+        padding: 28px 22px;
+    }
+
+    .pending-actions {
+        flex-direction: column;
+    }
+
+    .pending-actions .btn {
+        width: 100%;
+    }
+}

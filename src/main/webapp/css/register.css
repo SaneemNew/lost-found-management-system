@@ -1,0 +1,16 @@
+/* =============================
+   REGISTER PAGE
+============================= */
+
+.register-form-box {
+    max-width: 540px;
+}
+
+.optional-note {
+    font-weight: normal;
+    color: #999999;
+}
+
+.register-submit-btn {
+    width: 100%;
+}

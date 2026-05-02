@@ -2,11 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/includes/header.jsp" %>
 
-<div class="form-box" style="max-width: 540px;">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/register.css">
+
+<div class="form-box register-form-box">
     <h2>Create Account</h2>
 
     <c:if test="${not empty error}">
-        <div class="msg-error">${error}</div>
+        <div class="msg-error"><c:out value="${error}" /></div>
     </c:if>
 
     <div class="msg-info">
@@ -16,34 +18,61 @@
     <form action="${pageContext.request.contextPath}/register" method="post">
         <div class="form-group">
             <label>Full Name</label>
-            <input type="text" name="fullName" placeholder="Enter your full name" required>
-        </div>
-        <div class="form-group">
-            <label>Student ID</label>
-            <input type="text" name="studentId" placeholder="e.g. STU123456" required>
-        </div>
-        <div class="form-group">
-            <label>Email</label>
-            <input type="email" name="email" placeholder="Enter your university email" required>
-        </div>
-        <div class="form-group">
-            <label>Phone Number <span style="font-weight: normal; color: #999;">(optional)</span></label>
-            <input type="text" name="phone" placeholder="Enter your phone number">
-        </div>
-        <div class="form-group">
-            <label>Password</label>
-            <input type="password" name="password" placeholder="Create a password" required>
-        </div>
-        <div class="form-group">
-            <label>Confirm Password</label>
-            <input type="password" name="confirmPassword" placeholder="Re-enter your password" required>
+            <input type="text"
+                   name="fullName"
+                   placeholder="Enter your full name"
+                   required>
         </div>
 
-        <button type="submit" class="btn btn-blue" style="width: 100%;">Register</button>
+        <div class="form-group">
+            <label>Student ID</label>
+            <input type="text"
+                   name="studentId"
+                   placeholder="e.g. STU123456"
+                   required>
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email"
+                   name="email"
+                   placeholder="Enter your university email"
+                   required>
+        </div>
+
+        <div class="form-group">
+            <label>
+                Phone Number <span class="optional-note">(optional)</span>
+            </label>
+            <input type="text"
+                   name="phone"
+                   placeholder="Enter your phone number">
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password"
+                   name="password"
+                   placeholder="Create a password"
+                   required>
+        </div>
+
+        <div class="form-group">
+            <label>Confirm Password</label>
+            <input type="password"
+                   name="confirmPassword"
+                   placeholder="Re-enter your password"
+                   required>
+        </div>
+
+        <button type="submit" class="btn btn-blue register-submit-btn">
+            Register
+        </button>
     </form>
 
     <div class="form-footer">
-        Already have an account? <a href="${pageContext.request.contextPath}/login">Login here</a>
+        Already have an account?
+        <a href="${pageContext.request.contextPath}/login">Login here</a>
     </div>
 </div>
 

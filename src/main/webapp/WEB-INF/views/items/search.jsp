@@ -3,33 +3,36 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="/WEB-INF/views/includes/header.jsp" %>
 
-<div class="container">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/search.css">
+
+<div class="container search-page">
 
     <h2 class="section-title">Browse Found Items</h2>
 
-    <form action="${pageContext.request.contextPath}/search" method="get">
-        <div class="search-bar">
-            <input type="text"
-                   name="keyword"
-                   placeholder="Search by keyword..."
-                   value="<c:out value='${keyword}' />">
+    <form action="${pageContext.request.contextPath}/search" method="get" class="search-form">
+        <input type="text"
+               name="keyword"
+               placeholder="Search by keyword..."
+               value="<c:out value='${keyword}' />">
 
-            <select name="categoryId">
-                <option value="0">All Categories</option>
-                <c:forEach var="c" items="${categories}">
-                    <option value="${c.id}" <c:if test="${c.id == catId}">selected</c:if>>
-                        <c:out value="${c.name}" />
-                    </option>
-                </c:forEach>
-            </select>
+        <select name="categoryId">
+            <option value="0">All Categories</option>
 
-            <input type="text"
-                   name="location"
-                   placeholder="Filter by location..."
-                   value="<c:out value='${location}' />">
+            <c:forEach var="c" items="${categories}">
+                <option value="${c.id}" <c:if test="${c.id == catId}">selected</c:if>>
+                    <c:out value="${c.name}" />
+                </option>
+            </c:forEach>
+        </select>
 
-            <button type="submit" class="btn btn-blue">Search</button>
-        </div>
+        <input type="text"
+               name="location"
+               placeholder="Filter by location..."
+               value="<c:out value='${location}' />">
+
+        <button type="submit" class="btn btn-blue search-btn">
+            Search
+        </button>
     </form>
 
     <c:choose>
@@ -38,33 +41,36 @@
         </c:when>
 
         <c:otherwise>
-            <p style="font-size: 13px; color: #777; margin-bottom: 18px;">
-                ${fn:length(items)} item(s) found
+            <p class="search-count">
+                <c:out value="${fn:length(items)}" /> item(s) found
             </p>
 
-            <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;">
+            <div class="search-items-grid">
                 <c:forEach var="item" items="${items}">
-                    <div style="width: 320px; min-width: 320px; max-width: 320px; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); overflow: hidden;">
+                    <div class="search-item-card">
 
-                        <c:choose>
-                            <c:when test="${not empty item.imagePath}">
-                                <img src="${pageContext.request.contextPath}/getimage?path=${item.imagePath}"
-                                     alt="Item image"
-                                     style="width: 100%; height: 220px; object-fit: contain; background: #f4f4f4; display: block;">
-                            </c:when>
-                            <c:otherwise>
-                                <div style="height: 220px; background: #eee; display: flex; align-items: center; justify-content: center; color: #999;">
-                                    No image
-                                </div>
-                            </c:otherwise>
-                        </c:choose>
+                        <div class="search-image-box">
+                            <c:choose>
+                                <c:when test="${not empty item.imagePath}">
+                                    <img src="${pageContext.request.contextPath}/getimage?path=${item.imagePath}"
+                                         alt="Item image"
+                                         class="search-item-image">
+                                </c:when>
 
-                        <div style="padding: 16px 18px 18px;">
-                            <h4 style="font-size: 20px; color: #1b3a6b; margin-bottom: 10px; line-height: 1.3;">
+                                <c:otherwise>
+                                    <div class="search-no-image">
+                                        No image
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
+
+                        <div class="search-item-info">
+                            <h4 class="search-item-title">
                                 <c:out value="${item.title}" />
                             </h4>
 
-                            <p style="font-size: 14px; color: #666; margin-bottom: 6px;">
+                            <p>
                                 <strong>Category:</strong>
                                 <c:choose>
                                     <c:when test="${not empty item.categoryName}">
@@ -76,17 +82,15 @@
                                 </c:choose>
                             </p>
 
-                            <p style="font-size: 14px; color: #666; margin-bottom: 14px;">
-                                <strong>Location:</strong> <c:out value="${item.location}" />
+                            <p>
+                                <strong>Location:</strong>
+                                <c:out value="${item.location}" />
                             </p>
 
-                            <div style="margin-top: 8px;">
-                                <a href="${pageContext.request.contextPath}/item?id=${item.id}"
-                                   class="btn btn-blue btn-sm"
-                                   style="padding: 8px 16px;">
-                                    View Details
-                                </a>
-                            </div>
+                            <a href="${pageContext.request.contextPath}/item?id=${item.id}"
+                               class="btn btn-blue btn-sm">
+                                View Details
+                            </a>
                         </div>
 
                     </div>

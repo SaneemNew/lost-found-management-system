@@ -1,0 +1,44 @@
+/* =============================
+   ADMIN DASHBOARD PAGE
+============================= */
+
+.admin-action-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 35px;
+}
+
+.admin-outline-btn {
+    color: #1b3a6b;
+    border-color: #1b3a6b;
+}
+
+.category-layout {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.category-form-box {
+    flex: 1;
+    min-width: 250px;
+}
+
+.category-table-box {
+    flex: 2;
+    min-width: 300px;
+}
+
+.category-delete-form {
+    display: inline;
+}
+
+@media (max-width: 768px) {
+    .category-form-box,
+    .category-table-box {
+        flex: 1 1 100%;
+        min-width: 100%;
+    }
+}

@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/includes/header.jsp" %>
 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin-users.css">
+
 <div class="container">
 
     <div class="dash-header">
@@ -10,36 +12,41 @@
     </div>
 
     <!-- Filter buttons -->
-    <div style="margin-bottom: 18px; display: flex; gap: 10px; flex-wrap: wrap;">
+    <div class="admin-filter-row">
 
         <c:choose>
             <c:when test="${filter == 'all'}">
                 <a href="${pageContext.request.contextPath}/admin/users"
-                   class="btn btn-sm btn-blue">All Users</a>
+                   class="btn btn-sm btn-blue">
+                    All Users
+                </a>
             </c:when>
             <c:otherwise>
                 <a href="${pageContext.request.contextPath}/admin/users"
-                   class="btn btn-sm btn-outline"
-                   style="color:#1b3a6b;border-color:#1b3a6b;">All Users</a>
+                   class="btn btn-sm btn-outline admin-outline-btn">
+                    All Users
+                </a>
             </c:otherwise>
         </c:choose>
 
         <c:choose>
             <c:when test="${filter == 'pending'}">
                 <a href="${pageContext.request.contextPath}/admin/users?filter=pending"
-                   class="btn btn-sm btn-primary">Pending Only</a>
+                   class="btn btn-sm btn-primary">
+                    Pending Only
+                </a>
             </c:when>
             <c:otherwise>
                 <a href="${pageContext.request.contextPath}/admin/users?filter=pending"
-                   class="btn btn-sm btn-outline"
-                   style="color:#1b3a6b;border-color:#1b3a6b;">Pending Only</a>
+                   class="btn btn-sm btn-outline admin-outline-btn">
+                    Pending Only
+                </a>
             </c:otherwise>
         </c:choose>
 
         <a href="${pageContext.request.contextPath}/admin/dashboard"
-           class="btn btn-outline btn-sm"
-           style="color:#1b3a6b;border-color:#1b3a6b;">
-           Back to Dashboard
+           class="btn btn-outline btn-sm admin-outline-btn">
+            Back to Dashboard
         </a>
     </div>
 
@@ -97,12 +104,12 @@
                                         <c:when test="${u.status == 'pending'}">
                                             <form method="post"
                                                   action="${pageContext.request.contextPath}/admin/users"
-                                                  style="display: inline;">
+                                                  class="admin-action-form">
                                                 <input type="hidden" name="action" value="approve">
                                                 <input type="hidden" name="userId" value="${u.id}">
+
                                                 <button type="submit"
-                                                        class="btn btn-sm"
-                                                        style="background:#1e7e34;color:white;">
+                                                        class="btn btn-sm approve-btn">
                                                     Approve
                                                 </button>
                                             </form>
@@ -110,9 +117,10 @@
                                             <form method="post"
                                                   action="${pageContext.request.contextPath}/admin/users"
                                                   onsubmit="return confirm('Reject this user?');"
-                                                  style="display: inline;">
+                                                  class="admin-action-form">
                                                 <input type="hidden" name="action" value="reject">
                                                 <input type="hidden" name="userId" value="${u.id}">
+
                                                 <button type="submit"
                                                         class="btn btn-danger btn-sm">
                                                     Reject
@@ -121,7 +129,7 @@
                                         </c:when>
 
                                         <c:otherwise>
-                                            <span style="color: #aaa; font-size: 13px;">-</span>
+                                            <span class="no-action-text">-</span>
                                         </c:otherwise>
 
                                     </c:choose>

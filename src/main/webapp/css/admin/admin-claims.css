@@ -1,0 +1,39 @@
+/* =============================
+   ADMIN CLAIMS PAGE
+============================= */
+
+.admin-page-actions {
+    margin-bottom: 18px;
+}
+
+.admin-outline-btn {
+    color: #1b3a6b;
+    border-color: #1b3a6b;
+}
+
+.claim-description-cell {
+    max-width: 200px;
+}
+
+.claim-action-cell {
+    white-space: nowrap;
+}
+
+.claim-action-form {
+    display: inline;
+}
+
+.claim-reject-form {
+    display: inline;
+    margin-left: 4px;
+}
+
+.claim-approve-btn {
+    background: #1e7e34;
+    color: #ffffff;
+}
+
+.no-action-text {
+    color: #aaaaaa;
+    font-size: 13px;
+}

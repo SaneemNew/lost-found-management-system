@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/includes/header.jsp" %>
 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/student-dashboard.css">
+
 <div class="container">
 
     <div class="dash-header">
@@ -11,27 +13,27 @@
 
     <div class="stats-row">
         <div class="stat-box">
-            <div class="stat-num">${lostCount}</div>
+            <div class="stat-num"><c:out value="${lostCount}" /></div>
             <div class="stat-label">Lost Items Posted</div>
         </div>
 
         <div class="stat-box">
-            <div class="stat-num">${foundCount}</div>
+            <div class="stat-num"><c:out value="${foundCount}" /></div>
             <div class="stat-label">Found Items Posted</div>
         </div>
 
         <div class="stat-box">
-            <div class="stat-num">${claimCount}</div>
+            <div class="stat-num"><c:out value="${claimCount}" /></div>
             <div class="stat-label">Pending Claims</div>
         </div>
 
         <div class="stat-box">
-            <div class="stat-num">${bookmarkCount}</div>
+            <div class="stat-num"><c:out value="${bookmarkCount}" /></div>
             <div class="stat-label">Bookmarks</div>
         </div>
     </div>
 
-    <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 35px;">
+    <div class="student-action-row">
         <a href="${pageContext.request.contextPath}/student/postLost"
            class="btn btn-primary">
             Report Lost Item
@@ -43,20 +45,17 @@
         </a>
 
         <a href="${pageContext.request.contextPath}/search"
-           class="btn btn-outline"
-           style="color: #1b3a6b; border-color: #1b3a6b;">
+           class="btn btn-outline student-outline-btn">
             Browse Found Items
         </a>
 
         <a href="${pageContext.request.contextPath}/student/myPosts"
-           class="btn btn-outline"
-           style="color: #1b3a6b; border-color: #1b3a6b;">
+           class="btn btn-outline student-outline-btn">
             My Posts
         </a>
 
         <a href="${pageContext.request.contextPath}/student/updateProfile"
-           class="btn btn-outline"
-           style="color: #1b3a6b; border-color: #1b3a6b;">
+           class="btn btn-outline student-outline-btn">
             Edit Profile
         </a>
     </div>
@@ -65,36 +64,36 @@
 
     <c:choose>
         <c:when test="${empty recentItems}">
-            <p style="color: #777; font-size: 14px;">
+            <p class="empty-recent-items">
                 No found items posted yet.
             </p>
         </c:when>
 
         <c:otherwise>
-            <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;">
+            <div class="recent-items-row">
                 <c:forEach var="item" items="${recentItems}">
-                    <div style="width: 320px; min-width: 320px; max-width: 320px; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); overflow: hidden;">
+                    <div class="recent-item-card">
 
                         <c:choose>
                             <c:when test="${not empty item.imagePath}">
                                 <img src="${pageContext.request.contextPath}/getimage?path=${item.imagePath}"
                                      alt="Item image"
-                                     style="width: 100%; height: 220px; object-fit: contain; background: #f4f4f4; display: block;">
+                                     class="recent-item-image">
                             </c:when>
 
                             <c:otherwise>
-                                <div style="height: 220px; background: #eee; display: flex; align-items: center; justify-content: center; color: #999;">
+                                <div class="recent-item-no-image">
                                     No image
                                 </div>
                             </c:otherwise>
                         </c:choose>
 
-                        <div style="padding: 16px 18px 18px;">
-                            <h4 style="font-size: 20px; color: #1b3a6b; margin-bottom: 10px; line-height: 1.3;">
+                        <div class="recent-item-info">
+                            <h4 class="recent-item-title">
                                 <c:out value="${item.title}" />
                             </h4>
 
-                            <p style="font-size: 14px; color: #666; margin-bottom: 6px;">
+                            <p class="recent-item-meta">
                                 <strong>Category:</strong>
                                 <c:choose>
                                     <c:when test="${not empty item.categoryName}">
@@ -106,14 +105,13 @@
                                 </c:choose>
                             </p>
 
-                            <p style="font-size: 14px; color: #666; margin-bottom: 14px;">
+                            <p class="recent-item-location">
                                 <strong>Location:</strong> <c:out value="${item.location}" />
                             </p>
 
-                            <div style="margin-top: 8px;">
+                            <div class="recent-item-actions">
                                 <a href="${pageContext.request.contextPath}/item?id=${item.id}"
-                                   class="btn btn-blue btn-sm"
-                                   style="padding: 8px 16px;">
+                                   class="btn btn-blue btn-sm">
                                     View Details
                                 </a>
                             </div>

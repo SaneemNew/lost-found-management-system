@@ -2,13 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/includes/header.jsp" %>
 
-<div class="container" style="max-width: 650px;">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/post-item.css">
+
+<div class="container post-item-container">
     <h2 class="section-title">Report a Lost Item</h2>
 
-    <div class="form-box" style="margin: 0; max-width: 100%;">
+    <div class="form-box post-item-form-box">
 
         <c:if test="${not empty error}">
-            <div class="msg-error">${error}</div>
+            <div class="msg-error"><c:out value="${error}" /></div>
         </c:if>
 
         <form action="${pageContext.request.contextPath}/student/postLost" method="post">
@@ -21,20 +23,27 @@
                 <label>Category</label>
                 <select name="categoryId">
                     <option value="0">Select a category</option>
+
                     <c:forEach var="c" items="${categories}">
-                        <option value="${c.id}">${c.name}</option>
+                        <option value="${c.id}">
+                            <c:out value="${c.name}" />
+                        </option>
                     </c:forEach>
                 </select>
             </div>
 
             <div class="form-group">
                 <label>Description</label>
-                <textarea name="description" placeholder="Describe the item in detail..."></textarea>
+                <textarea name="description"
+                          placeholder="Describe the item in detail..."></textarea>
             </div>
 
             <div class="form-group">
                 <label>Location Lost</label>
-                <input type="text" name="location" placeholder="e.g. Library, Block B" required>
+                <input type="text"
+                       name="location"
+                       placeholder="e.g. Library, Block B"
+                       required>
             </div>
 
             <div class="form-group">
@@ -42,7 +51,9 @@
                 <input type="date" name="dateReported" required>
             </div>
 
-            <button type="submit" class="btn btn-primary" style="width: 100%;">Submit</button>
+            <button type="submit" class="btn btn-primary post-item-submit">
+                Submit
+            </button>
         </form>
     </div>
 </div>

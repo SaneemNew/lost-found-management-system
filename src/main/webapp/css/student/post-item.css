@@ -1,0 +1,25 @@
+/* =============================
+   POST LOST / POST FOUND PAGE
+============================= */
+
+.post-item-container {
+    max-width: 650px;
+}
+
+.post-item-form-box {
+    margin: 0;
+    max-width: 100%;
+}
+
+.post-item-submit {
+    width: 100%;
+}
+
+.file-note {
+    font-weight: normal;
+    color: #999999;
+}
+
+.file-input {
+    padding: 6px;
+}

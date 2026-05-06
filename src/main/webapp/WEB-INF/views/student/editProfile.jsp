@@ -2,7 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/includes/header.jsp" %>
 
-<div class="container" style="max-width: 700px;">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/edit-profile.css">
+
+<div class="container edit-profile-container">
     <h2 class="section-title">Edit Profile</h2>
 
     <c:if test="${param.updated == '1'}">
@@ -13,8 +15,8 @@
         <div class="msg-success">Password changed successfully.</div>
     </c:if>
 
-    <div class="form-box" style="margin: 0 0 25px 0; max-width: 100%;">
-        <h2 style="font-size: 18px; margin-bottom: 18px;">Profile Info</h2>
+    <div class="form-box edit-profile-box">
+        <h2 class="edit-profile-box-title">Profile Info</h2>
 
         <c:if test="${not empty error}">
             <div class="msg-error"><c:out value="${error}" /></div>
@@ -25,30 +27,43 @@
 
             <div class="form-group">
                 <label>Full Name</label>
-                <input type="text" name="fullName" value="<c:out value='${user.fullName}' />" required>
+                <input type="text"
+                       name="fullName"
+                       value="${user.fullName}"
+                       required>
             </div>
 
             <div class="form-group">
                 <label>Email</label>
-                <input type="email" name="email" value="<c:out value='${user.email}' />" required>
+                <input type="email"
+                       name="email"
+                       value="${user.email}"
+                       required>
             </div>
 
             <div class="form-group">
                 <label>Phone</label>
-                <input type="text" name="phone" value="<c:out value='${user.phone}' />">
+                <input type="text"
+                       name="phone"
+                       value="${user.phone}">
             </div>
 
             <div class="form-group">
                 <label>Student ID</label>
-                <input type="text" value="<c:out value='${user.studentId}' />" disabled style="background: #f0f0f0;">
+                <input type="text"
+                       value="${user.studentId}"
+                       disabled
+                       class="disabled-field">
             </div>
 
-            <button type="submit" class="btn btn-blue">Save Changes</button>
+            <button type="submit" class="btn btn-blue">
+                Save Changes
+            </button>
         </form>
     </div>
 
-    <div class="form-box" style="margin: 0; max-width: 100%;">
-        <h2 style="font-size: 18px; margin-bottom: 18px;">Change Password</h2>
+    <div class="form-box password-box">
+        <h2 class="edit-profile-box-title">Change Password</h2>
 
         <c:if test="${not empty passError}">
             <div class="msg-error"><c:out value="${passError}" /></div>
@@ -64,7 +79,10 @@
 
             <div class="form-group">
                 <label>New Password</label>
-                <input type="password" name="newPassword" placeholder="At least 6 characters" required>
+                <input type="password"
+                       name="newPassword"
+                       placeholder="At least 6 characters"
+                       required>
             </div>
 
             <div class="form-group">
@@ -72,7 +90,9 @@
                 <input type="password" name="confirmNew" required>
             </div>
 
-            <button type="submit" class="btn btn-blue">Update Password</button>
+            <button type="submit" class="btn btn-blue">
+                Update Password
+            </button>
         </form>
     </div>
 </div>

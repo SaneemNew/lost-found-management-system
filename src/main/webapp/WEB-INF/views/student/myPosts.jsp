@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/includes/header.jsp" %>
 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/my-posts.css">
+
 <div class="container">
 
     <!-- Page heading -->
@@ -11,9 +13,16 @@
     </div>
 
     <!-- Quick action buttons for posting new items -->
-    <div style="margin-bottom: 18px; display: flex; gap: 10px;">
-        <a href="${pageContext.request.contextPath}/student/postLost" class="btn btn-primary btn-sm">+ Report Lost</a>
-        <a href="${pageContext.request.contextPath}/student/postFound" class="btn btn-blue btn-sm">+ Report Found</a>
+    <div class="my-posts-actions">
+        <a href="${pageContext.request.contextPath}/student/postLost"
+           class="btn btn-primary btn-sm">
+            + Report Lost
+        </a>
+
+        <a href="${pageContext.request.contextPath}/student/postFound"
+           class="btn btn-blue btn-sm">
+            + Report Found
+        </a>
     </div>
 
     <c:choose>
@@ -21,6 +30,7 @@
             <!-- Message shown when the user has not posted anything yet -->
             <div class="msg-info">You haven't posted any items yet.</div>
         </c:when>
+
         <c:otherwise>
             <div class="table-wrapper">
                 <table>
@@ -35,12 +45,14 @@
                             <th>Actions</th>
                         </tr>
                     </thead>
+
                     <tbody>
                         <c:forEach var="item" items="${items}">
                             <tr>
                                 <td>
                                     <!-- Title links to the full item detail page -->
-                                    <a href="${pageContext.request.contextPath}/item?id=${item.id}" style="color: #1b3a6b;">
+                                    <a href="${pageContext.request.contextPath}/item?id=${item.id}"
+                                       class="my-post-title-link">
                                         <c:out value="${item.title}" />
                                     </a>
                                 </td>
@@ -86,11 +98,17 @@
 
                                 <td>
                                     <!-- Allow user to delete only their own post -->
-                                    <form method="post" action="${pageContext.request.contextPath}/student/myPosts"
-                                          onsubmit="return confirm('Delete this item?');" style="display: inline;">
+                                    <form method="post"
+                                          action="${pageContext.request.contextPath}/student/myPosts"
+                                          onsubmit="return confirm('Delete this item?');"
+                                          class="my-post-delete-form">
+
                                         <input type="hidden" name="action" value="delete">
                                         <input type="hidden" name="itemId" value="${item.id}">
-                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+
+                                        <button type="submit" class="btn btn-danger btn-sm">
+                                            Delete
+                                        </button>
                                     </form>
                                 </td>
                             </tr>

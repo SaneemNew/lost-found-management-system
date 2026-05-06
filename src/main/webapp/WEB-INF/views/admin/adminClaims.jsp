@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/includes/header.jsp" %>
 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin-claims.css">
+
 <div class="container">
 
     <div class="dash-header">
@@ -9,14 +11,18 @@
         <p>Review and update the status of item claims.</p>
     </div>
 
-    <div style="margin-bottom: 18px;">
-        <a href="${pageContext.request.contextPath}/admin/dashboard" class="btn btn-outline btn-sm" style="color:#1b3a6b;border-color:#1b3a6b;">Back to Dashboard</a>
+    <div class="admin-page-actions">
+        <a href="${pageContext.request.contextPath}/admin/dashboard"
+           class="btn btn-outline btn-sm admin-outline-btn">
+            Back to Dashboard
+        </a>
     </div>
 
     <c:choose>
         <c:when test="${empty claims}">
             <div class="msg-info">No claims have been submitted yet.</div>
         </c:when>
+
         <c:otherwise>
             <div class="table-wrapper">
                 <table>
@@ -31,37 +37,61 @@
                             <th>Actions</th>
                         </tr>
                     </thead>
+
                     <tbody>
                         <c:forEach var="c" items="${claims}">
                             <tr>
-                                <td>${c.id}</td>
+                                <td><c:out value="${c.id}" /></td>
+
                                 <td><c:out value="${c.itemTitle}" /></td>
+
                                 <td><c:out value="${c.claimantName}" /></td>
-                                <td style="max-width: 200px;"><c:out value="${c.description}" /></td>
+
+                                <td class="claim-description-cell">
+                                    <c:out value="${c.description}" />
+                                </td>
+
                                 <td>
                                     <span class="badge badge-${c.status}">
                                         <c:out value="${c.status}" />
                                     </span>
                                 </td>
+
                                 <td><c:out value="${c.createdAt}" /></td>
-                                <td style="white-space: nowrap;">
+
+                                <td class="claim-action-cell">
                                     <c:choose>
                                         <c:when test="${c.status == 'pending'}">
-                                            <form method="post" action="${pageContext.request.contextPath}/admin/claims" style="display: inline;">
+                                            <form method="post"
+                                                  action="${pageContext.request.contextPath}/admin/claims"
+                                                  class="claim-action-form">
+
                                                 <input type="hidden" name="action" value="approve">
                                                 <input type="hidden" name="claimId" value="${c.id}">
-                                                <button type="submit" class="btn btn-sm" style="background:#1e7e34;color:white;">Approve</button>
+
+                                                <button type="submit"
+                                                        class="btn btn-sm claim-approve-btn">
+                                                    Approve
+                                                </button>
                                             </form>
 
-                                            <form method="post" action="${pageContext.request.contextPath}/admin/claims"
-                                                  onsubmit="return confirm('Reject this claim?');" style="display: inline; margin-left: 4px;">
+                                            <form method="post"
+                                                  action="${pageContext.request.contextPath}/admin/claims"
+                                                  onsubmit="return confirm('Reject this claim?');"
+                                                  class="claim-reject-form">
+
                                                 <input type="hidden" name="action" value="reject">
                                                 <input type="hidden" name="claimId" value="${c.id}">
-                                                <button type="submit" class="btn btn-danger btn-sm">Reject</button>
+
+                                                <button type="submit"
+                                                        class="btn btn-danger btn-sm">
+                                                    Reject
+                                                </button>
                                             </form>
                                         </c:when>
+
                                         <c:otherwise>
-                                            <span style="color: #aaa; font-size: 13px;">-</span>
+                                            <span class="no-action-text">-</span>
                                         </c:otherwise>
                                     </c:choose>
                                 </td>

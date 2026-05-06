@@ -1,0 +1,29 @@
+/* =============================
+   ADMIN USERS PAGE
+============================= */
+
+.admin-filter-row {
+    margin-bottom: 18px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.admin-outline-btn {
+    color: #1b3a6b;
+    border-color: #1b3a6b;
+}
+
+.admin-action-form {
+    display: inline;
+}
+
+.approve-btn {
+    background: #1e7e34;
+    color: #ffffff;
+}
+
+.no-action-text {
+    color: #aaaaaa;
+    font-size: 13px;
+}

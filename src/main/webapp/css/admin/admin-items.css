@@ -1,0 +1,45 @@
+/* =============================
+   ADMIN ITEMS PAGE
+============================= */
+
+.admin-page-actions {
+    margin-bottom: 18px;
+}
+
+.admin-outline-btn {
+    color: #1b3a6b;
+    border-color: #1b3a6b;
+}
+
+.admin-item-title-link {
+    color: #1b3a6b;
+    font-weight: 600;
+}
+
+.admin-item-title-link:hover {
+    text-decoration: underline;
+}
+
+.admin-item-actions {
+    white-space: nowrap;
+}
+
+.admin-status-form {
+    display: inline;
+}
+
+.admin-status-select {
+    padding: 4px;
+    font-size: 12px;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+}
+
+.admin-status-btn {
+    margin-left: 4px;
+}
+
+.admin-delete-form {
+    display: inline;
+    margin-left: 4px;
+}

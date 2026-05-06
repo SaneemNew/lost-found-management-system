@@ -1,0 +1,29 @@
+/* =============================
+   MY POSTS PAGE
+============================= */
+
+.my-posts-actions {
+    margin-bottom: 18px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.my-post-title-link {
+    color: #1b3a6b;
+    font-weight: 600;
+}
+
+.my-post-title-link:hover {
+    text-decoration: underline;
+}
+
+.my-post-delete-form {
+    display: inline;
+}
+
+@media (max-width: 768px) {
+    .my-posts-actions {
+        gap: 8px;
+    }
+}

@@ -1,0 +1,94 @@
+/* =============================
+   STUDENT DASHBOARD PAGE
+============================= */
+
+.student-action-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 35px;
+}
+
+.student-outline-btn {
+    color: #1b3a6b;
+    border-color: #1b3a6b;
+}
+
+.recent-items-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.recent-item-card {
+    width: 320px;
+    min-width: 320px;
+    max-width: 320px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+}
+
+.recent-item-image {
+    width: 100%;
+    height: 280px;
+    object-fit: contain;
+    object-position: center;
+    background: #f4f4f4;
+    display: block;
+}
+
+.recent-item-no-image {
+    height: 220px;
+    background: #eeeeee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999999;
+}
+
+.recent-item-info {
+    padding: 16px 18px 18px;
+}
+
+.recent-item-title {
+    font-size: 20px;
+    color: #1b3a6b;
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+.recent-item-meta {
+    font-size: 14px;
+    color: #666666;
+    margin-bottom: 6px;
+}
+
+.recent-item-location {
+    font-size: 14px;
+    color: #666666;
+    margin-bottom: 14px;
+}
+
+.recent-item-actions {
+    margin-top: 8px;
+}
+
+.recent-item-actions .btn {
+    padding: 8px 16px;
+}
+
+@media (max-width: 480px) {
+    .recent-item-card {
+        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
+    }
+
+    .recent-item-image,
+    .recent-item-no-image {
+        height: 240px;
+    }
+}

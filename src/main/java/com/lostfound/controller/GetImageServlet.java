@@ -55,8 +55,6 @@ public class GetImageServlet extends HttpServlet {
             return;
         }
 
-        resp.setContentLengthLong(imageFile.length());
-
         try (FileInputStream fis = new FileInputStream(imageFile);
              OutputStream out = resp.getOutputStream()) {
 

@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/includes/header.jsp" %>
 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/contact.css">
+
 <div class="container page-section">
     <h2 class="section-title">Contact Us</h2>
 
@@ -33,7 +35,7 @@
             </p>
 
             <c:if test="${not empty error}">
-                <div class="msg-error">${error}</div>
+                <div class="msg-error"><c:out value="${error}" /></div>
             </c:if>
 
             <form class="contact-page-form"
@@ -46,7 +48,7 @@
                            id="fullName"
                            name="fullName"
                            placeholder="Enter your name"
-                           value="${param.fullName}"
+                           value="<c:out value='${param.fullName}' />"
                            required>
                 </div>
 
@@ -56,7 +58,7 @@
                            id="email"
                            name="email"
                            placeholder="Enter your email"
-                           value="${param.email}"
+                           value="<c:out value='${param.email}' />"
                            required>
                 </div>
 
@@ -66,7 +68,7 @@
                               name="message"
                               rows="6"
                               placeholder="Type your message here..."
-                              required>${param.message}</textarea>
+                              required><c:out value="${param.message}" /></textarea>
                 </div>
 
                 <button type="submit" class="btn btn-blue contact-submit-btn">

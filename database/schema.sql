@@ -1,7 +1,10 @@
 -- Lost and Found Portal Database Schema
 -- Database: lostfound_db
+-- WARNING: Running this script will delete and recreate the lostfound_db database.
+-- Use only for fresh setup or testing.
 
-CREATE DATABASE IF NOT EXISTS lostfound_db;
+DROP DATABASE IF EXISTS lostfound_db;
+CREATE DATABASE lostfound_db;
 USE lostfound_db;
 
 /*---------------------------------

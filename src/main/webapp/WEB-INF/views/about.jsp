@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/includes/header.jsp" %>
 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/about.css">
+
 <div class="container about-page">
 
     <div class="about-hero">

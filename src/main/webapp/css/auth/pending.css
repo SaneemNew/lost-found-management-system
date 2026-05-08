@@ -1,0 +1,36 @@
+/* =============================
+   PENDING APPROVAL PAGE
+============================= */
+
+.pending-container {
+    max-width: 580px;
+}
+
+.pending-content {
+    text-align: center;
+    padding: 60px 10px;
+}
+
+.pending-title {
+    color: #1b3a6b;
+    margin-bottom: 18px;
+}
+
+.pending-message {
+    text-align: left;
+}
+
+.pending-help-text {
+    color: #666666;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+.pending-contact-link {
+    color: #1b3a6b;
+    font-weight: 600;
+}
+
+.pending-contact-link:hover {
+    text-decoration: underline;
+}

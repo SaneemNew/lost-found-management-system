@@ -34,23 +34,6 @@
     width: 100%;
 }
 
-/* Remember me row for login page */
-.remember-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 6px 0 22px;
-}
-
-.remember-row input {
-    width: auto;
-}
-
-.remember-row label {
-    margin: 0;
-    font-weight: normal;
-}
-
 /* Pending page */
 .pending-card {
     text-align: center;

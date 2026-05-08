@@ -6,9 +6,9 @@ import com.lostfound.dao.ClaimDAO;
 import com.lostfound.dao.ItemDAO;
 import com.lostfound.model.Claim;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.*;
 
 @WebServlet("/admin/claims")
 public class AdminClaimServlet extends HttpServlet {

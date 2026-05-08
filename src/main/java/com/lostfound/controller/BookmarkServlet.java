@@ -4,9 +4,9 @@ import com.lostfound.dao.BookmarkDAO;
 import com.lostfound.util.SessionUtil;
 
 import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.*;
 
 @WebServlet(urlPatterns = {"/student/bookmark", "/student/bookmarks"})
 public class BookmarkServlet extends HttpServlet {

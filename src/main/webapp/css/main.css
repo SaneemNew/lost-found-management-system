@@ -72,7 +72,7 @@ textarea {
 }
 
 /* =============================
-   LAYOUT (Saneem)
+   LAYOUT
 ============================= */
 .container {
     width: min(var(--container-width), 100%);
@@ -94,7 +94,7 @@ textarea {
 }
 
 /* =============================
-   NAV BAR (Saneem)
+   NAV BAR
 ============================= */
 .navbar {
     background-color: var(--primary);
@@ -151,61 +151,7 @@ textarea {
 }
 
 /* =============================
-   INDEX PAGE / HERO (Saneem)
-============================= */
-.hero {
-    background: linear-gradient(135deg, #173b73 0%, #1b3a6b 45%, #2a5aa0 100%);
-    color: var(--white);
-    text-align: center;
-    padding: 95px 20px;
-}
-
-.hero-content {
-    max-width: 850px;
-    margin: 0 auto;
-}
-
-.hero-tag {
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.14);
-    color: #eef4ff;
-    padding: 8px 16px;
-    border-radius: 999px;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.6px;
-    margin-bottom: 18px;
-    text-transform: uppercase;
-}
-
-.hero h1 {
-    font-size: clamp(2.2rem, 5vw, 3rem);
-    margin-bottom: 16px;
-    line-height: 1.15;
-}
-
-.hero p {
-    font-size: 17px;
-    color: #c5d8f0;
-    margin-bottom: 28px;
-}
-
-.hero p.hero-text {
-    font-size: clamp(1rem, 2.3vw, 1.25rem);
-    color: #d8e6f8;
-    max-width: 760px;
-    margin: 0 auto 34px;
-}
-
-.hero-btns {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-/* =============================
-   BUTTONS (Abhisekh)
+   BUTTONS
 ============================= */
 .btn {
     padding: 11px 22px;
@@ -267,23 +213,8 @@ textarea {
     font-size: 13px;
 }
 
-.hero-btns .btn {
-    min-width: 220px;
-    padding: 14px 26px;
-    font-size: 17px;
-    border-radius: var(--radius-md);
-}
-
-.hero-btns .btn-primary {
-    box-shadow: 0 8px 20px rgba(232, 160, 32, 0.22);
-}
-
-.hero-btns .btn-primary:hover {
-    box-shadow: 0 14px 28px rgba(232, 160, 32, 0.28);
-}
-
 /* =========================
-   CARDS (Bishesh)
+   SHARED CARDS
 ========================= */
 .cards {
     display: grid;
@@ -313,181 +244,13 @@ textarea {
 
 .card p {
     font-size: 15px;
-    color: #666;
+    color: #666666;
     margin-bottom: 18px;
     line-height: 1.65;
 }
 
 /* =============================
-   ABOUT PAGE (Bishesh)
-============================= */
-.about-page {
-    padding-top: 45px;
-    padding-bottom: 30px;
-}
-
-.about-hero {
-    background: linear-gradient(135deg, #173b73 0%, #1b3a6b 55%, #2a5aa0 100%);
-    color: var(--white);
-    border-radius: var(--radius-xl);
-    padding: 55px 48px;
-    margin-bottom: 36px;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.10);
-}
-
-.about-hero-text {
-    max-width: 820px;
-}
-
-.about-tag {
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.16);
-    color: #eef4ff;
-    padding: 8px 16px;
-    border-radius: 999px;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    margin-bottom: 18px;
-}
-
-.about-hero h1 {
-    font-size: clamp(2rem, 4.5vw, 2.9rem);
-    line-height: 1.15;
-    margin-bottom: 16px;
-    color: var(--white);
-}
-
-.about-hero p {
-    font-size: 18px;
-    color: #dbe8f8;
-    line-height: 1.8;
-    max-width: 760px;
-    margin-bottom: 0;
-}
-
-.about-box {
-    background: var(--white);
-    border-radius: var(--radius-xl);
-    padding: 34px 32px;
-    box-shadow: var(--shadow-md);
-    margin-bottom: 34px;
-}
-
-.about-box p {
-    font-size: 17px;
-    color: #444;
-    line-height: 1.9;
-    margin-bottom: 18px;
-}
-
-.about-box p:last-child {
-    margin-bottom: 0;
-}
-
-.about-page .section-title {
-    font-size: 20px;
-    margin-bottom: 22px;
-    color: var(--primary);
-    border-bottom: 2px solid #e3e3e3;
-    padding-bottom: 10px;
-}
-
-.about-steps {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 22px;
-    margin-bottom: 34px;
-}
-
-.feature-card {
-    text-align: center;
-    padding: 30px 24px;
-    min-height: 320px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-.feature-icon {
-    font-size: 38px;
-    margin-bottom: 18px;
-}
-
-.feature-card h3 {
-    font-size: 18px;
-    line-height: 1.45;
-    margin-bottom: 14px;
-    color: var(--primary);
-    min-height: 56px;
-}
-
-.feature-card p {
-    font-size: 16px;
-    line-height: 1.8;
-    color: #555;
-    margin-bottom: 0;
-}
-
-.about-grid {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 24px;
-    margin-bottom: 34px;
-    align-items: stretch;
-}
-
-.about-list {
-    margin-top: 8px;
-    padding-left: 22px;
-}
-
-.about-list li {
-    margin-bottom: 12px;
-    color: #444;
-    font-size: 16px;
-    line-height: 1.8;
-}
-
-.highlight-box {
-    background: linear-gradient(135deg, #eef4ff 0%, #f8fbff 100%);
-    border-left: 5px solid var(--primary);
-    border-radius: var(--radius-xl);
-    padding: 30px 28px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-    height: 100%;
-}
-
-.highlight-box h3 {
-    color: var(--primary);
-    margin-bottom: 16px;
-    font-size: 20px;
-}
-
-.clean-list {
-    list-style: none;
-    padding-left: 0;
-    margin-top: 10px;
-}
-
-.clean-list li {
-    position: relative;
-    padding-left: 28px;
-    margin-bottom: 14px;
-}
-
-.clean-list li::before {
-    content: "✔";
-    position: absolute;
-    left: 0;
-    top: 0;
-    color: var(--primary);
-    font-weight: bold;
-}
-
-/* =============================
-   GENERIC FORMS (Aayush)
+   GENERIC FORMS
 ============================= */
 .form-box {
     background: var(--white);
@@ -514,19 +277,17 @@ textarea {
     margin-bottom: 7px;
     font-size: 14px;
     font-weight: 600;
-    color: #444;
+    color: #444444;
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea,
-.search-bar input,
-.search-bar select,
 .contact-page-form input,
 .contact-page-form textarea {
     width: 100%;
     padding: 12px 14px;
-    border: 1px solid #ccc;
+    border: 1px solid #cccccc;
     border-radius: 8px;
     font-size: 14px;
     outline: none;
@@ -537,8 +298,6 @@ textarea {
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus,
-.search-bar input:focus,
-.search-bar select:focus,
 .contact-page-form input:focus,
 .contact-page-form textarea:focus {
     border-color: var(--primary);
@@ -551,90 +310,8 @@ textarea {
     min-height: 120px;
 }
 
-.form-footer {
-    text-align: center;
-    margin-top: 15px;
-    font-size: 13px;
-    color: #666;
-}
-
-.form-footer a {
-    color: var(--primary);
-    text-decoration: underline;
-}
-
 /* =============================
-   CONTACT PAGE (Aayush)
-============================= */
-.contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.6fr;
-    gap: 30px;
-    margin-top: 25px;
-    align-items: start;
-}
-
-.contact-card {
-    background: var(--white);
-    border-radius: 14px;
-    padding: 32px;
-    box-shadow: var(--shadow-md);
-}
-
-.contact-card h3 {
-    color: #1f437d;
-    font-size: 22px;
-    margin-bottom: 22px;
-    text-align: left;
-}
-
-.contact-details p {
-    font-size: 17px;
-    color: #444;
-    margin-bottom: 16px;
-    line-height: 1.7;
-}
-
-.contact-note {
-    margin-top: 20px;
-    background: #f4f7fb;
-    padding: 15px;
-    border-left: 4px solid var(--primary);
-    border-radius: 8px;
-    color: #555;
-    font-size: 14px;
-    line-height: 1.6;
-}
-
-.contact-form-intro {
-    color: #666;
-    font-size: 14px;
-    line-height: 1.7;
-    margin-bottom: 18px;
-}
-
-.contact-page-form {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-}
-
-.contact-form-group {
-    display: flex;
-    flex-direction: column;
-}
-
-.contact-submit-btn {
-    width: 100%;
-    margin-top: 4px;
-    padding: 14px 18px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-}
-
-/* =============================
-   ALERT MESSAGES (Abhisekh)
+   ALERT MESSAGES
 ============================= */
 .msg-error,
 .msg-success,
@@ -661,7 +338,7 @@ textarea {
 }
 
 /* =============================
-   TABLES (Saneem)
+   TABLES
 ============================= */
 .table-wrapper {
     width: 100%;
@@ -689,9 +366,9 @@ table th {
 
 table td {
     padding: 11px 15px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #eeeeee;
     font-size: 14px;
-    color: #444;
+    color: #444444;
 }
 
 table tr:last-child td {
@@ -703,7 +380,7 @@ table tr:hover td {
 }
 
 /* =============================
-   BADGES (Abhisekh)
+   BADGES
 ============================= */
 .badge {
     display: inline-block;
@@ -714,15 +391,38 @@ table tr:hover td {
     line-height: 1.2;
 }
 
-.badge-pending  { background: #fff3cd; color: #856404; }
-.badge-approved { background: #d4edda; color: #155724; }
-.badge-rejected { background: #f8d7da; color: #721c24; }
-.badge-open     { background: #cce5ff; color: #004085; }
-.badge-resolved { background: #d4edda; color: #155724; }
-.badge-claimed  { background: #fff3cd; color: #856404; }
+.badge-pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.badge-approved {
+    background: #d4edda;
+    color: #155724;
+}
+
+.badge-rejected {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.badge-open {
+    background: #cce5ff;
+    color: #004085;
+}
+
+.badge-resolved {
+    background: #d4edda;
+    color: #155724;
+}
+
+.badge-claimed {
+    background: #fff3cd;
+    color: #856404;
+}
 
 /* =============================
-   ITEMS GRID (Bishesh)
+   SHARED ITEM CARDS
 ============================= */
 .item-grid {
     display: grid;
@@ -743,10 +443,23 @@ table tr:hover td {
     box-shadow: var(--shadow-md);
 }
 
-.item-card img {
+.item-card-image-box {
     width: 100%;
-    height: 180px;
+    height: 260px;
+    overflow: hidden;
+    background: #eeeeee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.item-card img,
+.item-card-image {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+    object-position: center;
+    display: block;
 }
 
 .item-card .item-info {
@@ -761,7 +474,7 @@ table tr:hover td {
 
 .item-card .item-info p {
     font-size: 14px;
-    color: #666;
+    color: #666666;
     margin-bottom: 6px;
 }
 
@@ -770,22 +483,7 @@ table tr:hover td {
 }
 
 /* =============================
-   SEARCH BAR (Abhisekh)
-============================= */
-.search-bar {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 12px;
-    background: var(--white);
-    padding: 18px;
-    border-radius: 8px;
-    box-shadow: var(--shadow-sm);
-    margin-bottom: 25px;
-    align-items: center;
-}
-
-/* =============================
-   DASHBOARD (Aayush)
+   DASHBOARD / STATS
 ============================= */
 .dash-header {
     margin-bottom: 25px;
@@ -825,16 +523,16 @@ table tr:hover td {
 
 .stat-box .stat-label {
     font-size: 13px;
-    color: #888;
+    color: #888888;
     margin-top: 4px;
 }
 
 /* =============================
-   FOOTER (Aayush)
+   FOOTER
 ============================= */
 footer {
     background-color: #1b1b1b;
-    color: #999;
+    color: #999999;
     text-align: center;
     padding: 22px;
     font-size: 13px;
@@ -848,55 +546,13 @@ footer.footer {
 }
 
 footer a {
-    color: #bbb;
+    color: #bbbbbb;
     text-decoration: underline;
 }
 
 /* =============================
-   ERROR PAGES (Bishesh)
+   RESPONSIVE
 ============================= */
-.error-page {
-    text-align: center;
-    padding: 80px 20px;
-}
-
-.error-page h1 {
-    font-size: clamp(3.5rem, 10vw, 5rem);
-    color: var(--primary);
-    font-weight: 700;
-}
-
-.error-page h2 {
-    font-size: 24px;
-    margin-bottom: 15px;
-    color: var(--text);
-}
-
-.error-page p {
-    color: var(--text-muted);
-    margin-bottom: 25px;
-}
-
-/* =============================
-   RESPONSIVE (Saneem)
-============================= */
-@media (max-width: 1100px) {
-    .about-steps {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 900px) {
-    .contact-grid,
-    .about-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .about-hero {
-        padding: 42px 30px;
-    }
-}
-
 @media (max-width: 768px) {
     .container {
         padding: 28px 16px;
@@ -913,66 +569,9 @@ footer a {
         gap: 14px;
     }
 
-    .hero {
-        padding: 72px 18px;
-    }
-
-    .hero-btns {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .hero-btns .btn {
-        width: 100%;
-        max-width: 320px;
-        min-width: unset;
-    }
-
-    .about-page {
-        padding-top: 30px;
-    }
-
-    .about-hero {
-        padding: 36px 22px;
-        border-radius: 16px;
-    }
-
-    .about-box {
-        padding: 24px 20px;
-    }
-
-    .about-box p {
-        font-size: 15px;
-        line-height: 1.8;
-    }
-
-    .about-steps {
-        grid-template-columns: 1fr;
-    }
-
-    .feature-card {
-        min-height: auto;
-    }
-
-    .feature-card h3 {
-        min-height: auto;
-    }
-
-    .about-list li {
-        font-size: 15px;
-    }
-
     .form-box {
         margin: 20px auto;
         padding: 22px 18px;
-    }
-
-    .search-bar {
-        grid-template-columns: 1fr;
-    }
-
-    .contact-card {
-        padding: 24px 20px;
     }
 }
 
@@ -989,34 +588,16 @@ footer a {
         font-size: 13px;
     }
 
-    .hero {
-        padding: 60px 16px;
-    }
-
-    .hero-tag,
-    .about-tag {
-        font-size: 11px;
-        padding: 7px 13px;
-    }
-
     .section-title {
         font-size: 20px;
     }
 
     .card,
-    .stat-box,
-    .contact-card,
-    .about-box {
+    .stat-box {
         padding: 20px 16px;
     }
 
-    .item-card img {
-        height: 160px;
-    }
-
-    .contact-details p,
-    .about-hero p,
-    .feature-card p {
-        font-size: 15px;
+    .item-card-image-box {
+        height: 200px;
     }
 }

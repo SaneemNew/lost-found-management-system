@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ include file="/WEB-INF/views/includes/header.jsp" %>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/edit-profile.css">
@@ -29,7 +29,7 @@
                 <label>Full Name</label>
                 <input type="text"
                        name="fullName"
-                       value="${user.fullName}"
+                       value="<c:out value='${user.fullName}' />"
                        required>
             </div>
 
@@ -37,7 +37,7 @@
                 <label>Email</label>
                 <input type="email"
                        name="email"
-                       value="${user.email}"
+                       value="<c:out value='${user.email}' />"
                        required>
             </div>
 
@@ -45,13 +45,13 @@
                 <label>Phone</label>
                 <input type="text"
                        name="phone"
-                       value="${user.phone}">
+                       value="<c:out value='${user.phone}' />">
             </div>
 
             <div class="form-group">
                 <label>Student ID</label>
                 <input type="text"
-                       value="${user.studentId}"
+                       value="<c:out value='${user.studentId}' />"
                        disabled
                        class="disabled-field">
             </div>

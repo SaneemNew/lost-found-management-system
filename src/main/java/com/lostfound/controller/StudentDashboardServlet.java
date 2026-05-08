@@ -6,9 +6,9 @@ import com.lostfound.dao.ItemDAO;
 import com.lostfound.util.SessionUtil;
 
 import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.*;
 
 @WebServlet("/student/dashboard")
 public class StudentDashboardServlet extends HttpServlet {

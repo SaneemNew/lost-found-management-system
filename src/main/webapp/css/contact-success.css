@@ -1,0 +1,53 @@
+/* =============================
+   CONTACT SUCCESS PAGE
+============================= */
+
+.contact-success-box {
+    text-align: center;
+    max-width: 650px;
+}
+
+.contact-success-title {
+    color: #1b3a6b;
+    margin-bottom: 12px;
+}
+
+.contact-success-main-text {
+    font-size: 15px;
+    color: #555555;
+    line-height: 1.7;
+}
+
+.contact-success-sub-text {
+    font-size: 14px;
+    color: #666666;
+    line-height: 1.7;
+    margin-top: 12px;
+}
+
+.contact-support-info {
+    margin-top: 22px;
+    background: #f4f7fb;
+    padding: 18px;
+    border-radius: 8px;
+}
+
+.contact-support-title {
+    margin: 0;
+    font-weight: bold;
+    color: #1b3a6b;
+}
+
+.contact-support-line {
+    margin: 6px 0 0;
+    color: #555555;
+}
+
+.contact-success-action {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.contact-success-action .btn {
+    display: inline-block;
+}

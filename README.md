@@ -1,16 +1,16 @@
 # CampusFind - University Lost and Found Management System
 
-CampusFind is a Java web application for managing lost and found items in a university. Students can report lost items, post found items, search listings, bookmark items, and submit claims. Admins can manage users, items, claims, categories, and reports.
+CampusFind is a Java web application for managing lost and found items in a university. Students can report lost items, post found items with images, search found item listings, bookmark items, submit claims, and manage their own posts. Admins can approve users, manage items, manage claims, manage categories, and view reports.
 
 ## Technologies Used
 
 - Java
-- Servlets
-- JSP
-- JSTL / EL
+- Jakarta Servlets
+- Jakarta JSP
+- Jakarta JSTL / EL
 - JDBC
 - MySQL / MariaDB
-- Apache Tomcat 9
+- Apache Tomcat 10.0.x
 - Maven
 - HTML
 - CSS
@@ -36,7 +36,7 @@ CampusFind is a Java web application for managing lost and found items in a univ
 ### Admin Features
 
 - Admin dashboard
-- Approve or reject users
+- Approve or reject student users
 - Manage items
 - Update item status
 - Delete items
@@ -56,7 +56,7 @@ src/main/java/com/lostfound/service
 src/main/java/com/lostfound/util
 src/main/webapp/WEB-INF/views
 src/main/webapp/css
-src/main/webapp/WEB-INF/lib
+src/main/webapp/images
 database/schema.sql
 pom.xml
 README.md
@@ -76,7 +76,7 @@ The database script is located at:
 database/schema.sql
 ```
 
-Import this file into phpMyAdmin or MySQL before running the project.
+Import this SQL file into phpMyAdmin or MySQL before running the project.
 
 ## Default Admin Login
 
@@ -89,19 +89,19 @@ Password: admin123
 
 Uploaded found-item images are stored outside the project folder.
 
-The project saves uploaded images inside the current user's home folder:
+The project saves uploaded images inside the current user's home directory:
 
 ```text
 campusfind_uploads/items
 ```
 
-On Windows, it will be like:
+Example on Windows:
 
 ```text
 C:/Users/YOUR_USERNAME/campusfind_uploads/items
 ```
 
-On macOS, it will be like:
+Example on macOS:
 
 ```text
 /Users/YOUR_USERNAME/campusfind_uploads/items
@@ -112,7 +112,7 @@ The folder is created automatically when an image is uploaded. If image upload d
 ## How to Run
 
 1. Import the project into Eclipse.
-2. Configure Apache Tomcat 9.
+2. Configure **Apache Tomcat 10.0.x**.
 3. Start MySQL using XAMPP.
 4. Import `database/schema.sql` into phpMyAdmin.
 5. Check database settings in:
@@ -121,11 +121,11 @@ The folder is created automatically when an image is uploaded. If image upload d
 src/main/java/com/lostfound/util/DBConnection.java
 ```
 
-6. Right-click the project.
+6. Right-click the project in Eclipse.
 7. Select:
 
 ```text
-Run As → Run on Server
+Run As -> Run on Server
 ```
 
 8. Open the project in the browser.
@@ -138,6 +138,24 @@ http://localhost:8080/campusfind/
 
 The URL may be different depending on the Eclipse context root.
 
+## Jakarta Migration Note
+
+This project uses the Jakarta EE package structure required by Tomcat 10.0.x. JSP pages use Jakarta JSTL tag libraries, for example:
+
+```jsp
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+```
+
+Servlets use Jakarta imports such as:
+
+```java
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
+import jakarta.servlet.annotation.*;
+```
+
+Because of this, the project should be deployed on **Tomcat 10.0.x**, not Tomcat 9.
+
 ## Important Notes
 
 - Student accounts are created with `pending` status.
@@ -145,7 +163,7 @@ The URL may be different depending on the Eclipse context root.
 - Students cannot access admin pages.
 - Admins cannot access student pages.
 - Logged-out users are redirected to the login page.
-- Search displays only open found items.
+- Search displays open found items.
 - Found items can have uploaded images.
 - Lost items do not require images.
 
@@ -158,7 +176,7 @@ The project includes:
 - Password hashing using `PasswordUtil`
 - PreparedStatement in DAO classes
 - JSTL `<c:out>` for safer output
-- Validation for registration, login, item posting, image upload, and password update
+- Validation for registration, login, item posting, image upload, profile update, and password update
 
 ## Coursework Restrictions Followed
 

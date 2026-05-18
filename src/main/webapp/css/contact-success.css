@@ -2,52 +2,115 @@
    CONTACT SUCCESS PAGE
 ============================= */
 
-.contact-success-box {
-    text-align: center;
-    max-width: 650px;
-}
-
-.contact-success-title {
-    color: #1b3a6b;
-    margin-bottom: 12px;
-}
-
-.contact-success-main-text {
-    font-size: 15px;
-    color: #555555;
-    line-height: 1.7;
-}
-
-.contact-success-sub-text {
-    font-size: 14px;
-    color: #666666;
-    line-height: 1.7;
-    margin-top: 12px;
-}
-
-.contact-support-info {
-    margin-top: 22px;
+.contact-success-page {
+    min-height: 520px;
+    padding: 70px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
     background: #f4f7fb;
-    padding: 18px;
-    border-radius: 8px;
 }
 
-.contact-support-title {
-    margin: 0;
-    font-weight: bold;
+.contact-success-card {
+    width: 100%;
+    max-width: 620px;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 42px;
+    box-shadow: var(--shadow-md);
+    text-align: center;
+}
+
+.contact-success-icon {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: #eef5ff;
     color: #1b3a6b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    margin: 0 auto 22px;
 }
 
-.contact-support-line {
-    margin: 6px 0 0;
-    color: #555555;
+.contact-success-card h2 {
+    color: #1b3a6b;
+    font-size: 26px;
+    margin-bottom: 16px;
+}
+
+.contact-success-message {
+    color: #333333;
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 10px;
+}
+
+.contact-success-subtext {
+    color: #666666;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 26px;
+}
+
+.contact-success-details {
+    background: #f5f8fc;
+    border: 1px solid #dce7f5;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: left;
+    margin-bottom: 26px;
+}
+
+.contact-success-detail-row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid #e4edf7;
+}
+
+.contact-success-detail-row:last-child {
+    border-bottom: none;
+}
+
+.contact-success-detail-row span {
+    color: #1b3a6b;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.contact-success-detail-row p {
+    color: #444444;
+    font-size: 14px;
+    margin: 0;
 }
 
 .contact-success-action {
-    margin-top: 25px;
     text-align: center;
 }
 
 .contact-success-action .btn {
     display: inline-block;
+    padding: 13px 22px;
+}
+
+/* =============================
+   RESPONSIVE SUCCESS PAGE
+============================= */
+
+@media (max-width: 600px) {
+    .contact-success-page {
+        padding: 45px 16px;
+    }
+
+    .contact-success-card {
+        padding: 30px 22px;
+    }
+
+    .contact-success-detail-row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+    }
 }

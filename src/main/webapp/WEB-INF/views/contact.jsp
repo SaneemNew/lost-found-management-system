@@ -8,20 +8,46 @@
     <h2 class="section-title">Contact Us</h2>
 
     <div class="contact-grid">
+
         <div class="contact-card">
             <h3>Get in Touch</h3>
 
             <div class="contact-details">
-                <p>📧 support@campusfind.ac.uk</p>
-                <p>📍 Student Services, Block A</p>
-                <p>🕘 Monday to Friday, 9am to 5pm</p>
-                <p>📞 +44 1234 567890</p>
+
+                <div class="contact-detail-item">
+                    <span class="contact-detail-icon">
+                        <i class="fa-regular fa-envelope"></i>
+                    </span>
+                    <p>support@campusfind.ac.uk</p>
+                </div>
+
+                <div class="contact-detail-item">
+                    <span class="contact-detail-icon">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </span>
+                    <p>Student Services, Block A</p>
+                </div>
+
+                <div class="contact-detail-item">
+                    <span class="contact-detail-icon">
+                        <i class="fa-regular fa-clock"></i>
+                    </span>
+                    <p>Monday to Friday, 9am to 5pm</p>
+                </div>
+
+                <div class="contact-detail-item">
+                    <span class="contact-detail-icon">
+                        <i class="fa-solid fa-phone"></i>
+                    </span>
+                    <p>+44 1234 567890</p>
+                </div>
+
             </div>
 
             <div class="contact-note">
+                <h4>Urgent lost and found issue?</h4>
                 <p>
-                    For urgent lost and found issues, please visit Student Services directly
-                    with any proof of ownership.
+                    Please visit Student Services directly with any proof of ownership.
                 </p>
             </div>
         </div>
@@ -35,7 +61,9 @@
             </p>
 
             <c:if test="${not empty error}">
-                <div class="msg-error"><c:out value="${error}" /></div>
+                <div class="msg-error">
+                    <c:out value="${error}" />
+                </div>
             </c:if>
 
             <form class="contact-page-form"
@@ -76,6 +104,7 @@
                 </button>
             </form>
         </div>
+
     </div>
 </div>
 

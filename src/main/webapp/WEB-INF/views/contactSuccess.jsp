@@ -4,48 +4,49 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/contact-success.css">
 
-<div class="container">
+<div class="contact-success-page">
+    <div class="contact-success-card">
 
-    <div class="form-box contact-success-box">
-        <h2 class="contact-success-title">
-            Support Request Received
-        </h2>
+        <div class="contact-success-icon">
+            <i class="fa-regular fa-circle-check"></i>
+        </div>
 
-        <p class="contact-success-main-text">
-            Thank you, <c:out value="${fullName}" />. Your message has been received by the CampusFind support team.
+        <h2>Support Request Received</h2>
+
+        <p class="contact-success-message">
+            Thank you, <c:out value="${fullName}" />. Your message has been received by the
+            CampusFind support team.
         </p>
 
-        <p class="contact-success-sub-text">
+        <p class="contact-success-subtext">
             Our support team will review your message and guide you if further action is needed.
             For urgent lost and found issues, please visit the Student Services desk directly.
         </p>
 
-        <div class="contact-support-info">
-            <p class="contact-support-title">
-                CampusFind Support
-            </p>
+        <div class="contact-success-details">
+            <div class="contact-success-detail-row">
+                <span>Email</span>
+                <p>support@campusfind.ac.uk</p>
+            </div>
 
-            <p class="contact-support-line">
-                Email: support@campusfind.ac.uk
-            </p>
+            <div class="contact-success-detail-row">
+                <span>Location</span>
+                <p>Student Services, Block A</p>
+            </div>
 
-            <p class="contact-support-line">
-                Location: Student Services, Block A
-            </p>
-
-            <p class="contact-support-line">
-                Support Hours: Monday to Friday, 9am to 5pm
-            </p>
+            <div class="contact-success-detail-row">
+                <span>Support Hours</span>
+                <p>Monday to Friday, 9am to 5pm</p>
+            </div>
         </div>
 
         <div class="contact-success-action">
-            <a href="${pageContext.request.contextPath}/contact"
-               class="btn btn-primary">
+            <a href="${pageContext.request.contextPath}/contact" class="btn btn-blue">
                 Send Another Message
             </a>
         </div>
-    </div>
 
+    </div>
 </div>
 
 <%@ include file="/WEB-INF/views/includes/footer.jsp" %>

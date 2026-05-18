@@ -2,15 +2,306 @@
    REGISTER PAGE
 ============================= */
 
-.register-form-box {
-    max-width: 540px;
+.register-page {
+    width: 100%;
+    min-height: calc(100vh - 150px);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 68px 20px 95px;
+    background:
+        linear-gradient(135deg, #f7fbff 0%, #eef5ff 48%, #f4f6f8 100%);
+}
+
+.register-card {
+    width: 100%;
+    max-width: 1040px;
+    display: grid;
+    grid-template-columns: 0.92fr 1.08fr;
+    background: #ffffff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 20px 46px rgba(15, 42, 78, 0.12);
+    border: 1px solid #dce7f5;
+}
+
+/* =============================
+   LEFT INFORMATION PANEL
+============================= */
+
+.register-info-panel {
+    background: linear-gradient(135deg, #0b2d5c 0%, #1b3a6b 100%);
+    color: #ffffff;
+    padding: 58px 48px;
+    display: flex;
+    align-items: center;
+}
+
+.register-info-content {
+    width: 100%;
+}
+
+.register-panel-label {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    color: #ffffff;
+    padding: 8px 15px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 800;
+    margin-bottom: 26px;
+}
+
+.register-info-panel h1 {
+    color: #ffffff;
+    font-size: 34px;
+    line-height: 1.18;
+    margin-bottom: 18px;
+    max-width: 390px;
+}
+
+.register-panel-text {
+    color: #e5eefb;
+    font-size: 15px;
+    line-height: 1.8;
+    max-width: 420px;
+    margin-bottom: 34px;
+}
+
+.register-panel-list {
+    display: grid;
+    gap: 18px;
+}
+
+.register-panel-item {
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    align-items: center;
+    gap: 14px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.register-panel-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+/* =============================
+   RIGHT FORM PANEL
+============================= */
+
+.register-form-panel {
+    padding: 52px 46px;
+}
+
+.register-form-header {
+    margin-bottom: 24px;
+}
+
+.register-form-header h2 {
+    color: #0b2d5c;
+    font-size: 29px;
+    line-height: 1.2;
+    margin-bottom: 8px;
+}
+
+.register-form-header p {
+    color: #58708c;
+    font-size: 15px;
+    margin: 0;
+}
+
+.register-approval-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: #eef5ff;
+    border: 1px solid #d8e7fb;
+    color: #1b3a6b;
+    padding: 13px 15px;
+    border-radius: 10px;
+    margin-bottom: 22px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.register-approval-note i {
+    margin-top: 2px;
+    font-size: 14px;
+}
+
+.register-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 18px;
+}
+
+.register-form-panel .form-group {
+    margin-bottom: 0;
+}
+
+.register-form-panel .form-group label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #0b2d5c;
+    font-size: 14px;
+}
+
+.register-form-panel .form-group input {
+    width: 100%;
+    height: 52px;
+    padding: 13px 15px;
+    border: 1px solid #cfd8e3;
+    border-radius: 10px;
+    font-size: 15px;
+    color: #1f2f42;
+    background: #ffffff;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.register-form-panel .form-group input::placeholder {
+    color: #7a8798;
+}
+
+.register-form-panel .form-group input:focus {
+    outline: none;
+    border-color: #1b3a6b;
+    box-shadow: 0 0 0 3px rgba(27, 58, 107, 0.10);
 }
 
 .optional-note {
-    font-weight: normal;
-    color: #999999;
+    font-weight: 500;
+    color: #7a8798;
 }
 
 .register-submit-btn {
+    display: block;
     width: 100%;
+    margin-top: 24px;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 800;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.register-form-panel .form-footer {
+    text-align: center;
+    margin-top: 22px;
+    padding-top: 20px;
+    border-top: 1px solid #edf1f6;
+    font-size: 14px;
+    color: #34495f;
+}
+
+.register-form-panel .form-footer a {
+    color: #1b3a6b;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.register-form-panel .form-footer a:hover {
+    text-decoration: underline;
+}
+
+/* =============================
+   RESPONSIVE REGISTER PAGE
+============================= */
+
+@media (max-width: 1000px) {
+    .register-card {
+        max-width: 760px;
+        grid-template-columns: 1fr;
+    }
+
+    .register-info-panel {
+        padding: 42px 40px;
+    }
+
+    .register-info-panel h1 {
+        max-width: 100%;
+    }
+
+    .register-panel-text {
+        max-width: 100%;
+    }
+
+    .register-form-panel {
+        padding: 42px 40px;
+    }
+}
+
+@media (max-width: 700px) {
+    .register-page {
+        padding: 42px 16px 70px;
+    }
+
+    .register-card {
+        border-radius: 16px;
+    }
+
+    .register-info-panel {
+        padding: 34px 26px;
+    }
+
+    .register-info-panel h1 {
+        font-size: 28px;
+    }
+
+    .register-form-panel {
+        padding: 34px 26px;
+    }
+
+    .register-form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .register-page {
+        padding: 34px 14px 60px;
+    }
+
+    .register-info-panel,
+    .register-form-panel {
+        padding: 28px 20px;
+    }
+
+    .register-info-panel h1 {
+        font-size: 25px;
+    }
+
+    .register-form-header h2 {
+        font-size: 25px;
+    }
+
+    .register-panel-item {
+        grid-template-columns: 38px 1fr;
+        gap: 12px;
+        font-size: 13px;
+    }
+
+    .register-panel-icon {
+        width: 38px;
+        height: 38px;
+    }
+
+    .register-form-panel .form-group input {
+        height: 50px;
+    }
 }

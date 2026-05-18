@@ -1,6 +1,7 @@
 package com.lostfound.controller;
 
 import java.io.IOException;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,6 +17,7 @@ public class ContactServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
+        req.setAttribute("activePage", "contact");
         req.getRequestDispatcher("/WEB-INF/views/contact.jsp").forward(req, resp);
     }
 
@@ -26,6 +28,8 @@ public class ContactServlet extends HttpServlet {
         String fullName = req.getParameter("fullName");
         String email = req.getParameter("email");
         String message = req.getParameter("message");
+
+        req.setAttribute("activePage", "contact");
 
         if (fullName == null || fullName.trim().isEmpty()
                 || email == null || email.trim().isEmpty()

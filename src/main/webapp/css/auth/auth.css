@@ -34,57 +34,6 @@
     width: 100%;
 }
 
-/* Pending page */
-.pending-card {
-    text-align: center;
-    max-width: 620px;
-}
-
-.pending-icon {
-    font-size: 40px;
-    margin-bottom: 12px;
-}
-
-.pending-message {
-    text-align: left;
-    line-height: 1.7;
-    margin-bottom: 22px;
-}
-
-.pending-text {
-    color: #666666;
-    font-size: 14px;
-    margin-bottom: 26px;
-}
-
-.pending-text a {
-    color: #1b3a6b;
-    font-weight: 600;
-    text-decoration: underline;
-}
-
-.pending-actions {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.pending-actions .btn {
-    width: auto;
-    min-width: 150px;
-}
-
-.auth-outline-btn {
-    color: #1b3a6b;
-    border-color: #1b3a6b;
-}
-
-.auth-outline-btn:hover {
-    background: rgba(27, 58, 107, 0.08);
-}
-
-/* Form footer */
 .form-footer {
     text-align: center;
     margin-top: 18px;
@@ -97,8 +46,125 @@
     text-decoration: underline;
 }
 
-/* Mobile */
-@media (max-width: 600px) {
+
+/* =============================
+   PENDING APPROVAL PAGE
+============================= */
+
+.pending-page {
+    min-height: calc(100vh - 430px);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 85px 20px 110px;
+    background: #f4f7fb;
+}
+
+.pending-card {
+    width: 100%;
+    max-width: 620px;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 46px 52px;
+    text-align: center;
+    border: 1px solid #e4eaf2;
+    box-shadow: 0 14px 34px rgba(13, 45, 87, 0.08);
+}
+
+.pending-card h2 {
+    color: #0b2d5c;
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 18px;
+}
+
+.pending-intro {
+    color: #333333;
+    font-size: 15px;
+    line-height: 1.7;
+    max-width: 500px;
+    margin: 0 auto 10px;
+}
+
+.pending-note {
+    color: #1b3a6b;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 auto 28px;
+}
+
+.pending-details {
+    text-align: left;
+    background: #f8fafc;
+    border: 1px solid #e3eaf3;
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin-bottom: 24px;
+}
+
+.pending-details h3 {
+    color: #0b2d5c;
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 14px;
+}
+
+.pending-details ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.pending-details li {
+    color: #333333;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 8px;
+}
+
+.pending-details li:last-child {
+    margin-bottom: 0;
+}
+
+.pending-help-text {
+    color: #666666;
+    font-size: 14px;
+    margin-bottom: 24px;
+}
+
+.pending-help-text a {
+    color: #1b3a6b;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.pending-actions {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.pending-actions .btn {
+    width: auto;
+    min-width: 150px;
+}
+
+.pending-outline-btn {
+    color: #1b3a6b;
+    border-color: #1b3a6b;
+    background: #ffffff;
+}
+
+.pending-outline-btn:hover {
+    background: #f0f5fb;
+}
+
+
+/* =============================
+   RESPONSIVE
+============================= */
+
+@media (max-width: 640px) {
     .auth-page {
         padding: 40px 16px;
         align-items: flex-start;
@@ -106,6 +172,22 @@
 
     .auth-card {
         padding: 28px 22px;
+    }
+
+    .pending-page {
+        padding: 55px 16px 80px;
+    }
+
+    .pending-card {
+        padding: 34px 24px;
+    }
+
+    .pending-card h2 {
+        font-size: 24px;
+    }
+
+    .pending-details {
+        padding: 20px;
     }
 
     .pending-actions {

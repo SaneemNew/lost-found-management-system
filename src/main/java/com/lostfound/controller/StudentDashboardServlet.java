@@ -24,6 +24,7 @@ public class StudentDashboardServlet extends HttpServlet {
             throws ServletException, IOException {
 
         Integer userId = SessionUtil.getUserId(req);
+
         if (userId == null) {
             resp.sendRedirect(req.getContextPath() + "/login");
             return;
@@ -33,7 +34,9 @@ public class StudentDashboardServlet extends HttpServlet {
         req.setAttribute("foundCount", itemDAO.countByUserAndType(userId, "found"));
         req.setAttribute("claimCount", claimDAO.countPendingByUser(userId));
         req.setAttribute("bookmarkCount", bookmarkDAO.countByUser(userId));
-        req.setAttribute("recentItems", itemDAO.getRecentFound(6));
+
+        // Dashboard should only show latest 3 items to keep it clean
+        req.setAttribute("recentItems", itemDAO.getRecentFound(3));
 
         req.getRequestDispatcher("/WEB-INF/views/student/dashboard.jsp").forward(req, resp);
     }

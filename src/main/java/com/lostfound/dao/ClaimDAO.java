@@ -258,4 +258,28 @@ public class ClaimDAO {
         c.setItemTitle(rs.getString("item_title"));
         return c;
     }
+    
+ // Get the latest pending claim for homepage preview
+    public Claim getLatestPendingClaim() {
+        String sql = "SELECT c.*, u.full_name AS claimant_name, i.title AS item_title "
+                   + "FROM claims c "
+                   + "JOIN users u ON c.claimant_id = u.id "
+                   + "JOIN items i ON c.item_id = i.id "
+                   + "WHERE c.status = 'pending' "
+                   + "ORDER BY c.created_at DESC LIMIT 1";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            if (rs.next()) {
+                return buildClaim(rs);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error in getLatestPendingClaim: " + e.getMessage());
+        }
+
+        return null;
+    }
 }

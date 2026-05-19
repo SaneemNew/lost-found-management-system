@@ -2,19 +2,329 @@
    ADMIN REPORTS PAGE
 ============================= */
 
-.admin-page-actions {
+.admin-report-page {
+    width: min(1120px, 100%);
+    margin: 0 auto;
+    padding: 56px 24px 72px;
+}
+
+/* =============================
+   HERO
+============================= */
+
+.report-hero {
+    background:
+        linear-gradient(
+            135deg,
+            #0b2d5c 0%,
+            #123f78 55%,
+            #164985 100%
+        );
+    border-radius: 18px;
+    padding: 42px 46px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 28px;
+    align-items: center;
+    margin-bottom: 28px;
+    box-shadow: 0 18px 42px rgba(15, 42, 78, 0.22);
+}
+
+.report-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.16);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 800;
     margin-bottom: 18px;
 }
 
-.admin-outline-btn {
-    color: #1b3a6b;
-    border-color: #1b3a6b;
+.report-hero h1 {
+    color: #ffffff;
+    font-size: 34px;
+    line-height: 1.2;
+    margin-bottom: 12px;
+    font-weight: 850;
 }
 
-.report-stats-row {
-    margin-bottom: 35px;
+.report-hero p {
+    color: #e4eefb;
+    font-size: 16px;
+    line-height: 1.75;
+    max-width: 640px;
 }
 
-.top-category-table {
-    max-width: 400px;
+.report-hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.report-back-btn,
+.report-download-btn {
+    min-height: 46px;
+    border-radius: 10px;
+    padding: 0 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    font-size: 14px;
+    font-weight: 850;
+    transition: 0.2s ease;
+    white-space: nowrap;
+}
+
+.report-back-btn {
+    background: rgba(255, 255, 255, 0.13);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.report-back-btn:hover {
+    background: rgba(255, 255, 255, 0.22);
+    transform: translateY(-2px);
+}
+
+.report-download-btn {
+    background: #ffffff;
+    color: #0b2d5c;
+    border: 1px solid #ffffff;
+}
+
+.report-download-btn:hover {
+    background: #eef5ff;
+    transform: translateY(-2px);
+}
+
+/* =============================
+   OVERVIEW
+============================= */
+
+.report-overview-card {
+    background: #ffffff;
+    border: 1px solid #dce7f5;
+    border-radius: 18px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 36px;
+    box-shadow: 0 14px 32px rgba(15, 42, 78, 0.08);
+}
+
+.report-overview-box {
+    background: #f7fbff;
+    border: 1px solid #dce7f5;
+    border-radius: 14px;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.report-overview-box span {
+    color: #40546c;
+    font-size: 13px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.report-overview-box strong {
+    color: #0b2d5c;
+    font-size: 36px;
+    line-height: 1;
+    font-weight: 900;
+}
+
+/* =============================
+   SECTION
+============================= */
+
+.report-section {
+    margin-bottom: 34px;
+}
+
+.report-section-heading {
+    border-bottom: 1px solid #dce7f5;
+    padding-bottom: 12px;
+    margin-bottom: 18px;
+}
+
+.report-section-heading h2 {
+    color: #0b2d5c;
+    font-size: 25px;
+    line-height: 1.25;
+    font-weight: 850;
+    margin-bottom: 8px;
+}
+
+.report-section-heading p {
+    color: #5c6f86;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* =============================
+   STAT CARDS
+============================= */
+
+.report-stat-grid {
+    display: grid;
+    gap: 18px;
+}
+
+.report-stat-grid.four-cols {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.report-stat-grid.three-cols {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.report-stat-card {
+    background: #ffffff;
+    border: 1px solid #dce7f5;
+    border-radius: 14px;
+    min-height: 112px;
+    padding: 22px 18px;
+    text-align: center;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 12px 26px rgba(15, 42, 78, 0.07);
+    transition: 0.2s ease;
+}
+
+.report-stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 32px rgba(15, 42, 78, 0.11);
+}
+
+.report-stat-card span {
+    color: #40546c;
+    font-size: 13px;
+    font-weight: 850;
+}
+
+.report-stat-card strong {
+    color: #0b2d5c;
+    font-size: 38px;
+    line-height: 1;
+    font-weight: 900;
+}
+
+/* =============================
+   TABLE
+============================= */
+
+.report-table-wrapper {
+    background: #ffffff;
+    border: 1px solid #dce7f5;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 12px 26px rgba(15, 42, 78, 0.07);
+}
+
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.report-table thead {
+    background: #0b3d91;
+}
+
+.report-table th {
+    color: #ffffff;
+    text-align: left;
+    padding: 17px 20px;
+    font-size: 14px;
+    font-weight: 850;
+}
+
+.report-table td {
+    color: #40546c;
+    padding: 17px 20px;
+    font-size: 14px;
+    border-bottom: 1px solid #e8eef7;
+}
+
+.report-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.report-empty-message {
+    background: #ffffff;
+    border: 1px solid #dce7f5;
+    border-radius: 14px;
+    padding: 22px;
+    color: #40546c;
+    font-size: 15px;
+    box-shadow: 0 12px 26px rgba(15, 42, 78, 0.07);
+}
+
+/* =============================
+   RESPONSIVE
+============================= */
+
+@media (max-width: 1050px) {
+    .report-hero {
+        grid-template-columns: 1fr;
+    }
+
+    .report-hero-actions {
+        flex-wrap: wrap;
+    }
+
+    .report-stat-grid.four-cols {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 760px) {
+    .admin-report-page {
+        padding: 36px 16px 56px;
+    }
+
+    .report-hero {
+        padding: 34px 28px;
+    }
+
+    .report-hero h1 {
+        font-size: 28px;
+    }
+
+    .report-overview-card,
+    .report-stat-grid.three-cols,
+    .report-stat-grid.four-cols {
+        grid-template-columns: 1fr;
+    }
+
+    .report-back-btn,
+    .report-download-btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 430px) {
+    .report-hero h1 {
+        font-size: 25px;
+    }
+
+    .report-overview-box strong,
+    .report-stat-card strong {
+        font-size: 32px;
+    }
+
+    .report-table th,
+    .report-table td {
+        padding: 14px 16px;
+    }
 }

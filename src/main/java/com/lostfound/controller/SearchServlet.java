@@ -29,6 +29,10 @@ public class SearchServlet extends HttpServlet {
 
         int catId = 0;
 
+        /*
+         * Category is optional in search.
+         * If no valid category is selected, 0 means "all categories".
+         */
         try {
             if (catParam != null && !catParam.trim().isEmpty()) {
                 catId = Integer.parseInt(catParam);
@@ -37,8 +41,12 @@ public class SearchServlet extends HttpServlet {
             catId = 0;
         }
 
+        /*
+         * Search only displays found items.
+         * The selected filters are sent back to the JSP so the form keeps
+         * the user's search values after submission.
+         */
         req.setAttribute("activePage", "search");
-
         req.setAttribute("items", itemDAO.searchFound(keyword, catId, location));
         req.setAttribute("categories", categoryDAO.getAll());
         req.setAttribute("keyword", keyword);

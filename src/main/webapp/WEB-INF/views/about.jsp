@@ -5,7 +5,7 @@
 
 <div class="container about-page">
 
-    <!-- HERO SECTION -->
+    <!-- Hero section -->
     <section class="about-hero">
         <div class="about-hero-content">
             <span class="about-hero-badge">University Lost and Found Portal</span>
@@ -19,7 +19,7 @@
         </div>
     </section>
 
-    <!-- PROJECT PURPOSE -->
+    <!-- Project purpose -->
     <section class="about-purpose-card">
         <div class="about-purpose-text">
             <span class="about-small-label">Project Purpose</span>
@@ -52,7 +52,7 @@
         </div>
     </section>
 
-    <!-- HOW SYSTEM WORKS -->
+    <!-- Process overview -->
     <section class="about-section">
         <div class="about-section-title">
             <span>Process</span>
@@ -94,7 +94,7 @@
         </div>
     </section>
 
-    <!-- FEATURES -->
+    <!-- System features -->
     <section class="about-section">
         <div class="about-section-title">
             <span>System Features</span>
@@ -130,7 +130,7 @@
         </div>
     </section>
 
-    <!-- SYSTEM USERS -->
+    <!-- User roles -->
     <section class="about-section">
         <div class="about-section-title">
             <span>User Roles</span>
@@ -170,7 +170,7 @@
         </div>
     </section>
 
-    <!-- TEAM SECTION -->
+    <!-- Team section -->
     <section class="about-section about-team-section">
         <div class="about-section-title">
             <span>Project Team</span>
@@ -183,7 +183,6 @@
 
         <div class="team-grid">
 
-            <!-- BISHESH -->
             <div class="team-card">
                 <div class="team-photo-box">
                     <img src="${pageContext.request.contextPath}/images/team/bishesh.png"
@@ -204,7 +203,6 @@
                 </div>
             </div>
 
-            <!-- AAYUSH -->
             <div class="team-card">
                 <div class="team-photo-box">
                     <img src="${pageContext.request.contextPath}/images/team/aayush.png"
@@ -225,7 +223,6 @@
                 </div>
             </div>
 
-            <!-- SANEEM - MIDDLE CARD -->
             <div class="team-card">
                 <div class="team-photo-box">
                     <img src="${pageContext.request.contextPath}/images/team/saneem.png"
@@ -246,7 +243,6 @@
                 </div>
             </div>
 
-            <!-- ABHISEKH -->
             <div class="team-card">
                 <div class="team-photo-box">
                     <img src="${pageContext.request.contextPath}/images/team/abhisekh.png"
@@ -267,7 +263,6 @@
                 </div>
             </div>
 
-            <!-- MANOJ -->
             <div class="team-card">
                 <div class="team-photo-box">
                     <img src="${pageContext.request.contextPath}/images/team/manoj.png"
@@ -291,7 +286,7 @@
         </div>
     </section>
 
-    <!-- GOAL SECTION -->
+    <!-- Project goal -->
     <section class="about-goal-banner">
         <div>
             <span class="about-goal-label">Project Goal</span>
@@ -312,7 +307,7 @@
 
 </div>
 
-<!-- TEAM CONTRIBUTION MODAL -->
+<!-- Team contribution modal -->
 <div class="team-modal-overlay" id="teamModalOverlay" aria-hidden="true">
     <div class="team-modal" role="dialog" aria-modal="true" aria-labelledby="teamModalName">
 

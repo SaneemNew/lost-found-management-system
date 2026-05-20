@@ -3,13 +3,16 @@ package com.lostfound.dao;
 import com.lostfound.model.Claim;
 import com.lostfound.util.DBConnection;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ClaimDAO {
 
-    // save a new claim submitted by a student
+    // Saves a new claim submitted by a student.
     public boolean saveClaim(Claim claim) {
         String sql = "INSERT INTO claims (item_id, claimant_id, description, status) VALUES (?, ?, ?, 'pending')";
 
@@ -28,7 +31,7 @@ public class ClaimDAO {
         }
     }
 
-    // check whether this user has already submitted a claim for this item
+    // Checks whether the same student has already claimed the same item.
     public boolean alreadyClaimed(int itemId, int userId) {
         String sql = "SELECT id FROM claims WHERE item_id = ? AND claimant_id = ?";
 
@@ -49,7 +52,7 @@ public class ClaimDAO {
         return false;
     }
 
-    // get all claims submitted for one specific item
+    // Gets all claims submitted for one item.
     public List<Claim> getByItem(int itemId) {
         String sql = "SELECT c.*, u.full_name AS claimant_name, i.title AS item_title "
                    + "FROM claims c "
@@ -60,7 +63,7 @@ public class ClaimDAO {
         return runQuery(sql, itemId);
     }
 
-    // get all claims submitted by one user
+    // Gets all claims submitted by one student.
     public List<Claim> getByUser(int userId) {
         String sql = "SELECT c.*, u.full_name AS claimant_name, i.title AS item_title "
                    + "FROM claims c "
@@ -71,7 +74,7 @@ public class ClaimDAO {
         return runQuery(sql, userId);
     }
 
-    // get every claim in the system for admin review
+    // Gets every claim in the system for the admin claims page.
     public List<Claim> getAllClaims() {
         String sql = "SELECT c.*, u.full_name AS claimant_name, i.title AS item_title "
                    + "FROM claims c "
@@ -96,7 +99,7 @@ public class ClaimDAO {
         return list;
     }
 
-    // fetch one claim by its id
+    // Finds one claim by its ID.
     public Claim getById(int claimId) {
         String sql = "SELECT c.*, u.full_name AS claimant_name, i.title AS item_title "
                    + "FROM claims c "
@@ -122,7 +125,7 @@ public class ClaimDAO {
         return null;
     }
 
-    // update claim status such as approved or rejected
+    // Updates a claim status, for example pending, approved, or rejected.
     public boolean updateStatus(int claimId, String newStatus) {
         String sql = "UPDATE claims SET status = ? WHERE id = ?";
 
@@ -140,7 +143,102 @@ public class ClaimDAO {
         }
     }
 
-    // once one claim is approved, reject all other pending claims for the same item
+    /*
+     * Approves a pending claim and updates the related item in one transaction.
+     * This is needed because approving a claim also means the item should become
+     * claimed and the other pending claims for that item should be rejected.
+     *
+     * If any step fails, rollback keeps the database from saving only part of
+     * the update.
+     */
+    public boolean approveClaimWithTransaction(int claimId) {
+        String findClaimSql = "SELECT item_id FROM claims WHERE id = ? AND status = 'pending'";
+        String approveClaimSql = "UPDATE claims SET status = 'approved' WHERE id = ? AND status = 'pending'";
+        String updateItemSql = "UPDATE items SET status = 'claimed' WHERE id = ?";
+        String rejectOthersSql = "UPDATE claims SET status = 'rejected' "
+                               + "WHERE item_id = ? AND id <> ? AND status = 'pending'";
+
+        Connection conn = null;
+
+        try {
+            // Start transaction because multiple related updates are needed.
+            conn = DBConnection.getConnection();
+            conn.setAutoCommit(false);
+
+            int itemId;
+
+            // Find the item connected to this pending claim.
+            try (PreparedStatement ps = conn.prepareStatement(findClaimSql)) {
+                ps.setInt(1, claimId);
+
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (!rs.next()) {
+                        conn.rollback();
+                        return false;
+                    }
+
+                    itemId = rs.getInt("item_id");
+                }
+            }
+
+            // Approve the selected claim.
+            try (PreparedStatement ps = conn.prepareStatement(approveClaimSql)) {
+                ps.setInt(1, claimId);
+
+                if (ps.executeUpdate() == 0) {
+                    conn.rollback();
+                    return false;
+                }
+            }
+
+            // Mark the item as claimed.
+            try (PreparedStatement ps = conn.prepareStatement(updateItemSql)) {
+                ps.setInt(1, itemId);
+
+                if (ps.executeUpdate() == 0) {
+                    conn.rollback();
+                    return false;
+                }
+            }
+
+            // Reject other pending claims for the same item.
+            try (PreparedStatement ps = conn.prepareStatement(rejectOthersSql)) {
+                ps.setInt(1, itemId);
+                ps.setInt(2, claimId);
+                ps.executeUpdate();
+            }
+
+            // Save all changes if every step succeeds.
+            conn.commit();
+            return true;
+
+        } catch (Exception e) {
+            System.out.println("Error in approveClaimWithTransaction: " + e.getMessage());
+
+            if (conn != null) {
+                try {
+                    // Undo changes if any step fails.
+                    conn.rollback();
+                } catch (SQLException rollbackError) {
+                    System.out.println("Rollback failed: " + rollbackError.getMessage());
+                }
+            }
+
+            return false;
+
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.setAutoCommit(true);
+                    conn.close();
+                } catch (SQLException closeError) {
+                    System.out.println("Error closing transaction connection: " + closeError.getMessage());
+                }
+            }
+        }
+    }
+
+    // Rejects other pending claims after one claim has already been approved.
     public boolean rejectOtherPendingClaims(int itemId, int approvedClaimId) {
         String sql = "UPDATE claims SET status = 'rejected' "
                    + "WHERE item_id = ? AND id <> ? AND status = 'pending'";
@@ -160,7 +258,7 @@ public class ClaimDAO {
         }
     }
 
-    // count how many claims of a user are still pending
+    // Counts how many claims of a student are still pending.
     public int countPendingByUser(int userId) {
         String sql = "SELECT COUNT(*) FROM claims WHERE claimant_id = ? AND status = 'pending'";
 
@@ -182,7 +280,7 @@ public class ClaimDAO {
         return 0;
     }
 
-    // count all claims in the system
+    // Counts all claims in the system.
     public int countAll() {
         String sql = "SELECT COUNT(*) FROM claims";
 
@@ -201,7 +299,7 @@ public class ClaimDAO {
         return 0;
     }
 
-    // count claims by a specific status like pending, approved, or rejected
+    // Counts claims by status for admin reports.
     public int countByStatus(String status) {
         String sql = "SELECT COUNT(*) FROM claims WHERE status = ?";
 
@@ -223,43 +321,7 @@ public class ClaimDAO {
         return 0;
     }
 
-    // reusable helper for methods that fetch a list using one integer parameter
-    private List<Claim> runQuery(String sql, int param) {
-        List<Claim> list = new ArrayList<>();
-
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setInt(1, param);
-
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    list.add(buildClaim(rs));
-                }
-            }
-
-        } catch (Exception e) {
-            System.out.println("Error in runQuery: " + e.getMessage());
-        }
-
-        return list;
-    }
-
-    // convert one result set row into a Claim object
-    private Claim buildClaim(ResultSet rs) throws SQLException {
-        Claim c = new Claim();
-        c.setId(rs.getInt("id"));
-        c.setItemId(rs.getInt("item_id"));
-        c.setClaimantId(rs.getInt("claimant_id"));
-        c.setDescription(rs.getString("description"));
-        c.setStatus(rs.getString("status"));
-        c.setCreatedAt(rs.getString("created_at"));
-        c.setClaimantName(rs.getString("claimant_name"));
-        c.setItemTitle(rs.getString("item_title"));
-        return c;
-    }
-    
- // Get the latest pending claim for homepage preview
+    // Gets the latest pending claim for dashboard or homepage preview.
     public Claim getLatestPendingClaim() {
         String sql = "SELECT c.*, u.full_name AS claimant_name, i.title AS item_title "
                    + "FROM claims c "
@@ -281,5 +343,43 @@ public class ClaimDAO {
         }
 
         return null;
+    }
+
+    // Reusable helper for claim list queries that use one integer parameter.
+    private List<Claim> runQuery(String sql, int param) {
+        List<Claim> list = new ArrayList<>();
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, param);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    list.add(buildClaim(rs));
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error in runQuery: " + e.getMessage());
+        }
+
+        return list;
+    }
+
+    // Converts one database row into a Claim object.
+    private Claim buildClaim(ResultSet rs) throws SQLException {
+        Claim c = new Claim();
+
+        c.setId(rs.getInt("id"));
+        c.setItemId(rs.getInt("item_id"));
+        c.setClaimantId(rs.getInt("claimant_id"));
+        c.setDescription(rs.getString("description"));
+        c.setStatus(rs.getString("status"));
+        c.setCreatedAt(rs.getString("created_at"));
+        c.setClaimantName(rs.getString("claimant_name"));
+        c.setItemTitle(rs.getString("item_title"));
+
+        return c;
     }
 }

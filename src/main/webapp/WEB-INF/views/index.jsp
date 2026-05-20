@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ include file="/WEB-INF/views/includes/header.jsp" %>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index.css">
 
+<!-- Hero section -->
 <section class="home-hero">
     <div class="home-hero-inner">
 
@@ -22,6 +23,7 @@
                 Built for students, administrators, and structured campus item recovery.
             </p>
 
+            <!-- Main call-to-action buttons -->
             <div class="home-actions">
                 <c:choose>
                     <c:when test="${not empty sessionScope.userName && sessionScope.role == 'student'}">
@@ -33,6 +35,18 @@
                         <a href="${pageContext.request.contextPath}/student/postFound" class="home-btn home-btn-light">
                             <i class="fa-solid fa-box-open"></i>
                             Report Found Item
+                        </a>
+                    </c:when>
+
+                    <c:when test="${not empty sessionScope.userName && sessionScope.role == 'admin'}">
+                        <a href="${pageContext.request.contextPath}/admin/dashboard" class="home-btn home-btn-primary">
+                            <i class="fa-solid fa-gauge-high"></i>
+                            Admin Dashboard
+                        </a>
+
+                        <a href="${pageContext.request.contextPath}/admin/items" class="home-btn home-btn-light">
+                            <i class="fa-solid fa-box-open"></i>
+                            Manage Items
                         </a>
                     </c:when>
 
@@ -56,6 +70,7 @@
             </div>
         </div>
 
+        <!-- Live overview panel -->
         <div class="home-hero-panel js-reveal">
             <div class="home-preview-card">
 
@@ -94,6 +109,7 @@
                     <small>Search</small>
                 </a>
 
+                <!-- Example recent activity preview -->
                 <div class="preview-activity-list">
 
                     <div class="preview-activity-item found-item">
@@ -167,7 +183,7 @@
     </div>
 </section>
 
-
+<!-- Process section -->
 <section class="home-section home-how-section">
     <div class="container">
 
@@ -231,7 +247,7 @@
     </div>
 </section>
 
-
+<!-- Recent found items section -->
 <section class="home-section home-muted-section">
     <div class="container">
 
@@ -328,7 +344,7 @@
     </div>
 </section>
 
-
+<!-- Benefits section -->
 <section class="home-section home-benefits-section">
     <div class="container">
 
@@ -376,7 +392,7 @@
     </div>
 </section>
 
-
+<!-- System statistics section -->
 <section class="home-section home-stats-section">
     <div class="container">
 
@@ -445,7 +461,7 @@
     </div>
 </section>
 
-
+<!-- Final call-to-action section -->
 <section class="home-section home-final-section">
     <div class="container">
 
@@ -469,6 +485,7 @@
     </div>
 </section>
 
+<!-- Small UI animation script only. Core system logic remains server-side. -->
 <script src="${pageContext.request.contextPath}/js/home.js"></script>
 
 <%@ include file="/WEB-INF/views/includes/footer.jsp" %>

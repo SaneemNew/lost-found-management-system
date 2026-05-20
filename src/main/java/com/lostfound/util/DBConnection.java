@@ -6,30 +6,40 @@ import java.sql.SQLException;
 
 public class DBConnection {
 
-    private static final String DB_URL  = "jdbc:mysql://localhost:3306/lostfound_db?useSSL=false&serverTimezone=UTC";
+    /*
+     * Database configuration for local XAMPP/MySQL setup.
+     * If the project is tested on another PC, update these values
+     * according to that PC's MySQL port, username, and password.
+     */
+    private static final String DB_URL =
+            "jdbc:mysql://localhost:3306/lostfound_db?useSSL=false&serverTimezone=UTC";
+
     private static final String DB_USER = "root";
     private static final String DB_PASS = "";
 
-    // a new connection each time
+    /*
+     * Creates and returns a new database connection.
+     */
     public static Connection getConnection() throws SQLException {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
-            throw new SQLException("MySQL driver not found: " + e.getMessage());
+            throw new SQLException("MySQL JDBC driver not found.", e);
         }
+
         return DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
     }
 
-    // helperr
-    
+    /*
+     * Safely closes a database connection.
+     */
     public static void close(Connection conn) {
         if (conn != null) {
             try {
                 conn.close();
             } catch (SQLException e) {
-                System.out.println("warning: could not close connection");
+                System.out.println("Warning: could not close database connection.");
             }
         }
     }
-
 }

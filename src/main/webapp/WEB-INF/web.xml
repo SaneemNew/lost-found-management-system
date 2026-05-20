@@ -8,14 +8,17 @@
 
     <display-name>CampusFind</display-name>
 
+    <!-- Default page shown when the project root URL is opened -->
     <welcome-file-list>
         <welcome-file>home</welcome-file>
     </welcome-file-list>
 
+    <!-- Session expires after 30 minutes of inactivity -->
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
 
+    <!-- Custom error pages -->
     <error-page>
         <error-code>404</error-code>
         <location>/WEB-INF/views/error/404.jsp</location>
@@ -31,6 +34,7 @@
         <location>/WEB-INF/views/error/500.jsp</location>
     </error-page>
 
+    <!-- Authentication and role protection filter -->
     <filter>
         <filter-name>AuthFilter</filter-name>
         <filter-class>com.lostfound.filter.AuthFilter</filter-class>
@@ -46,6 +50,7 @@
         <url-pattern>/admin/*</url-pattern>
     </filter-mapping>
 
+    <!-- PostFoundServlet is declared here because it uses multipart upload -->
     <servlet>
         <servlet-name>PostFoundServlet</servlet-name>
         <servlet-class>com.lostfound.controller.PostFoundServlet</servlet-class>

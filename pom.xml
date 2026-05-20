@@ -61,7 +61,7 @@
     </dependencies>
 
     <build>
-        <finalName>CampusFind_Final</finalName>
+        <finalName>campusfind</finalName>
 
         <plugins>
 

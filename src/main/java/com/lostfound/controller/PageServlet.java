@@ -29,14 +29,21 @@ public class PageServlet extends HttpServlet {
 
         String path = req.getServletPath();
 
+        /*
+         * The same servlet is used for simple public pages.
+         * If the request is for /about, the about page is opened directly.
+         */
         if ("/about".equals(path)) {
             req.setAttribute("activePage", "about");
             req.getRequestDispatcher("/WEB-INF/views/about.jsp").forward(req, resp);
             return;
         }
 
-        req.setAttribute("activePage", "home");
-
+        /*
+         * The home page shows a small public overview of the system.
+         * Counts and recent found items are loaded from the database so the page
+         * reflects the current system data.
+         */
         int lostItemCount = itemDAO.countByType("lost");
         int foundItemCount = itemDAO.countByType("found");
         int claimCount = claimDAO.countAll();
@@ -44,6 +51,7 @@ public class PageServlet extends HttpServlet {
 
         List<Item> recentFoundItems = itemDAO.getRecentFound(3);
 
+        req.setAttribute("activePage", "home");
         req.setAttribute("lostItemCount", lostItemCount);
         req.setAttribute("foundItemCount", foundItemCount);
         req.setAttribute("claimCount", claimCount);

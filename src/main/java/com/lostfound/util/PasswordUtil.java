@@ -1,9 +1,14 @@
 package com.lostfound.util;
 
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
 public class PasswordUtil {
 
+    /*
+     * Converts a plain text password into a SHA-256 hash.
+     * The hashed value is stored in the database instead of the original password.
+     */
     public static String hashPassword(String password) {
         if (password == null) {
             return null;
@@ -11,7 +16,7 @@ public class PasswordUtil {
 
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] bytes = md.digest(password.getBytes("UTF-8"));
+            byte[] bytes = md.digest(password.getBytes(StandardCharsets.UTF_8));
 
             StringBuilder sb = new StringBuilder();
 
@@ -27,6 +32,10 @@ public class PasswordUtil {
         }
     }
 
+    /*
+     * Checks whether the entered password matches the stored password hash.
+     * The entered password is hashed first, then compared with the saved hash.
+     */
     public static boolean checkPassword(String plainPassword, String storedHash) {
         if (plainPassword == null || storedHash == null) {
             return false;

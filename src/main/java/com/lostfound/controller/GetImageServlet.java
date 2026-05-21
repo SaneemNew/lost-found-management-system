@@ -16,8 +16,15 @@ public class GetImageServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
+    /*
+     * Uploaded item images are stored outside the project folder.
+     * This makes the uploads safer during redeployment because images are not
+     * removed when the web application is cleaned or rebuilt.
+     */
     private static final String UPLOAD_BASE_DIR =
-            System.getProperty("user.home") + File.separator + "campusfind_uploads" + File.separator + "items";
+            System.getProperty("user.home") + File.separator
+            + "campusfind_uploads" + File.separator
+            + "items";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -30,8 +37,16 @@ public class GetImageServlet extends HttpServlet {
             return;
         }
 
+        /*
+         * Only the file name is used from the stored path.
+         * This prevents users from trying to access files from other folders.
+         */
         String fileName = imagePath.substring(imagePath.lastIndexOf("/") + 1);
 
+        /*
+         * Basic path-safety check.
+         * Requests containing directory traversal or path separators are blocked.
+         */
         if (fileName.contains("..") || fileName.contains("/") || fileName.contains("\\")) {
             resp.sendError(HttpServletResponse.SC_FORBIDDEN);
             return;
@@ -46,6 +61,10 @@ public class GetImageServlet extends HttpServlet {
 
         String lowerName = fileName.toLowerCase();
 
+        /*
+         * Only image formats supported by the upload feature are served.
+         * Other file types are rejected for safety.
+         */
         if (lowerName.endsWith(".png")) {
             resp.setContentType("image/png");
         } else if (lowerName.endsWith(".jpg") || lowerName.endsWith(".jpeg")) {
@@ -55,6 +74,10 @@ public class GetImageServlet extends HttpServlet {
             return;
         }
 
+        /*
+         * Stream the image file to the browser in small chunks.
+         * try-with-resources closes both the file input stream and output stream.
+         */
         try (FileInputStream fis = new FileInputStream(imageFile);
              OutputStream out = resp.getOutputStream()) {
 

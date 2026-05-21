@@ -1,25 +1,120 @@
 /* =============================
-   ERROR / ACCESS DENIED PAGES
+   ERROR / ACCESS DENIED PAGE
 ============================= */
 
 .error-page {
+    flex: 1 0 auto;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 55px 24px;
+    background: var(--bg);
+}
+
+.error-card {
+    width: min(600px, 100%);
+    background: var(--white);
+    border: 1px solid #d9e3f2;
+    border-radius: 22px;
+    padding: 42px 38px;
     text-align: center;
-    padding: 80px 20px;
+    box-shadow: 0 16px 38px rgba(10, 35, 66, 0.10);
 }
 
-.error-page h1 {
-    font-size: clamp(3.5rem, 10vw, 5rem);
-    color: #1b3a6b;
+.error-icon {
+    width: 76px;
+    height: 76px;
+    margin: 0 auto 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    background: #fff1f0;
+    border: 1px solid #f5c2c0;
+    color: #b42318;
+    font-size: 38px;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.error-code {
+    margin: 0 0 10px;
+    color: #b42318;
+    font-size: clamp(3.2rem, 7vw, 4.6rem);
+    font-weight: 800;
+    line-height: 1;
+}
+
+.error-title {
+    margin: 0 0 14px;
+    color: var(--primary);
+    font-size: clamp(1.8rem, 4vw, 2.3rem);
+    font-weight: 800;
+}
+
+.error-message {
+    max-width: 460px;
+    margin: 0 auto 30px;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.error-actions {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.error-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 155px;
+    padding: 13px 22px;
+    border-radius: 10px;
     font-weight: 700;
+    text-decoration: none;
+    transition: var(--transition);
 }
 
-.error-page h2 {
-    font-size: 24px;
-    margin-bottom: 15px;
-    color: #333333;
+.error-btn-primary {
+    background: var(--primary);
+    color: var(--white);
+    border: 2px solid var(--primary);
 }
 
-.error-page p {
-    color: #777777;
-    margin-bottom: 25px;
+.error-btn-primary:hover {
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.error-btn-secondary {
+    background: var(--white);
+    color: var(--primary);
+    border: 2px solid var(--primary);
+}
+
+.error-btn-secondary:hover {
+    background: #eef4ff;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+    .error-page {
+        padding: 45px 16px;
+        min-height: 460px;
+    }
+
+    .error-card {
+        padding: 38px 24px;
+        border-radius: 18px;
+    }
+
+    .error-btn {
+        width: 100%;
+    }
 }

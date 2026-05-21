@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/includes/header.jsp" %>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/item-detail.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/items/item-detail.css">
 
 <div class="container">
 
@@ -117,9 +117,7 @@
                 <!-- Action buttons -->
                 <div class="item-action-row">
 
-                    <!-- Claim button is only shown to logged-in students,
-                         only for found items, only when item is open,
-                         and not for the person who posted it -->
+                    <!-- Claim button is only shown for valid student claim situations -->
                     <c:if test="${not empty sessionScope.userId 
                                  and sessionScope.role == 'student' 
                                  and item.type == 'found' 
@@ -164,8 +162,13 @@
                 </div>
             </div>
 
-            <!-- Hidden claim form, shown only for student users -->
-            <c:if test="${not empty sessionScope.userId and sessionScope.role == 'student'}">
+            <!-- Claim form is only available for valid student claim situations -->
+            <c:if test="${not empty sessionScope.userId 
+                         and sessionScope.role == 'student' 
+                         and item.type == 'found' 
+                         and item.status == 'open' 
+                         and sessionScope.userId != item.userId 
+                         and not alreadyClaimed}">
                 <div id="claimForm" class="claim-form-wrapper">
                     <div class="form-box claim-form-box">
                         <h2 class="claim-form-title">Submit a Claim</h2>

@@ -35,7 +35,13 @@ public class PostFoundServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
+        /*
+         * Load categories before opening the found-item form.
+         * The student must select one valid category for the item.
+         */
         req.setAttribute("categories", categoryDAO.getAll());
+        req.setAttribute("activePage", "postFound");
+
         req.getRequestDispatcher("/WEB-INF/views/student/postFound.jsp").forward(req, resp);
     }
 
@@ -56,6 +62,10 @@ public class PostFoundServlet extends HttpServlet {
         String date = req.getParameter("dateReported");
         String catParam = req.getParameter("categoryId");
 
+        /*
+         * Common item validation is handled by the service layer.
+         * This keeps basic business rules outside the servlet.
+         */
         String error = itemService.validateItem(title, location, date);
 
         if (error != null) {
@@ -63,7 +73,7 @@ public class PostFoundServlet extends HttpServlet {
             return;
         }
 
-        int catId = 0;
+        int catId;
 
         try {
             catId = Integer.parseInt(catParam);
@@ -79,6 +89,11 @@ public class PostFoundServlet extends HttpServlet {
         String imagePath = null;
         Part filePart = req.getPart("image");
 
+        /*
+         * Image upload is optional for found items.
+         * If an image is provided, the servlet validates its name, extension,
+         * and content type before saving it.
+         */
         if (filePart != null && filePart.getSize() > 0) {
             String originalFileName = filePart.getSubmittedFileName();
             String contentType = filePart.getContentType();
@@ -107,6 +122,10 @@ public class PostFoundServlet extends HttpServlet {
                 return;
             }
 
+            /*
+             * Uploaded images are stored outside the project folder.
+             * The database stores only the relative image path.
+             */
             String rootPath = System.getProperty("user.home")
                     + File.separator + "campusfind_uploads"
                     + File.separator + "items";
@@ -144,7 +163,7 @@ public class PostFoundServlet extends HttpServlet {
             return;
         }
 
-        resp.sendRedirect(req.getContextPath() + "/student/myPosts");
+        resp.sendRedirect(req.getContextPath() + "/student/myPosts?success=foundPosted");
     }
 
     private void reloadForm(HttpServletRequest req, HttpServletResponse resp,
@@ -152,7 +171,7 @@ public class PostFoundServlet extends HttpServlet {
                             String location, String date, String catParam)
             throws ServletException, IOException {
 
-        int selectedCategoryId = 0;
+        int selectedCategoryId;
 
         try {
             selectedCategoryId = Integer.parseInt(catParam);
@@ -160,6 +179,10 @@ public class PostFoundServlet extends HttpServlet {
             selectedCategoryId = 0;
         }
 
+        /*
+         * Refill the form after validation failure so the student does not
+         * need to type everything again.
+         */
         req.setAttribute("error", error);
         req.setAttribute("categories", categoryDAO.getAll());
         req.setAttribute("title", title);
@@ -167,6 +190,7 @@ public class PostFoundServlet extends HttpServlet {
         req.setAttribute("location", location);
         req.setAttribute("dateReported", date);
         req.setAttribute("selectedCategoryId", selectedCategoryId);
+        req.setAttribute("activePage", "postFound");
 
         req.getRequestDispatcher("/WEB-INF/views/student/postFound.jsp").forward(req, resp);
     }

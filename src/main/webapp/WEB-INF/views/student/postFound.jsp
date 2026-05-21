@@ -1,20 +1,28 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/includes/header.jsp" %>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/post-item.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/student/post-item.css">
 
 <div class="container post-item-container">
-    <h2 class="section-title">Report a Found Item</h2>
 
+    <!-- Page header -->
+    <div class="post-item-header">
+        <h2 class="section-title">Report Found Item</h2>
+        <p class="post-item-subtitle">
+            Fill in the details below to report an item you have found on campus.
+        </p>
+    </div>
+
+    <!-- Found item form -->
     <div class="form-box post-item-form-box">
 
-        <%-- Show validation or upload error sent from the servlet --%>
         <c:if test="${not empty error}">
-            <div class="msg-error"><c:out value="${error}" /></div>
+            <div class="msg-error">
+                <c:out value="${error}" />
+            </div>
         </c:if>
 
-        <%-- Form for reporting a found item, including optional image upload --%>
         <form action="${pageContext.request.contextPath}/student/postFound"
               method="post"
               enctype="multipart/form-data">
@@ -33,7 +41,6 @@
                 <select name="categoryId">
                     <option value="0">Select a category</option>
 
-                    <%-- Load all categories from database and re-select previous choice if form reloads --%>
                     <c:forEach var="c" items="${categories}">
                         <option value="${c.id}" <c:if test="${selectedCategoryId == c.id}">selected</c:if>>
                             <c:out value="${c.name}" />
@@ -70,18 +77,20 @@
                     Photo <span class="file-note">(optional)</span>
                 </label>
 
-                <%-- Accept only JPG and PNG image files from the browser side --%>
                 <input type="file"
                        name="image"
                        accept=".jpg,.jpeg,.png,image/jpeg,image/png"
                        class="file-input">
             </div>
 
-            <button type="submit" class="btn btn-blue post-item-submit">
-                Submit
+            <button type="submit" class="btn btn-primary post-item-submit">
+                Submit Found Item
             </button>
+
         </form>
+
     </div>
+
 </div>
 
 <%@ include file="/WEB-INF/views/includes/footer.jsp" %>

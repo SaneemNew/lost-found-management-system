@@ -2,28 +2,315 @@
    ADMIN USERS PAGE
 ============================= */
 
-.admin-filter-row {
-    margin-bottom: 18px;
+.admin-users-page {
+    width: min(1180px, 100%);
+    margin: 0 auto;
+    padding: 58px 24px 70px;
+}
+
+/* Hero Section */
+
+.admin-users-hero {
+    background: linear-gradient(135deg, #0b2f5f, #154985);
+    border-radius: 22px;
+    padding: 38px 42px;
+    color: #ffffff;
     display: flex;
-    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+    gap: 28px;
+    box-shadow: 0 18px 42px rgba(10, 45, 92, 0.22);
+    margin-bottom: 34px;
+}
+
+.admin-users-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+.admin-users-hero h1 {
+    margin: 0 0 10px;
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    line-height: 1.1;
+    color: #ffffff;
+}
+
+.admin-users-hero p {
+    margin: 0;
+    max-width: 620px;
+    color: rgba(255, 255, 255, 0.88);
+    line-height: 1.7;
+    font-size: 15px;
+}
+
+.admin-users-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 12px;
+    min-width: 360px;
+}
+
+/* Hero Buttons */
+
+.btn-light-active {
+    background: #ffffff;
+    color: #0b2f5f;
+    border: 1px solid #ffffff;
+    font-weight: 700;
+}
+
+.btn-light-active:hover {
+    background: #f0f5fb;
+    color: #0b2f5f;
+}
+
+.btn-light-outline {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    font-weight: 700;
+}
+
+.btn-light-outline:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+
+/* Main Card */
+
+.admin-users-card {
+    background: #ffffff;
+    border: 1px solid #e2eaf4;
+    border-radius: 20px;
+    padding: 26px;
+    box-shadow: 0 16px 38px rgba(15, 40, 70, 0.08);
+}
+
+.admin-users-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 18px;
+    margin-bottom: 22px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #e3ebf5;
+}
+
+.admin-users-card-header h2 {
+    margin: 0 0 6px;
+    color: #0b2f5f;
+    font-size: 26px;
+}
+
+.admin-users-card-header p {
+    margin: 0;
+    color: #5f7188;
+    font-size: 14px;
+}
+
+/* Table */
+
+.admin-users-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 16px;
+    border: 1px solid #e2eaf4;
+    background: #ffffff;
+}
+
+.admin-users-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1040px;
+}
+
+.admin-users-table thead {
+    background: #183f75;
+}
+
+.admin-users-table th {
+    padding: 16px 18px;
+    color: #ffffff;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.admin-users-table td {
+    padding: 17px 18px;
+    color: #34455c;
+    font-size: 14px;
+    border-bottom: 1px solid #edf1f6;
+    vertical-align: middle;
+}
+
+.admin-users-table tbody tr:nth-child(even) {
+    background: #fbfdff;
+}
+
+.admin-users-table tbody tr:hover {
+    background: #f3f7fc;
+}
+
+.admin-users-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.user-id {
+    font-weight: 700;
+    color: #24486f;
+}
+
+.user-name-cell {
+    font-weight: 700;
+    color: #22344d;
+}
+
+.user-email-cell {
+    color: #40546d;
+}
+
+.date-cell {
+    color: #53667d;
+    line-height: 1.5;
+    white-space: nowrap;
+}
+
+.muted-text {
+    color: #9aa8b8;
+    font-size: 13px;
+}
+
+/* Role Chips */
+
+.role-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 11px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: capitalize;
+}
+
+.role-student {
+    background: #eaf3ff;
+    color: #144b84;
+}
+
+.role-admin {
+    background: #f0ecff;
+    color: #4a36a0;
+}
+
+/* Status Badges */
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: capitalize;
+}
+
+.badge-approved {
+    background: #d7f5df;
+    color: #0f7a34;
+}
+
+.badge-pending {
+    background: #fff1bf;
+    color: #9a6a00;
+}
+
+.badge-rejected {
+    background: #ffd9d6;
+    color: #a62820;
+}
+
+/* Actions */
+
+.table-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
     flex-wrap: wrap;
 }
+
+.table-actions form {
+    margin: 0;
+}
+
+.completed-action {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 11px;
+    border-radius: 999px;
+    background: #eef2f7;
+    color: #718096;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* Keep old outline class safe if used elsewhere */
 
 .admin-outline-btn {
     color: #1b3a6b;
     border-color: #1b3a6b;
 }
 
-.admin-action-form {
-    display: inline;
-}
-
-.approve-btn {
-    background: #1e7e34;
-    color: #ffffff;
-}
-
 .no-action-text {
     color: #aaaaaa;
     font-size: 13px;
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+    .admin-users-hero {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 32px 26px;
+    }
+
+    .admin-users-hero-actions {
+        justify-content: flex-start;
+        min-width: 100%;
+    }
+
+    .admin-users-card {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .admin-users-page {
+        padding: 36px 16px 55px;
+    }
+
+    .admin-users-hero h1 {
+        font-size: 2rem;
+    }
+
+    .admin-users-hero-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .admin-users-hero-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
 }

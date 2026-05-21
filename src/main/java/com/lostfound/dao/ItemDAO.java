@@ -426,4 +426,31 @@ public class ItemDAO {
             return false;
         }
     }
+    
+ // Get the latest item of a given type, such as lost or found
+    public Item getLatestByType(String type) {
+        String sql = "SELECT i.*, c.name AS cat_name, u.full_name AS poster "
+                   + "FROM items i "
+                   + "LEFT JOIN categories c ON i.category_id = c.id "
+                   + "LEFT JOIN users u ON i.user_id = u.id "
+                   + "WHERE i.type = ? "
+                   + "ORDER BY i.created_at DESC LIMIT 1";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, type);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return buildFull(rs);
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error in getLatestByType: " + e.getMessage());
+        }
+
+        return null;
+    }
 }

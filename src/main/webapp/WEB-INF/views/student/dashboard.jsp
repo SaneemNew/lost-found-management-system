@@ -1,16 +1,18 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/includes/header.jsp" %>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/student-dashboard.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/student/student-dashboard.css">
 
 <div class="container">
 
+    <!-- Dashboard header -->
     <div class="dash-header">
         <h2>Welcome, <c:out value="${sessionScope.userName}" /></h2>
         <p>Here is an overview of your activity.</p>
     </div>
 
+    <!-- Student activity summary -->
     <div class="stats-row">
         <div class="stat-box">
             <div class="stat-num"><c:out value="${lostCount}" /></div>
@@ -33,6 +35,7 @@
         </div>
     </div>
 
+    <!-- Main student actions -->
     <div class="student-action-row">
         <a href="${pageContext.request.contextPath}/student/postLost"
            class="btn btn-primary">
@@ -60,17 +63,31 @@
         </a>
     </div>
 
-    <h2 class="section-title">Recently Found Items</h2>
+    <!-- Recent found items preview -->
+    <div class="recent-section-header">
+        <div>
+            <h2 class="section-title">Recently Found Items</h2>
+            <p class="section-subtitle">
+                Latest found item reports from the campus.
+            </p>
+        </div>
+
+        <a href="${pageContext.request.contextPath}/search"
+           class="btn btn-sm btn-outline student-outline-btn">
+            View More
+        </a>
+    </div>
 
     <c:choose>
         <c:when test="${empty recentItems}">
-            <p class="empty-recent-items">
+            <div class="empty-recent-items">
                 No found items posted yet.
-            </p>
+            </div>
         </c:when>
 
         <c:otherwise>
             <div class="recent-items-row">
+
                 <c:forEach var="item" items="${recentItems}">
                     <div class="recent-item-card">
 
@@ -106,7 +123,8 @@
                             </p>
 
                             <p class="recent-item-location">
-                                <strong>Location:</strong> <c:out value="${item.location}" />
+                                <strong>Location:</strong>
+                                <c:out value="${item.location}" />
                             </p>
 
                             <div class="recent-item-actions">
@@ -119,6 +137,7 @@
 
                     </div>
                 </c:forEach>
+
             </div>
         </c:otherwise>
     </c:choose>

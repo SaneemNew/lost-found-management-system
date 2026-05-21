@@ -31,6 +31,10 @@ public class AdminReportServlet extends HttpServlet {
 
         String download = req.getParameter("download");
 
+        /*
+         * If the admin requests CSV download, generate the CSV response directly.
+         * Otherwise, load the normal report page.
+         */
         if ("csv".equalsIgnoreCase(download)) {
             downloadCsvReport(resp);
             return;
@@ -43,24 +47,27 @@ public class AdminReportServlet extends HttpServlet {
 
     private void loadReportData(HttpServletRequest req) {
 
-        // user counts
+        // Used for active navbar highlighting.
+        req.setAttribute("activePage", "adminReports");
+
+        // User counts
         req.setAttribute("totalUsers", userDAO.countAll());
         req.setAttribute("activeUsers", userDAO.countByStatus("approved"));
         req.setAttribute("pendingUsers", userDAO.countByStatus("pending"));
         req.setAttribute("rejectedUsers", userDAO.countByStatus("rejected"));
 
-        // item counts
+        // Item counts
         req.setAttribute("totalItems", itemDAO.countAll());
         req.setAttribute("lostItems", itemDAO.countByType("lost"));
         req.setAttribute("foundItems", itemDAO.countByType("found"));
 
-        // claim counts
+        // Claim counts
         req.setAttribute("totalClaims", claimDAO.countAll());
         req.setAttribute("approvedClaims", claimDAO.countByStatus("approved"));
         req.setAttribute("pendingClaims", claimDAO.countByStatus("pending"));
         req.setAttribute("rejectedClaims", claimDAO.countByStatus("rejected"));
 
-        // top lost categories
+        // Top lost categories
         req.setAttribute("topCategories", itemDAO.getTopLostCategories(5));
     }
 

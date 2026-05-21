@@ -1,0 +1,36 @@
+CampusFind Database Backup and Recovery Instructions
+
+Database Name:
+lostfound_db
+
+Backup Method:
+The CampusFind database can be backed up using phpMyAdmin from XAMPP.
+
+Backup Steps:
+1. Open XAMPP Control Panel.
+2. Start Apache and MySQL.
+3. Open phpMyAdmin.
+4. Select the lostfound_db database.
+5. Click Export.
+6. Choose Quick export method.
+7. Select SQL format.
+8. Click Export and save the generated .sql file safely.
+
+Recovery Method:
+The database can be restored using phpMyAdmin.
+
+Recovery Steps:
+1. Open XAMPP Control Panel.
+2. Start Apache and MySQL.
+3. Open phpMyAdmin.
+4. Create or select the lostfound_db database.
+5. Click Import.
+6. Choose the saved SQL backup file.
+7. Click Import.
+8. Check that the tables and records are restored correctly.
+
+Schema Recreation:
+The schema.sql file included in the project can recreate the database structure, constraints, indexes, and default admin account. This is useful when setting up the project on another PC or recovering the database structure during testing.
+
+Note:
+The Java application does not perform automatic scheduled backups. Backup and recovery are handled manually through phpMyAdmin/XAMPP, which is suitable for the coursework environment.

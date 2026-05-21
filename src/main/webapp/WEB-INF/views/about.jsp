@@ -176,8 +176,9 @@
             <span>Project Team</span>
             <h2>Meet the Team</h2>
             <p>
-                The CampusFind project was completed through shared responsibilities across
-                planning, interface design, database work, testing, and documentation.
+                CampusFind was developed through shared responsibilities across backend
+                development, JSP views, database handling, UI refinement, testing, and
+                final documentation.
             </p>
         </div>
 
@@ -192,7 +193,7 @@
 
                 <div class="team-card-body">
                     <h3>Bishesh Thapa</h3>
-                    <p class="team-role">Frontend / UI Support</p>
+                    <p class="team-role">Admin Features / Shared Layout</p>
 
                     <button type="button"
                             class="team-contribution-btn"
@@ -212,7 +213,7 @@
 
                 <div class="team-card-body">
                     <h3>Aayush Tamang</h3>
-                    <p class="team-role">Database / Testing Support</p>
+                    <p class="team-role">Student Portal / Reports and Claims</p>
 
                     <button type="button"
                             class="team-contribution-btn"
@@ -232,7 +233,7 @@
 
                 <div class="team-card-body">
                     <h3>Saneem Bhattarai</h3>
-                    <p class="team-role">Project Leader</p>
+                    <p class="team-role">Project Lead / Backend Integration</p>
 
                     <button type="button"
                             class="team-contribution-btn"
@@ -252,7 +253,7 @@
 
                 <div class="team-card-body">
                     <h3>Abhisekh Sah</h3>
-                    <p class="team-role">UI / Feature Support</p>
+                    <p class="team-role">Authentication / Contact and Profile Features</p>
 
                     <button type="button"
                             class="team-contribution-btn"
@@ -272,7 +273,7 @@
 
                 <div class="team-card-body">
                     <h3>Manoj Magar</h3>
-                    <p class="team-role">Documentation / Testing Support</p>
+                    <p class="team-role">Admin Users / Item Detail and Error Handling</p>
 
                     <button type="button"
                             class="team-contribution-btn"

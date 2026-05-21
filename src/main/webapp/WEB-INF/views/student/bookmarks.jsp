@@ -1,16 +1,18 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/includes/header.jsp" %>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bookmarks.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/student/bookmarks.css">
 
 <div class="container bookmarks-page">
 
+    <!-- Page header -->
     <div class="dash-header">
         <h2>My Bookmarks</h2>
         <p>Items you are keeping an eye on.</p>
     </div>
 
+    <!-- Bookmarked items -->
     <c:choose>
         <c:when test="${empty items}">
             <div class="msg-info">

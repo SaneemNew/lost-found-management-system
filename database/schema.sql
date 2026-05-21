@@ -22,8 +22,6 @@ CREATE TABLE IF NOT EXISTS users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-
-
 /*---------------------------------
   categories table
 ----------------------------------*/
@@ -63,6 +61,8 @@ CREATE TABLE IF NOT EXISTS claims (
     status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
+    UNIQUE KEY unique_claim (item_id, claimant_id),
+
     FOREIGN KEY (item_id) REFERENCES items(id) ON DELETE CASCADE,
     FOREIGN KEY (claimant_id) REFERENCES users(id) ON DELETE CASCADE
 );
@@ -77,11 +77,12 @@ CREATE TABLE IF NOT EXISTS bookmarks (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
     UNIQUE KEY unique_bookmark (user_id, item_id),
+
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (item_id) REFERENCES items(id) ON DELETE CASCADE
 );
 
--- indexes for search performance
+-- Indexes for search and report performance
 CREATE INDEX idx_items_type ON items(type);
 CREATE INDEX idx_items_status ON items(status);
 CREATE INDEX idx_items_category ON items(category_id);
@@ -101,9 +102,19 @@ INSERT INTO categories (name) VALUES
 ('Sports Equipment'),
 ('Other');
 
--- default admin account (password: admin123)
--- password hash is SHA-256 of "admin123"
+/*---------------------------------
+  seed data: default admin account
+  email: admin@campus.com
+  password: admin123
+  password hash: SHA-256 of "admin123"
+----------------------------------*/
 INSERT INTO users (full_name, email, student_id, phone, password, role, status)
-VALUES ('Admin', 'admin@campus.com', 'ADMIN001', '0000000000',
-        '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9',
-        'admin', 'approved');
+VALUES (
+    'Admin',
+    'admin@campus.com',
+    'ADMIN001',
+    '0000000000',
+    '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9',
+    'admin',
+    'approved'
+);

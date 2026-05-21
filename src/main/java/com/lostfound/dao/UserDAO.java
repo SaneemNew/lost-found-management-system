@@ -186,7 +186,7 @@ public class UserDAO {
         }
     }
 
-    // Update password after it has already been hashed in the service layer
+    // Update password after it has already been hashed before this DAO method is called
     public boolean updatePassword(int userId, String hashedPass) {
         String sql = "UPDATE users SET password = ? WHERE id = ?";
 

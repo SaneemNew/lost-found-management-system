@@ -17,6 +17,10 @@ public class ContactServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
+        /*
+         * Opens the contact page.
+         * The activePage value is used only for navbar highlighting.
+         */
         req.setAttribute("activePage", "contact");
         req.getRequestDispatcher("/WEB-INF/views/contact.jsp").forward(req, resp);
     }
@@ -31,6 +35,11 @@ public class ContactServlet extends HttpServlet {
 
         req.setAttribute("activePage", "contact");
 
+        /*
+         * The contact page is a simple inquiry form.
+         * Messages are not stored in the database in this version, so validation
+         * is done before showing the confirmation page.
+         */
         if (fullName == null || fullName.trim().isEmpty()
                 || email == null || email.trim().isEmpty()
                 || message == null || message.trim().isEmpty()) {
@@ -40,6 +49,10 @@ public class ContactServlet extends HttpServlet {
             return;
         }
 
+        /*
+         * Keep the submitted name so the success page can show a friendly
+         * confirmation message to the user.
+         */
         req.setAttribute("fullName", fullName.trim());
         req.getRequestDispatcher("/WEB-INF/views/contactSuccess.jsp").forward(req, resp);
     }

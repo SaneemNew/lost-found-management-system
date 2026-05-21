@@ -6,6 +6,7 @@ import com.lostfound.util.PasswordUtil;
 import com.lostfound.util.SessionUtil;
 
 import java.io.IOException;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -30,7 +31,13 @@ public class UpdateProfileServlet extends HttpServlet {
             return;
         }
 
+        /*
+         * Load the logged-in student's current details before showing
+         * the edit profile page.
+         */
         req.setAttribute("user", userDAO.getUserById(userId));
+        req.setAttribute("activePage", "editProfile");
+
         req.getRequestDispatcher("/WEB-INF/views/student/editProfile.jsp").forward(req, resp);
     }
 
@@ -47,6 +54,10 @@ public class UpdateProfileServlet extends HttpServlet {
 
         String action = req.getParameter("action");
 
+        /*
+         * The edit profile page handles two different actions:
+         * updating profile information and changing password.
+         */
         if ("password".equals(action)) {
             handlePasswordUpdate(req, resp, userId);
             return;
@@ -69,42 +80,40 @@ public class UpdateProfileServlet extends HttpServlet {
             return;
         }
 
+        /*
+         * The current password must be checked before allowing
+         * the user to set a new password.
+         */
         if (!PasswordUtil.checkPassword(current, user.getPassword())) {
-            req.setAttribute("passError", "Current password is incorrect.");
-            req.setAttribute("user", user);
-            req.getRequestDispatcher("/WEB-INF/views/student/editProfile.jsp").forward(req, resp);
+            forwardPasswordError(req, resp, user, "Current password is incorrect.");
             return;
         }
 
         if (newPass == null || newPass.trim().length() < 6) {
-            req.setAttribute("passError", "New password must be at least 6 characters.");
-            req.setAttribute("user", user);
-            req.getRequestDispatcher("/WEB-INF/views/student/editProfile.jsp").forward(req, resp);
+            forwardPasswordError(req, resp, user, "New password must be at least 6 characters.");
             return;
         }
 
-        if (!newPass.equals(confirmNew)) {
-            req.setAttribute("passError", "Passwords do not match.");
-            req.setAttribute("user", user);
-            req.getRequestDispatcher("/WEB-INF/views/student/editProfile.jsp").forward(req, resp);
+        if (confirmNew == null || !newPass.equals(confirmNew)) {
+            forwardPasswordError(req, resp, user, "Passwords do not match.");
             return;
         }
 
+        /*
+         * Passwords are hashed before storing.
+         * The plain password is never saved in the database.
+         */
         String hashedNewPassword = PasswordUtil.hashPassword(newPass);
 
         if (hashedNewPassword == null) {
-            req.setAttribute("passError", "Password could not be processed. Please try again.");
-            req.setAttribute("user", user);
-            req.getRequestDispatcher("/WEB-INF/views/student/editProfile.jsp").forward(req, resp);
+            forwardPasswordError(req, resp, user, "Password could not be processed. Please try again.");
             return;
         }
 
         boolean updated = userDAO.updatePassword(userId, hashedNewPassword);
 
         if (!updated) {
-            req.setAttribute("passError", "Password could not be updated. Please try again.");
-            req.setAttribute("user", user);
-            req.getRequestDispatcher("/WEB-INF/views/student/editProfile.jsp").forward(req, resp);
+            forwardPasswordError(req, resp, user, "Password could not be updated. Please try again.");
             return;
         }
 
@@ -118,50 +127,86 @@ public class UpdateProfileServlet extends HttpServlet {
         String email = req.getParameter("email");
         String phone = req.getParameter("phone");
 
-        if (fullName == null || fullName.trim().isEmpty()
-                || email == null || email.trim().isEmpty()) {
+        fullName = fullName != null ? fullName.trim() : "";
+        email = email != null ? email.trim().toLowerCase() : "";
+        phone = phone != null ? phone.trim() : "";
 
-            req.setAttribute("error", "Name and email are required.");
-            req.setAttribute("user", userDAO.getUserById(userId));
-            req.getRequestDispatcher("/WEB-INF/views/student/editProfile.jsp").forward(req, resp);
+        User formUser = new User();
+        formUser.setId(userId);
+        formUser.setFullName(fullName);
+        formUser.setEmail(email);
+        formUser.setPhone(phone);
+
+        if (fullName.isEmpty()) {
+            forwardProfileError(req, resp, formUser, "Full name is required.");
             return;
         }
 
-        fullName = fullName.trim();
-        email = email.trim().toLowerCase();
-        phone = (phone != null) ? phone.trim() : "";
+        if (!fullName.matches("^[A-Za-z ]+$")) {
+            forwardProfileError(req, resp, formUser, "Full name must contain letters and spaces only.");
+            return;
+        }
 
+        if (email.isEmpty()) {
+            forwardProfileError(req, resp, formUser, "Email is required.");
+            return;
+        }
+
+        if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+            forwardProfileError(req, resp, formUser, "Please enter a valid email address.");
+            return;
+        }
+
+        if (!phone.isEmpty() && !phone.matches("^[0-9]{7,15}$")) {
+            forwardProfileError(req, resp, formUser, "Phone number must contain 7 to 15 digits only.");
+            return;
+        }
+
+        /*
+         * Email must remain unique.
+         * The current user can keep their own email, but cannot use
+         * another user's email address.
+         */
         if (userDAO.emailExistsForOtherUser(email, userId)) {
-            User currentUser = userDAO.getUserById(userId);
-
-            if (currentUser != null) {
-                currentUser.setFullName(fullName);
-                currentUser.setEmail(email);
-                currentUser.setPhone(phone);
-            }
-
-            req.setAttribute("error", "This email is already being used by another account.");
-            req.setAttribute("user", currentUser);
-            req.getRequestDispatcher("/WEB-INF/views/student/editProfile.jsp").forward(req, resp);
+            forwardProfileError(req, resp, formUser, "This email is already being used by another account.");
             return;
         }
 
-        User user = new User();
-        user.setId(userId);
-        user.setFullName(fullName);
-        user.setEmail(email);
-        user.setPhone(phone);
-
-        boolean updated = userDAO.updateProfile(user);
+        boolean updated = userDAO.updateProfile(formUser);
 
         if (!updated) {
-            req.setAttribute("error", "Profile could not be updated. Please try again.");
-            req.setAttribute("user", userDAO.getUserById(userId));
-            req.getRequestDispatcher("/WEB-INF/views/student/editProfile.jsp").forward(req, resp);
+            forwardProfileError(req, resp, formUser, "Profile could not be updated. Please try again.");
             return;
         }
 
+        /*
+         * Refresh session values so the navbar/header shows the latest
+         * name and email immediately after profile update.
+         */
         SessionUtil.updateUserSession(req, fullName, email);
+
         resp.sendRedirect(req.getContextPath() + "/student/updateProfile?updated=1");
+    }
+
+    private void forwardProfileError(HttpServletRequest req, HttpServletResponse resp,
+                                     User user, String error)
+            throws ServletException, IOException {
+
+        req.setAttribute("error", error);
+        req.setAttribute("user", user);
+        req.setAttribute("activePage", "editProfile");
+
+        req.getRequestDispatcher("/WEB-INF/views/student/editProfile.jsp").forward(req, resp);
+    }
+
+    private void forwardPasswordError(HttpServletRequest req, HttpServletResponse resp,
+                                      User user, String error)
+            throws ServletException, IOException {
+
+        req.setAttribute("passError", error);
+        req.setAttribute("user", user);
+        req.setAttribute("activePage", "editProfile");
+
+        req.getRequestDispatcher("/WEB-INF/views/student/editProfile.jsp").forward(req, resp);
     }
 }

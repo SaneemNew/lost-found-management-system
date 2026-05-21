@@ -4,15 +4,66 @@
 
 .post-item-container {
     max-width: 650px;
+    padding-top: 55px;
+    padding-bottom: 70px;
+}
+
+.post-item-header {
+    margin-bottom: 24px;
+}
+
+.post-item-header .section-title {
+    margin-bottom: 8px;
+}
+
+.post-item-subtitle {
+    color: #666666;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 22px;
 }
 
 .post-item-form-box {
     margin: 0;
     max-width: 100%;
+    padding: 36px 38px;
+    border-radius: 10px;
+}
+
+.post-item-form-box .form-group {
+    margin-bottom: 22px;
+}
+
+.post-item-form-box label {
+    display: block;
+    margin-bottom: 9px;
+    font-weight: 600;
+    color: #333333;
+}
+
+.post-item-form-box input,
+.post-item-form-box select,
+.post-item-form-box textarea {
+    width: 100%;
+}
+
+.post-item-form-box textarea {
+    min-height: 125px;
+    resize: vertical;
 }
 
 .post-item-submit {
     width: 100%;
+    margin-top: 8px;
+    background: #f0a51a;
+    border-color: #f0a51a;
+    color: #ffffff;
+}
+
+.post-item-submit:hover {
+    background: #d99010;
+    border-color: #d99010;
+    color: #ffffff;
 }
 
 .file-note {
@@ -21,5 +72,30 @@
 }
 
 .file-input {
-    padding: 6px;
+    padding: 12px 14px;
+}
+
+.file-input::file-selector-button {
+    padding: 8px 14px;
+    margin-right: 12px;
+    border: 1px solid #1b3a6b;
+    border-radius: 5px;
+    background: #ffffff;
+    color: #1b3a6b;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.file-input::file-selector-button:hover {
+    background: #f0f5fb;
+}
+
+@media (max-width: 600px) {
+    .post-item-container {
+        padding-top: 35px;
+    }
+
+    .post-item-form-box {
+        padding: 28px 22px;
+    }
 }

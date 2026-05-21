@@ -1,13 +1,17 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/includes/header.jsp" %>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/search.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/items/search.css">
 
 <div class="container search-page">
 
     <h2 class="section-title">Browse Found Items</h2>
+
+    <!-- Error message when an invalid item detail link is opened -->
+    <c:if test="${param.error == 'invalidItem'}">
+        <div class="msg-error">Invalid or unavailable item selected.</div>
+    </c:if>
 
     <form action="${pageContext.request.contextPath}/search" method="get" class="search-form">
         <input type="text"
@@ -18,10 +22,20 @@
         <select name="categoryId">
             <option value="0">All Categories</option>
 
-            <c:forEach var="c" items="${categories}">
-                <option value="${c.id}" <c:if test="${c.id == catId}">selected</c:if>>
-                    <c:out value="${c.name}" />
-                </option>
+            <c:forEach var="cat" items="${categories}">
+                <c:choose>
+                    <c:when test="${cat.id == catId}">
+                        <option value="${cat.id}" selected>
+                            <c:out value="${cat.name}" />
+                        </option>
+                    </c:when>
+
+                    <c:otherwise>
+                        <option value="${cat.id}">
+                            <c:out value="${cat.name}" />
+                        </option>
+                    </c:otherwise>
+                </c:choose>
             </c:forEach>
         </select>
 
@@ -42,7 +56,7 @@
 
         <c:otherwise>
             <p class="search-count">
-                <c:out value="${fn:length(items)}" /> item(s) found
+                Found item results are shown below.
             </p>
 
             <div class="search-items-grid">

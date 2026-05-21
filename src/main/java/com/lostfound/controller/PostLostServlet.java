@@ -34,7 +34,13 @@ public class PostLostServlet extends HttpServlet {
             return;
         }
 
+        /*
+         * Load categories before opening the lost-item form.
+         * The student must select one valid category for the lost item.
+         */
         req.setAttribute("categories", categoryDAO.getAll());
+        req.setAttribute("activePage", "postLost");
+
         req.getRequestDispatcher("/WEB-INF/views/student/postLost.jsp").forward(req, resp);
     }
 
@@ -55,6 +61,10 @@ public class PostLostServlet extends HttpServlet {
         String date = req.getParameter("dateReported");
         String catParam = req.getParameter("categoryId");
 
+        /*
+         * Common item validation is handled by the service layer.
+         * This keeps the main business rules separate from the servlet.
+         */
         String error = itemService.validateItem(title, location, date);
 
         if (error != null) {
@@ -62,7 +72,7 @@ public class PostLostServlet extends HttpServlet {
             return;
         }
 
-        int catId = 0;
+        int catId;
 
         try {
             catId = Integer.parseInt(catParam);
@@ -75,6 +85,10 @@ public class PostLostServlet extends HttpServlet {
             return;
         }
 
+        /*
+         * Lost item posts do not require an image in this system.
+         * Image upload is only used for found item posts.
+         */
         Item item = new Item();
 
         item.setUserId(userId);
@@ -93,7 +107,7 @@ public class PostLostServlet extends HttpServlet {
             return;
         }
 
-        resp.sendRedirect(req.getContextPath() + "/student/myPosts");
+        resp.sendRedirect(req.getContextPath() + "/student/myPosts?success=lostPosted");
     }
 
     private void reloadForm(HttpServletRequest req, HttpServletResponse resp,
@@ -101,7 +115,7 @@ public class PostLostServlet extends HttpServlet {
                             String location, String date, String catParam)
             throws ServletException, IOException {
 
-        int selectedCategoryId = 0;
+        int selectedCategoryId;
 
         try {
             selectedCategoryId = Integer.parseInt(catParam);
@@ -109,6 +123,10 @@ public class PostLostServlet extends HttpServlet {
             selectedCategoryId = 0;
         }
 
+        /*
+         * Refill the form after validation failure so the student does not
+         * need to enter all details again.
+         */
         req.setAttribute("error", error);
         req.setAttribute("title", title);
         req.setAttribute("description", description);
@@ -116,6 +134,7 @@ public class PostLostServlet extends HttpServlet {
         req.setAttribute("dateReported", date);
         req.setAttribute("selectedCategoryId", selectedCategoryId);
         req.setAttribute("categories", categoryDAO.getAll());
+        req.setAttribute("activePage", "postLost");
 
         req.getRequestDispatcher("/WEB-INF/views/student/postLost.jsp").forward(req, resp);
     }

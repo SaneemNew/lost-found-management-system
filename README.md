@@ -1,6 +1,6 @@
 # CampusFind - University Lost and Found Management System
 
-CampusFind is a Java web application for managing lost and found items in a university. Students can report lost items, post found items with optional images, search found item listings, bookmark items, submit claims, and manage their own posts. Admins can approve users, manage items, manage claims, manage categories, and view system reports.
+CampusFind is a Java web application for managing lost and found items in a university. Students can report lost items, post found items with optional images, search item listings, bookmark items, submit claims, and manage their own posts. Admins can approve users, manage items, manage claims, manage categories, and view system reports.
 
 ## Technologies Used
 
@@ -58,14 +58,16 @@ src/main/java/com/lostfound/service
 src/main/java/com/lostfound/util
 src/main/webapp/WEB-INF/views
 src/main/webapp/css
-src/main/webapp/js
 src/main/webapp/images
+src/main/webapp/js
+src/main/webapp/uploads/items
 database/schema.sql
+database/database_with_sample_data.sql
 pom.xml
 README.md
 ```
 
-## Database
+## Database Setup
 
 Database name:
 
@@ -73,15 +75,18 @@ Database name:
 lostfound_db
 ```
 
-The database script is located at:
+The database files are located in the `database` folder:
 
 ```text
 database/schema.sql
+database/database_with_sample_data.sql
 ```
 
-Import this SQL file into phpMyAdmin or MySQL before running the project.
+Use `database/schema.sql` for a clean fresh setup with the main database structure and default admin account.
 
-Warning: running the SQL script will drop and recreate the `lostfound_db` database. It should be used for fresh setup or testing.
+Use `database/database_with_sample_data.sql` for a ready demo setup with sample users, categories, items, claims, bookmarks, and item records. This is recommended when downloading the project from GitHub because the homepage and item pages will show sample data immediately after importing the database.
+
+Warning: running the SQL scripts may drop and recreate the `lostfound_db` database. Use them only for fresh setup or testing.
 
 ## Database Configuration
 
@@ -110,38 +115,69 @@ Email: admin@campus.com
 Password: admin123
 ```
 
-The default admin account is inserted by `database/schema.sql`.
+The default admin account is inserted by the database SQL scripts.
 
-## Image Upload Folder
+## Sample Item Images
 
-Uploaded found-item images are stored outside the project folder.
-
-The project saves uploaded images inside the current user's home directory:
+Sample item images are included in the project here:
 
 ```text
-campusfind_uploads/items
+src/main/webapp/uploads/items
 ```
 
-Example on Windows:
+The sample database stores image paths like this:
 
 ```text
-C:/Users/YOUR_USERNAME/campusfind_uploads/items
+uploads/items/filename.png
 ```
 
-Example on macOS:
+For example, if the database stores:
 
 ```text
-/Users/YOUR_USERNAME/campusfind_uploads/items
+uploads/items/found_38_1779008112245.png
 ```
 
-The folder is created automatically when an image is uploaded. If image upload does not work because of permission issues, create the folder manually.
+then the matching file is stored in the project as:
+
+```text
+src/main/webapp/uploads/items/found_38_1779008112245.png
+```
+
+After importing `database/database_with_sample_data.sql`, the sample item records and their images should display correctly when the project is deployed.
+
+## Image Upload Notes
+
+Found-item images are saved under:
+
+```text
+src/main/webapp/uploads/items
+```
+
+The database stores only the image path, not the image file itself. If images do not appear after deployment, check that:
+
+- The image file exists in `src/main/webapp/uploads/items`.
+- The database `image_path` value matches the image file path.
+- The project was refreshed and redeployed after adding image files.
 
 ## How to Run
 
 1. Import the Maven project into Eclipse.
 2. Configure Apache Tomcat 10.0.x.
 3. Start MySQL using XAMPP.
-4. Import `database/schema.sql` into phpMyAdmin or MySQL.
+4. Import one of the SQL files from the `database` folder into phpMyAdmin or MySQL.
+
+For clean setup:
+
+```text
+database/schema.sql
+```
+
+For demo setup with sample users, sample items, and sample images:
+
+```text
+database/database_with_sample_data.sql
+```
+
 5. Check database settings in:
 
 ```text
@@ -198,6 +234,8 @@ The project should be deployed on Tomcat 10.0.x, not Tomcat 9.
 - A student cannot claim their own found item.
 - Duplicate claims are prevented by Java validation and a database unique constraint.
 - Duplicate bookmarks are prevented by a database unique constraint.
+- The homepage displays recent item records from the database.
+- If the database has no item records, the homepage may appear empty.
 
 ## Security and Validation
 
@@ -229,6 +267,8 @@ The database can be backed up by exporting the database from phpMyAdmin or MySQL
 
 The `database/schema.sql` file can recreate the database structure and insert the default admin account for fresh setup.
 
+The `database/database_with_sample_data.sql` file can recreate the database with sample users, categories, items, claims, bookmarks, and item records for demo/testing.
+
 This project does not include an automated internal backup system.
 
 ## Coursework Restrictions Followed
@@ -242,123 +282,6 @@ The project does not use:
 - External APIs
 
 JavaScript is used only for small user interface effects such as animations, counters, and the About page team modal. Core system features such as authentication, database access, item posting, claims, bookmarks, and admin actions are handled using Java, JSP, Servlets, JDBC, and MySQL.
-
-## Full Database Schema
-
-Use the following SQL script to create the database for CampusFind.
-
-```sql
--- Lost and Found Portal Database Schema
--- Database: lostfound_db
--- WARNING: Running this script will delete and recreate the lostfound_db database.
--- Use only for fresh setup or testing.
-
-DROP DATABASE IF EXISTS lostfound_db;
-CREATE DATABASE lostfound_db;
-USE lostfound_db;
-
-/*---------------------------------
-  users table
-----------------------------------*/
-CREATE TABLE IF NOT EXISTS users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    full_name VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    student_id VARCHAR(20) NOT NULL UNIQUE,
-    phone VARCHAR(20),
-    password VARCHAR(255) NOT NULL,
-    role ENUM('admin', 'student') DEFAULT 'student',
-    status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-/*---------------------------------
-  categories table
-----------------------------------*/
-CREATE TABLE IF NOT EXISTS categories (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(50) NOT NULL UNIQUE
-);
-
-/*---------------------------------
-  items table
-----------------------------------*/
-CREATE TABLE IF NOT EXISTS items (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    type ENUM('lost', 'found') NOT NULL,
-    title VARCHAR(150) NOT NULL,
-    description TEXT,
-    category_id INT,
-    location VARCHAR(150),
-    date_reported DATE,
-    image_path VARCHAR(255),
-    status ENUM('open', 'claimed', 'resolved') DEFAULT 'open',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE SET NULL
-);
-
-/*---------------------------------
-  claims table
-----------------------------------*/
-CREATE TABLE IF NOT EXISTS claims (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    item_id INT NOT NULL,
-    claimant_id INT NOT NULL,
-    description TEXT,
-    status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-    UNIQUE KEY unique_claim (item_id, claimant_id),
-    FOREIGN KEY (item_id) REFERENCES items(id) ON DELETE CASCADE,
-    FOREIGN KEY (claimant_id) REFERENCES users(id) ON DELETE CASCADE
-);
-
-/*---------------------------------
-  bookmarks table
-----------------------------------*/
-CREATE TABLE IF NOT EXISTS bookmarks (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    item_id INT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-    UNIQUE KEY unique_bookmark (user_id, item_id),
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (item_id) REFERENCES items(id) ON DELETE CASCADE
-);
-
--- indexes for search performance
-CREATE INDEX idx_items_type ON items(type);
-CREATE INDEX idx_items_status ON items(status);
-CREATE INDEX idx_items_category ON items(category_id);
-CREATE INDEX idx_claims_status ON claims(status);
-
-/*---------------------------------
-  seed data: categories
-----------------------------------*/
-INSERT INTO categories (name) VALUES
-('Electronics'),
-('Clothing'),
-('Books & Stationery'),
-('Keys'),
-('Bags & Wallets'),
-('ID Cards'),
-('Jewellery'),
-('Sports Equipment'),
-('Other');
-
--- default admin account
--- email: admin@campus.com
--- password: admin123
--- password hash is SHA-256 of "admin123"
-INSERT INTO users (full_name, email, student_id, phone, password, role, status)
-VALUES ('Admin', 'admin@campus.com', 'ADMIN001', '0000000000',
-        '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9',
-        'admin', 'approved');
-```
 
 ## Project Name
 
